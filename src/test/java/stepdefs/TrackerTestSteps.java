@@ -10,7 +10,6 @@ import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +29,8 @@ public class TrackerTestSteps {
         autorizationPage.switchWindow(0);
     }
 
-    @И("^Пользователь создает задачу с параметрами$")
-    public void createTask(Map<String, String> map) {//входной параметр
+    @И("^Пользователь создает задачу с (параметрами|некорретными параметрами)$")
+    public void createTask(String s,Map<String, String> map) {//входной параметр
         trackerPage.setNameInput(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец "));
@@ -41,7 +40,7 @@ public class TrackerTestSteps {
         trackerPage.clickAddTimeButton();
     }
 
-    @Тогда("^задача создана коррректно$")
+    @Тогда("^задача создана корректно$")
     public void verifyTask() {
         trackerPage.verifyTask();
     }
@@ -73,6 +72,11 @@ public class TrackerTestSteps {
             usersPage.setSearchField(s);
             usersPage.verifySearch(s);
         }
+    }
+
+    @Тогда("^пользователь получает уведомление о неккорректной ссылке$")
+    public void verifyErrorNotification () {
+            trackerPage.verifyErrorNotification();
     }
 }
 
