@@ -21,6 +21,7 @@ public class TrackerPage {
     private final SelenideElement noOptions = $x("//div[text()='No options']");
     private final SelenideElement burgerMenu = $x("//button[@aria-label='open drawer']");//клик на меню
     private final SelenideElement  usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
+    private final SelenideElement urlNotifications = $x("//*[text()='Значение не является допустимым URL.']");// проверка на некоректный url
 
 
     public void clickAddTimeButton() {
@@ -60,5 +61,8 @@ public class TrackerPage {
     }
     public void clickUserPage() {
         usersPage.shouldBe(Condition.enabled).click();
+    }
+    public void verifyErrorNotification() {
+        urlNotifications.shouldBe(Condition.appear);
     }
 }
