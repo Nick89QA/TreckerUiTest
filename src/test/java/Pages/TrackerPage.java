@@ -16,11 +16,12 @@ public class TrackerPage {
     private final SelenideElement description = $("input[name='description']");
     private final SelenideElement inputLink = $("input[name='link']");
     private final SelenideElement addTimeButton = $x("(//span[text()='Добавить время'])[2]");
-    private final SelenideElement succesMessage =$x("//div[@class='MuiAlert-message'][text()='Временной промежуток добавлен']");
+    private final SelenideElement successMessage =$x("//div[@class='MuiAlert-message'][text()='Временной промежуток добавлен']");
     private final SelenideElement projectName = $x("//input[@name='project']");//клик на элемент
     private final SelenideElement noOptions = $x("//div[text()='No options']");
     private final SelenideElement burgerMenu = $x("//button[@aria-label='open drawer']");//клик на меню
     private final SelenideElement  usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
+    private final SelenideElement urlNotifications = $x("//*[text()='Значение не является допустимым URL.']");// проверка на некоректный url
 
 
     public void clickAddTimeButton() {
@@ -53,12 +54,15 @@ public class TrackerPage {
         this.inputLink.shouldBe(Condition.enabled).setValue(inputLink);
     }
     public void verifyTask() {
-        succesMessage.shouldBe(Condition.appear);
+        successMessage.shouldBe(Condition.appear);
     }
     public void clickMenuButton() {
         burgerMenu.shouldBe(Condition.enabled).click();
     }
     public void clickUserPage() {
         usersPage.shouldBe(Condition.enabled).click();
+    }
+    public void verifyErrorNotification() {
+        urlNotifications.shouldBe(Condition.appear);
     }
 }
