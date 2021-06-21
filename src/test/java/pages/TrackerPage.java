@@ -1,9 +1,10 @@
-package Pages;
+package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -20,45 +21,49 @@ public class TrackerPage {
     private final SelenideElement projectName = $x("//input[@name='project']");//клик на элемент
     private final SelenideElement noOptions = $x("//div[text()='No options']");
     private final SelenideElement burgerMenu = $x("//button[@aria-label='open drawer']");//клик на меню
-    private final SelenideElement  usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
+    private final SelenideElement usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
+    private final SelenideElement urlNotifications = $x("//*[text()='Значение не является допустимым URL.']");// проверка на некоректный url
+    private final SelenideElement inputProjectNotification = $x("//*[text()='Выберите проект']");//проверка на обязательность выбора проекта
+    private final SelenideElement createdProjectName = $x("(//input[@name='project'])[2]");//проверка поля проект
+    private final SelenideElement createTaskName = $x ("//input[@name='title'])[2]");//проверка поля название
+    private final SelenideElement createStartTime = $x ("(//input[@name='start'])[2]");//проверка начала времени
+    private final SelenideElement createEndTime = $x ("(//input[@name='end'])[2]");//проверка конца времени
+    private final SelenideElement createDescription = $x(" (//input[@name='description'])[2]"); //проверка описания
+    private final SelenideElement createLink = $x("(//input[@name='link'])[2]");//проверка поля линк
 
 
-    public void clickAddTimeButton() {
-        addTimeButton.shouldBe(Condition.enabled).click();
-    }
-
-    public void setNameInput(String name) {
-        nameInput.shouldBe(Condition.enabled, Duration.ofSeconds(10)).setValue(name);
-    }
-
-    public void setStartTime (String startTime ) {
-      this.startTime.shouldBe(Condition.enabled).setValue(startTime);
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime.shouldBe(Condition.enabled).setValue(endTime);
-    }
-    public void setProjectName(String name) {
-     projectName.shouldBe(Condition.enabled).click();// нажатие на попап элемент Проект
-      projectName.setValue(name).pressEnter();
-      noOptions.shouldNotBe(Condition.visible);//проверка no options
-
-    }
-
-    public void setDescription(String description) {
-       this.description.shouldBe(Condition.enabled).setValue(description);
-    }
-
-    public void setInputLink (String inputLink) {
-        this.inputLink.shouldBe(Condition.enabled).setValue(inputLink);
-    }
     public void verifyTask() {
         succesMessage.shouldBe(Condition.appear);
     }
-    public void clickMenuButton() {
+   public void clickMenuButton() {
         burgerMenu.shouldBe(Condition.enabled).click();
     }
     public void clickUserPage() {
         usersPage.shouldBe(Condition.enabled).click();
     }
+    public void verifyErrorNotification() {//проверка на валидность URL
+        urlNotifications.shouldBe(Condition.appear);
+    }
+    public void verifyProjectNotification() {
+        inputProjectNotification.shouldBe(Condition.appear);//проверка на обязательность выбора проекта
+    }
+
+//    public void verifyTask (Map <String,String> map) {
+//
+//
+   public void createTask(Map <String,String> map) {
+       nameInput.shouldBe(Condition.enabled, Duration.ofSeconds(10)).setValue(map.get("Название"));
+       startTime.shouldBe(Condition.enabled).setValue(map.get("Время начала"));
+       this.endTime.shouldBe(Condition.enabled).setValue(map.get("Время конец"));
+       this.description.shouldBe(Condition.enabled).setValue(map.get("Описание задачи"));
+       this.inputLink.shouldBe(Condition.enabled).setValue(map.get("Ссылка на задачу"));
+       this.projectName.shouldBe(Condition.enabled).setValue(map.get("Проект")).pressEnter();
+       addTimeButton.shouldBe(Condition.enabled).click();
+
+
+
+
+
+
+   }
 }
