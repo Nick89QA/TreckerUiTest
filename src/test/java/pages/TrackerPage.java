@@ -1,4 +1,4 @@
-package pages;
+package Pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -16,13 +16,11 @@ public class TrackerPage {
     private final SelenideElement description = $("input[name='description']");
     private final SelenideElement inputLink = $("input[name='link']");
     private final SelenideElement addTimeButton = $x("(//span[text()='Добавить время'])[2]");
-    private final SelenideElement successMessage =$x("//div[@class='MuiAlert-message'][text()='Временной промежуток добавлен']");
+    private final SelenideElement succesMessage =$x("//div[@class='MuiAlert-message'][text()='Временной промежуток добавлен']");
     private final SelenideElement projectName = $x("//input[@name='project']");//клик на элемент
     private final SelenideElement noOptions = $x("//div[text()='No options']");
     private final SelenideElement burgerMenu = $x("//button[@aria-label='open drawer']");//клик на меню
-    private final SelenideElement usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
-    private final SelenideElement urlNotifications = $x("//*[text()='Значение не является допустимым URL.']");// проверка на некоректный url
-    private final SelenideElement inputProjectNotification = $x("//*[text()='Выберите проект']");//проверка на обязательность выбора проекта
+    private final SelenideElement  usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
 
 
     public void clickAddTimeButton() {
@@ -54,19 +52,13 @@ public class TrackerPage {
     public void setInputLink (String inputLink) {
         this.inputLink.shouldBe(Condition.enabled).setValue(inputLink);
     }
-    public void verifyTask() {// проверка на успешное создание задачи
-        successMessage.shouldBe(Condition.appear);
+    public void verifyTask() {
+        succesMessage.shouldBe(Condition.appear);
     }
     public void clickMenuButton() {
         burgerMenu.shouldBe(Condition.enabled).click();
     }
     public void clickUserPage() {
         usersPage.shouldBe(Condition.enabled).click();
-    }
-    public void verifyErrorNotification() {//проверка на валидность URL
-        urlNotifications.shouldBe(Condition.appear);
-    }
-    public void verifyProjectNotification() {
-        inputProjectNotification.shouldBe(Condition.appear);//проверка на обязательность выбора проекта
     }
 }
