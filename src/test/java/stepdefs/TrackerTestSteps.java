@@ -1,8 +1,8 @@
 package stepdefs;
 
-import Pages.AutorizationPage;
-import Pages.TrackerPage;
-import Pages.UsersPage;
+import pages.AutorizationPage;
+import pages.TrackerPage;
+import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
 
 import cucumber.api.java.ru.Дано;
@@ -29,7 +29,7 @@ public class TrackerTestSteps {
         autorizationPage.switchWindow(0);
     }
 
-    @И("^Пользователь создает задачу с (параметрами|некорретными параметрами)$")
+    @Когда("^Пользователь создает задачу с (параметрами|некорректными параметрами)$")//дополняем в скобках название сценария
     public void createTask(String s,Map<String, String> map) {//входной параметр
         trackerPage.setNameInput(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
@@ -78,5 +78,20 @@ public class TrackerTestSteps {
     public void verifyErrorNotification () {
             trackerPage.verifyErrorNotification();
     }
+    @Когда("^Пользователь создает задачу без проекта$")//дополняем в скобках название сценария
+    public void taskWithoutProject(Map<String, String> map) {//входной параметр
+        trackerPage.setNameInput(map.get("Название"));
+        trackerPage.setStartTime(map.get("Время начала"));
+        trackerPage.setEndTime(map.get("Время конец "));
+        trackerPage.setInputLink(map.get("Ссылка на задачу"));
+        trackerPage.setDescription(map.get("Описание задачи"));
+        trackerPage.clickAddTimeButton();//клик на кнопку "Добавить время"
+    }
+    @Тогда("^пользователь получает уведомление о необходимости выбора проекта$")
+    public void verifyProjectNotification() {
+        trackerPage.verifyProjectNotification();// проверка на обязательность выбора проекта
+
+    }
+
 }
 
