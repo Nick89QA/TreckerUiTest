@@ -1,6 +1,7 @@
 package stepdefs;
 
 import pages.AutorizationPage;
+import pages.ProjectPage;
 import pages.TrackerPage;
 import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
@@ -17,6 +18,7 @@ public class TrackerTestSteps {
     private AutorizationPage autorizationPage = Selenide.page(AutorizationPage.class);
     private TrackerPage trackerPage = Selenide.page(TrackerPage.class);
     private UsersPage usersPage = Selenide.page(UsersPage.class);
+    private ProjectPage projectPage = Selenide.page(ProjectPage.class);
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
@@ -91,6 +93,17 @@ public class TrackerTestSteps {
     public void verifyProjectNotification() {
         trackerPage.verifyProjectNotification();// проверка на обязательность выбора проекта
 
+    }
+    @Когда("^Пользователь заходит на страницу с проектами$")
+    public void userOnProjectPage() {
+        trackerPage.clickMenuButton();//клик на меню
+        projectPage.setMenuProject();//клик на страницу проекты
+        projectPage.setButtonAllProject();//клик на раздел "все проекты"
+        projectPage.setButtonAlfaDirect();//клик на проект AльфаДирект
+    }
+    @Тогда("^Пользователь может просматривать информацию о проекте$")
+    public void verifyProjectPage(){
+        projectPage.setCheckoutPageProject();
     }
 
 }

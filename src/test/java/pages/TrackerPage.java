@@ -24,6 +24,7 @@ public class TrackerPage {
     private final SelenideElement urlNotifications = $x("//*[text()='Значение не является допустимым URL.']");// проверка на некоректный url
     private final SelenideElement inputProjectNotification = $x("//*[text()='Выберите проект']");//проверка на обязательность выбора проекта
 
+
     public void clickAddTimeButton() {
         addTimeButton.shouldBe(Condition.enabled).click();
     }
