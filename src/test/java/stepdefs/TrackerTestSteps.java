@@ -1,10 +1,8 @@
 
 package stepdefs;
 
-import pages.AutorizationPage;
-import pages.ProjectPage;
-import pages.TrackerPage;
-import pages.UsersPage;
+import com.codeborne.selenide.SelenideElement;
+import pages.*;
 import com.codeborne.selenide.Selenide;
 
 import cucumber.api.java.ru.Дано;
@@ -23,6 +21,7 @@ public class TrackerTestSteps {
     private TrackerPage trackerPage = Selenide.page(TrackerPage.class);
     private UsersPage usersPage = Selenide.page(UsersPage.class);
     private ProjectPage projectPage = Selenide.page(ProjectPage.class);
+    private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
@@ -46,59 +45,72 @@ public class TrackerTestSteps {
         trackerPage.verifyTask();
     }
 
-        @Тогда("^авторизация прошла успешно$")
-        public void verifyAuth () {
-            autorizationPage.verifyAuth();
-        }
-
-        @Когда("^Пользователь переходит на страницу Пользователи$")
-        public void goToUsersPage () {
-            trackerPage.clickMenuButton();
-            trackerPage.clickUserPage();//клик на юзерпейдж
-        }
-
-        @И("^Вводит в поле поиска (.*)$")
-        public void writeTextSearchField (String text){
+    @Тогда("^авторизация прошла успешно$")
+    public void verifyAuth () {
+        autorizationPage.verifyAuth();
+    }
+    @Когда("^Пользователь переходит на страницу Пользователи$")
+    public void goToUsersPage () {
+        trackerPage.clickMenuButton();
+        trackerPage.clickUserPage();//клик на юзерпейдж
+    }
+    @И("^Вводит в поле поиска (.*)$")
+    public void writeTextSearchField (String text){
             usersPage.setSearchField(text);//вводим текст в searchField
-        }
-
-        @Тогда("^результат поиска содержит (.*)$")
-        public void searchResult (String text){
+    }
+    @Тогда("^результат поиска содержит (.*)$")
+    public void searchResult (String text){
             usersPage.verifySearch(text);
-        }
+    }
 
-        @Тогда("^пользователь ищет по параметрам и убеждается в успехе$")
-        public void verifySuccessSearch (List < String > textList) {
-            for (String s : textList) {
-                usersPage.setSearchField(s);
-                usersPage.verifySearch(s);
-            }
+    @Тогда("^пользователь ищет по параметрам и убеждается в успехе$")
+    public void verifySuccessSearch (List < String > textList) {
+        for (String s : textList) {
+            usersPage.setSearchField(s);
+            usersPage.verifySearch(s);
         }
+    }
 
-        @Тогда("^пользователь получает уведомление о неккорректной ссылке$")
-        public void verifyErrorNotification () {
-            trackerPage.verifyErrorNotification();
-        }
+    @Тогда("^пользователь получает уведомление о неккорректной ссылке$")
+    public void verifyErrorNotification () {
+        trackerPage.verifyErrorNotification();
+    }
 //        @Когда("^Пользователь создает задачу без проекта$")//дополняем в скобках название сценария
 //        public void taskWithoutProject (Map < String, String > map){//входной параметр
 //            trackerPage.createTask(map);
 //        }
-        @Тогда("^пользователь получает уведомление о необходимости выбора проекта$")
-        public void verifyProjectNotification () {
-            trackerPage.verifyProjectNotification();// проверка на обязательность выбора проекта
-
-        }
-        @Когда("^Пользователь заходит на страницу с проектами$")
-        public void userOnProjectPage () {
-            trackerPage.clickMenuButton();//клик на меню
-            projectPage.setMenuProject();//клик на страницу проекты
-            projectPage.setButtonAllProject();//клик на раздел "все проекты"
-            projectPage.setButtonAlfaDirect();//клик на проект AльфаДирект
-        }
-        @Тогда("^Пользователь может просматривать информацию о проекте$")
-        public void verifyProjectPage () {
+    @Тогда("^пользователь получает уведомление о необходимости выбора проекта$")
+    public void verifyProjectNotification () {
+        trackerPage.verifyProjectNotification();// проверка на обязательность выбора проекта
+    }
+    @Когда("^Пользователь заходит на страницу с проектами$")
+    public void userOnProjectPage () {
+        trackerPage.clickMenuButton();//клик на меню
+        projectPage.setMenuProject();//клик на страницу проекты
+        projectPage.setButtonAllProject();//клик на раздел "все проекты"
+        projectPage.setButtonAlfaDirect();//клик на проект AльфаДирект
+    }
+    @Тогда("^Пользователь может просматривать информацию о проекте$")
+    public void verifyProjectPage () {
             projectPage.setCheckoutPageProject();
         }
 
+    @Когда("^Пользователь создает успешно новый проект$")
+    public void createNewTask( Map<String, String> map) {
+     projectPage.createProject(map);
     }
+
+
+    @Когда("^Пользователь создает подряд на странице с подрядами$")//создание подряда
+    public void userCreateNewContract(Map<String, String>map) {
+     contractorPage.createContract(map);
+
+    }
+
+
+    @Тогда("^пользователь видит созданный проект в списке проектов$")
+    public void verifyCreateContract() {
+     contractorPage.checkNewContract();
+    }
+}
 

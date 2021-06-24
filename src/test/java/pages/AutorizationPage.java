@@ -13,22 +13,26 @@ public class AutorizationPage {
     private final SelenideElement password = Selenide.$("input[type='password']");//введение
     private final SelenideElement profileSettingsButton = Selenide.$x("//button[@aria-label='account of current user']");
 
-    public void verifyAuth(){
+    public void verifyAuth() {
         profileSettingsButton.shouldBe(Condition.enabled, Duration.ofSeconds(7));
     }
 
     public void clickAuth() {
         auth.shouldBe(Condition.enabled).click();
     }
+
     public void setMailInput(String mail) {
         mailInput.shouldBe(Condition.enabled).setValue(mail);
     }
+
     public void setPassword(String password) {
         this.password.shouldBe(Condition.enabled).setValue(password);
     }
-    public void clickNext(){
+
+    public void clickNext() {
         buttonNext.shouldBe(Condition.enabled).click();
     }
+
     public void switchWindow(int num) {
         Selenide.switchTo().window(num);
     }

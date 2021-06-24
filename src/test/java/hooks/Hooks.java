@@ -7,7 +7,7 @@ public class Hooks {
     @Before
     public void setUp() {
         Selenide.clearBrowserCookies();
-        Selenide.open("https://hub.crtweb.ru/tracker");
+        Selenide.open("https://stage.hub.crtweb.ru/tracker");// https://hub.crtweb.ru/tracker
     }
 
 }
