@@ -17,10 +17,11 @@ public class ProjectPage {
     private final SelenideElement inputTittleProject = $x("(//input[@type='text'])[2]");//поле название проекта
     private final SelenideElement inputDescribeProject = $x("(//input[@type='text'])[3]");//поле описание проекта
     private final SelenideElement popupElement = $x("//li[text()='asd']");//элемент Creative в попап
-    private final SelenideElement burgerMenu = $x("//button[@aria-label='open drawer']");//клик на меню
     private final SelenideElement createProjectButton = $x("//span[text() ='Создать проект']");//кнопка создать проект
     private final SelenideElement clickInputPerformer = $x("(//div[@role='button'])[5]");//клик на поле подрядчик
     private final SelenideElement checkoutCreateProject = $x("(//div[@class='MuiAccordionSummary-content'])[3]");//проверка созданного проекта
+    private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
+
 
     public void setButtonAllProject() {
         buttonAllProject.shouldBe(Condition.enabled).click();//клик на раздел все проекты
@@ -40,7 +41,7 @@ public class ProjectPage {
 
     //создаем метод с параметрами для создания проекта
     public void createProject(Map<String,String>map ) {
-        burgerMenu.shouldBe(Condition.enabled).click();//клик на бургер меню
+        burgerMenu.shouldBe(Condition.enabled).click();
         menuProject.shouldBe(Condition.enabled).click();//меню проекта
         buttonCreateProject.shouldBe(Condition.enabled).click();//клик на плюсик создание проекта
         inputTittleProject.shouldBe(Condition.enabled).setValue(map.get("Название проекта"));
