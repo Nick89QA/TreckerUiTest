@@ -2,14 +2,14 @@
 package stepdefs;
 
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.ru.Дано;
+import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Когда;
+import io.cucumber.java.ru.Тогда;
 import pages.*;
-import Pages.AutorizationPage;
-import Pages.UsersPage;
+import pages.AutorizationPage;
+import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
-import cucumber.api.java.ru.Дано;
-import cucumber.api.java.ru.И;
-import cucumber.api.java.ru.Когда;
-import cucumber.api.java.ru.Тогда;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ public class TrackerTestSteps {
     private UsersPage usersPage = Selenide.page(UsersPage.class);
     private ProjectPage projectPage = Selenide.page(ProjectPage.class);
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
+    private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
@@ -35,13 +36,8 @@ public class TrackerTestSteps {
         autorizationPage.switchWindow(0);
     }
 
-    //дополняем в скобках название сценария
-    public void newTask(String s, Map<String, String> map) {//входной параметр
-        trackerPage.createTask(map);
-    }
-
-    @Когда("^Пользователь создает задачу с (параметрами|некорректными параметрами)$")
-    public void createTask(String s, Map<String, String> map) {//входной параметр
+    @Когда("^Пользователь создает задачу с параметрами$")
+    public void createTask(Map<String, String> map) {//входной параметр
         trackerPage.createTask(map);
     }
 
@@ -61,11 +57,6 @@ public class TrackerTestSteps {
         trackerPage.clickUserPage();//клик на юзерпейдж
     }
 
-    @И("^Вводит в поле поиска (.*)$")
-    public void writeTextSearchField(String text) {
-        usersPage.setSearchField(text);//вводим текст в searchField
-    }
-
     @Тогда("^результат поиска содержит (.*)$")
     public void searchResult(String text) {
         usersPage.verifySearch(text);
@@ -81,14 +72,9 @@ public class TrackerTestSteps {
 
     @Тогда("^пользователь получает уведомление о неккорректной ссылке$")
     public void verifyErrorNotification() {
-
         trackerPage.verifyErrorNotification();
     }
 
-    //        @Когда("^Пользователь создает задачу без проекта$")//дополняем в скобках название сценария
-//        public void taskWithoutProject (Map < String, String > map){//входной параметр
-//            trackerPage.createTask(map);
-//        }
     @Тогда("^пользователь получает уведомление о необходимости выбора проекта$")
     public void verifyProjectNotification() {
         trackerPage.verifyProjectNotification();// проверка на обязательность выбора проекта
@@ -107,25 +93,15 @@ public class TrackerTestSteps {
         projectPage.setCheckoutPageProject();
     }
 
-    @Когда("^Пользователь создает успешно новый проект$")
-    public void createNewTask(Map<String, String> map) {
-        projectPage.createProject(map);
-    }
 
-    @Когда("^Пользователь создает подряд на странице с подрядами$")//создание подряда
-    public void userCreateNewContract(String s,Map<String, String> map) {
-        contractorPage.createContract(map);
-
-    }
-
-    @Тогда("^пользователь видит созданный проект в списке проектов$")
+    @Тогда("^пользователь видит созданный подряд в списке подрядчиков$")
     public void verifyCreateContract() {
         contractorPage.checkNewContract();
     }
 
     @Когда("^Пользователь заходит на страницу с подрядчиками$")
     public void userGoToContractPage() {
-     contractorPage.reviewContractPage();
+        contractorPage.reviewContractPage();
     }
 
     @Тогда("^Пользователь убеждается о доступности подрядчиков на странице$")
@@ -134,12 +110,115 @@ public class TrackerTestSteps {
     }
 
     @Когда("^Пользователь заходит на страницу отчетности$")
-    public void пользовательЗаходитНаСтраницуОтчетности() {
-        
+    public void userGoToReportingPage() {
+        reportingPage.userOnReportPage();
     }
 
     @Тогда("^Пользователь убеждается о доступности отчетности за прошлый месяц$")
-    public void пользовательУбеждаетсяОДоступностиОтчетностиЗаПрошлыйМесяц() {
+    public void verifyReports() {
+        reportingPage.checkWrightResult();
+    }
+
+    @Когда("^Пользователь добавляет свой проект в архив$")
+    public void userAddProjectToArchive() {
+        projectPage.addProjectToArchive();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном добавлении проекта в архив$")
+    public void checkToaddingProject() {
+        projectPage.verifyArchive();
+    }
+
+    @Когда("^Пользователь создает подряд на странице с подрядами$")
+    public void userCreateNewContract(Map<String, String> map) {
+        contractorPage.createContract(map);
+    }
+
+    @Когда("^Пользователь создает успешно новый проект$")
+    public void createNewTask(Map<String, String> map) {
+        projectPage.createProject(map);
+    }
+
+    @Когда("^Пользователь создает задачу используя прошлый временной промежуток$")
+    public void createTaskPastTime(Map<String, String> map) {
+        trackerPage.taskPastTime(map);
+    }
+
+    @Тогда("^Пользователь убеждается об успешном создании задачи$")
+    public void userVerifySuccessTask() {
+        trackerPage.verifyTask();
+    }
+
+    @Когда("^Пользователь заходит на страницу Пользователя и ищет свою фамилию$")
+    public void userGoToUserPage(Map<String, String> map) {
+        usersPage.searchSurname(map);
+    }
+
+    @Тогда("^Пользователь убеждается об успешном нахождении данной фамилии$")
+    public void userVerifyResult() {
+        usersPage.verifyResult();
+    }
+
+    @Когда("^Пользователь заходит в свой проект и добавляет туда менеджера$")
+    public void userAddManagerToProject(Map<String, String> map) {
+        projectPage.addManagerToProject(map);
+    }
+
+    @Тогда("^Пользователь убеждается об успешном добавлении менеджера в свой проект$")
+    public void verifyAddingManager() {
+        projectPage.verifyAddManager();
+    }
+
+    @Когда("^Пользователь заходит на страницу с проектами AlfaDirect и открывает отчет за прошлый месяц$")
+    public void reviewReportForLastMonth() {
+        projectPage.ReviewReport();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном просмотре отчета по проекту$")
+    public void verifySuccessReport() {
+        projectPage.checkReport();
+    }
+
+    @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
+    public void authorizationWithIncorrectEmail(String email) {
+        autorizationPage.sendIncorrectEmail(email);
+    }
+
+    @Тогда("^Пользователь убеждается об введении некорректного email$")
+    public void userMakeSureIncorrectEmail() {
+        autorizationPage.verifyIncorrectEmail();
+
+    }
+
+    @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")
+    public void AuthorizeWithIncorrectPassword(Map<String, String> map) {
+        autorizationPage.sendIncorrectPassword(map);
+    }
+
+    @Тогда("^Пользователь убеждается об введении некорректного пароля$")
+    public void userVerifyIncorrectPassword() {
+        autorizationPage.incorrectPassword();
+    }
+
+    @Когда("^Пользователь заходит на страницу с подрядами и удаляет подряд$")
+    public void DeleteContract() {
+        contractorPage.userDeleteContract();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном удалении подряда$")
+    public void verifyDeleteContract() {
+        contractorPage.verifyDeleteContract();
+    }
+
+    @Когда("^Пользователь редактирует информацию о подрядчике$")
+    public void userCanEditContract(Map<String, String> map) {
+        contractorPage.userEditContract(map);
+    }
+
+    @Тогда("^Пользователь убеждается об успешном редактировании информации о подрядчике$")
+    public void verifySuccessEdit() {
+        contractorPage.verifyEditContract();
     }
 }
 

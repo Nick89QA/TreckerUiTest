@@ -1,8 +1,11 @@
 package pages;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+
 import java.time.Duration;
 import java.util.Map;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -18,8 +21,8 @@ public class TrackerPage {
     private final SelenideElement projectName = $x("//input[@name='project']");//клик на элемент
     private final SelenideElement noOptions = $x("//div[text()='No options']");
     private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
-    private final SelenideElement  usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
-    private final SelenideElement urlNotifications = $x("//*[text()='Значение не является допустимым URL.']");// проверка на некоректный url
+    private final SelenideElement usersPage = $x("//span[text() = 'Пользователи']");//клик на страницу пользователи
+    private final SelenideElement urlNotifications = $x("//label[text()='Ссылка на задачу']");// проверка на некоректный url
     private final SelenideElement inputProjectNotification = $x("//*[text()='Выберите проект']");//проверка на обязательность выбора проекта
     private final SelenideElement createdProjectName = $x("(//input[@name='project'])[2]");//проверка поля проект
     private final SelenideElement createTaskName = $x("//input[@name='title'])[2]");//проверка поля название
@@ -27,14 +30,12 @@ public class TrackerPage {
     private final SelenideElement createEndTime = $x("(//input[@name='end'])[2]");//проверка конца времени
     private final SelenideElement createDescription = $x(" (//input[@name='description'])[2]"); //проверка описания
     private final SelenideElement createLink = $x("(//input[@name='link'])[2]");//проверка поля ли
+    private final SelenideElement clickPageTimer = $x("//span[text()='Таймер']");//клик на страницу таймер
+    private final SelenideElement clickOnYesterday = $x("//button[@title = 'Предыдущий день']");//клик на предыдущий день
 
 
     public void verifyTask() {
-        successMessage.shouldBe(Condition.appear);
-    }
-
-    public void setInputLink (String inputLink) {
-        this.inputLink.shouldBe(Condition.enabled).setValue(inputLink);
+        successMessage.shouldBe(Condition.enabled);
     }
 
     public void clickMenuButton() {
@@ -54,7 +55,7 @@ public class TrackerPage {
     }
 
     public void createTask(Map<String, String> map) {
-        nameInput.shouldBe(Condition.enabled, Duration.ofSeconds(10)).setValue(map.get("Название"));
+        nameInput.shouldBe(Condition.enabled).setValue(map.get("Название"));
         startTime.shouldBe(Condition.enabled).setValue(map.get("Время начала"));
         this.endTime.shouldBe(Condition.enabled).setValue(map.get("Время конец"));
         this.description.shouldBe(Condition.enabled).setValue(map.get("Описание задачи"));
@@ -64,4 +65,18 @@ public class TrackerPage {
 
     }
 
+    public void taskPastTime(Map<String, String> map) {
+        burgerMenu.shouldBe(Condition.enabled).click();
+        clickPageTimer.shouldBe(Condition.enabled).click();
+        clickOnYesterday.shouldBe(Condition.enabled).click();
+        nameInput.shouldBe(Condition.enabled).setValue(map.get("Название"));
+        startTime.shouldBe(Condition.enabled).setValue(map.get("Время начала"));
+        this.endTime.shouldBe(Condition.enabled).setValue(map.get("Время конец"));
+        this.projectName.shouldBe(Condition.enabled).setValue(map.get("Проект")).pressEnter();
+        this.inputLink.shouldBe(Condition.enabled).setValue(map.get("Ссылка на задачу"));
+        this.description.shouldBe(Condition.enabled).setValue(map.get("Описание задачи"));
+        addTimeButton.shouldBe(Condition.enabled).click();
+
+
+    }
 }
