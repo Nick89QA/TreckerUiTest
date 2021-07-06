@@ -19,7 +19,7 @@ public class AutorizationPage {
 
 
     public void verifyAuth() {
-        profileSettingsButton.shouldBe(Condition.enabled, Duration.ofSeconds(7));
+        profileSettingsButton.shouldBe(Condition.enabled);
     }
 
     public void clickAuth() {
