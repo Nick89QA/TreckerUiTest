@@ -12,8 +12,6 @@ import com.codeborne.selenide.Selenide;
 import java.util.List;
 import java.util.Map;
 
-import static com.codeborne.selenide.Selenide.$;
-
 public class TrackerTestSteps {
     private AutorizationPage autorizationPage = Selenide.page(AutorizationPage.class);
     private TrackerPage trackerPage = Selenide.page(TrackerPage.class);

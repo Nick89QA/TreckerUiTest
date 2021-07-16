@@ -73,13 +73,15 @@ public class TrackerPage {
 
     public void setInputSelectProject(String description1) {
         inputSelectProject
+                .scrollIntoView(true)
                 .should(Condition.visible).setValue(description1);
         Selenide.$x(String.format("//li[text()='%s']", description1)).shouldBe(Condition.enabled).click();
     }
 
     public void setInputLink(String link) {
         inputLink
-                .should(Condition.enabled).setValue(link);
+                .should(Condition.enabled).setValue(link)
+                .pressEnter();
     }
 
     public void clickDescribeTask(String project) {
