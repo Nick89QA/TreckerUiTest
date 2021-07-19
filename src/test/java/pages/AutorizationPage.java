@@ -79,7 +79,7 @@ public class AutorizationPage {
                 .should(Condition.enabled).click();
     }
 
-    public void sendInputIncorrectPassword(String incorrectPassword) {
+    public void sendInputIncorrectPassword(String incorrectPassword) {//fix
         inputPassword
                 .should(Condition.enabled)
                 .setValue(incorrectPassword);
