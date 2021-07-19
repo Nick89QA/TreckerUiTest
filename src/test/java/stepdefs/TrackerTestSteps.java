@@ -4,6 +4,7 @@ package stepdefs;
 import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
+
 import pages.*;
 import pages.AutorizationPage;
 import pages.UsersPage;
@@ -19,6 +20,7 @@ public class TrackerTestSteps {
     private ProjectPage projectPage = Selenide.page(ProjectPage.class);
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
     private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
+
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
@@ -41,6 +43,7 @@ public class TrackerTestSteps {
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));
         trackerPage.AddTimeButton();
+
     }
 
     @Когда("^Пользователь создает задачу используя прошлый временной промежуток$")
@@ -238,6 +241,7 @@ public class TrackerTestSteps {
         autorizationPage.clickButtonNext();
         autorizationPage.sendInputIncorrectPassword(map.get("Некорректный пароль"));
         autorizationPage.clickButtonNext();
+
     }
 
     @Тогда("^Пользователь убеждается об введении некорректного пароля$")
