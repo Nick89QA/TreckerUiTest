@@ -2,7 +2,7 @@
 *~
 ._*
 *.log
-
+*.jar
 # OS
 .DS_Store
 .Trashes
@@ -28,3 +28,5 @@ touch
 # Project
 /target
 /build
+/allure-report
+/.allure

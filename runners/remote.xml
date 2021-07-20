@@ -3,7 +3,7 @@
 <suite name="BDD Test Suite" verbose="0" data-provider-thread-count="10">
   <test name="remote">
     <classes>
-      <class name="untils.TestRunner">
+      <class name="utils.TestRunner">
       </class>
     </classes>
   </test>
