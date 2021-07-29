@@ -17,7 +17,7 @@ public class AutorizationPage {
     private final SelenideElement buttonProfile = $x("//button[@aria-label='account of current user']");
     private final SelenideElement verifyIncorrectEmail = $x("//div[text()='Введите адрес электронной почты или номер телефона.']");//проверка
     private final SelenideElement verifyIncorrectPassword = $x("//span[contains(text(), 'Неверный пароль')]");
-   // private static final Logger log = Logger.getLogger("AutorizationPage");
+
 
     public void verifyAuth() {
         buttonProfile

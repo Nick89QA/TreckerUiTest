@@ -1,6 +1,7 @@
 
 package stepdefs;
 
+import com.codeborne.selenide.Condition;
 import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
@@ -20,6 +21,7 @@ public class TrackerTestSteps {
     private ProjectPage projectPage = Selenide.page(ProjectPage.class);
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
     private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
+    private ProfilePage profilePage = Selenide.page(ProfilePage.class);
 
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
@@ -39,7 +41,7 @@ public class TrackerTestSteps {
         trackerPage.sendNameInput(map.get("Название"));
         trackerPage.setStartTime(map.get(" Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
-        trackerPage.setInputSelectProject(map.get("Проект"));
+        trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));
         trackerPage.AddTimeButton();
@@ -277,23 +279,233 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном редактировании информации о подрядчике$")
     public void verifySuccessEdit() {
-        contractorPage.verifyEditContract();
+        contractorPage
+                .verifyEditContract();
     }
 
     @Тогда("^Пользователь убеждается об успешном создании проекта$")
     public void userCheckSuccessCreateContract() {
-        projectPage.checkSuccessProject();
+        projectPage
+                .checkSuccessProject();
     }
 
-    @Когда("^Пользователь создает задачу с неполными параметрами$")
-    public void createTaskWithoutProjectName(Map<String,String> map) {
+
+    @Когда("^Пользователь заходит на страницу Профиль и смотрит отчет по проектам$")
+    public void userGoToProfilePageAndSeeReportForProject() {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastMonth();
+        profilePage.clickButtonClickForExitFromCalendar();
+
+    }
+
+    @Тогда("^Пользователь убеждается о доступности отчета на странице Профиль за прошлый месяц$")
+    public void userSureAboutValiableReportForLastMonth() {
+        profilePage.checkVerifyLastMonth();
+    }
+
+    @Когда("^Пользователь заходит на страницу Профиль$")
+    public void userGoToProfilePage() {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+    }
+
+    @Тогда("^Пользователь убеждается о досупном просмотре своей роли на странице Профиль$")
+    public void userMakeSureAboutAvailableRoleOnProject() {
+        profilePage.verifyCheckRoleOnPage();
+    }
+
+    @Когда("^Пользователь заходит на страницу Профиль и редактирует электронную почту$")
+    public void userGoToProfilePAgeAndEditMail(Map<String, String> map) {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonEdit();
+        profilePage.clickInputEmail(map.get("Электронная почта"));
+        profilePage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном редактировании электронной почты$")
+    public void userMakeSureAboutSuccessEditEmail() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+    @Когда("^Пользователь заходит на страницу Профиль и меняет формат даты$")
+    public void userGoToProfilePageAndChangeDateFormat(Map<String, String> map) {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonEdit();
+        profilePage.selectInputFormatDate(map.get("Формат даты"));
+        profilePage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном изменении формата даты на странице$")
+    public void userMakeSureSuccessEditDateFormat() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+    @Когда("^Пользователь заходит на страницу Профиль и меняет формат времени$")
+    public void userGoToProfilePageAndChangeTimeFormat(Map<String, String> map) {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonEdit();
+        profilePage.clickInputFormatTime(map.get("Формат времени"));
+        profilePage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном изменении формата времени на странице профиль$")
+    public void userMakeSureSuccessEditTimeFormat() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+    @Когда("^Пользователь заходит на страницу и редактирует свое имя$")
+    public void userGoToProfilePageAndEditName(Map<String, String> map) {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonEdit();
+        profilePage.setInputName(map.get("Имя"));
+        profilePage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь успешно редактирует свое имя на странице Профиль$")
+    public void userSuccessEditNameOnProfilePage() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+    @Когда("^Пользователь заходит на страницу профиль и редактирует свою фамилию$")
+    public void userGoToProfilePageAndEditLastName(Map<String, String> map) {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonEdit();
+        profilePage.setInputLastName(map.get("Фамилия"));
+        profilePage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном редактировании своей фамилии на странице$")
+    public void userMakeSureInSuccessEditLastName() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+    @Когда("^Пользователь создает задачу с неккоректными  параметрами$")
+    public void userCreateTwoTasksOnBorderTime(Map<String, String> map) {
+        trackerPage.clickBurgerMenu();
+        trackerPage.ClickPageTimer();
+        trackerPage.ClickButtonYesterday();
         trackerPage.sendNameInput(map.get("Название"));
-        trackerPage.setStartTime(map.get(" Время начала"));
+        trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
-        trackerPage.setInputLink(map.get("Ссылка на задачу"));
-        trackerPage.clickDescribeTask(map.get("Описание задачи"));
+        trackerPage.clickSelectProject(map.get("Проект"));
+        trackerPage.setInputLinkPastTime(map.get("Ссылка на задачу"));
+        trackerPage.clickDescribeTask(map.get("Описание задачи"));//дописать задачу
         trackerPage.AddTimeButton();
     }
-}
+
+    @Тогда("^Пользователь убеждается об успешном создании задач$")
+    public void userMakeSureSuccessCreateTasks() {
+        trackerPage.verifyTask();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу База знаний$")
+    public void userRedirectFromMainPageToPageKnowledgeBase() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkKnowledgeBase();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу База знаний$")
+    public void userMakeSureSuccessRedirectPageKnowledgeBase() {
+        trackerPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectKnowledgeBase();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Лонгриды$")
+    public void userRedirectFromMainPageToPagelongrid() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkLongrid();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Лонгриды$")
+    public void userMakeSureSuccessRedirectPageLongrid() {
+        trackerPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectLongridPage();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Платрум$")
+    public void userRedirectFromMainPageToPagePlatrum() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkPlatrum();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Платрум$")
+    public void userMakeSureSuccessRedirectPagePlatrum() {
+        trackerPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectPlatrumPage();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Гит$")
+    public void userRedirectFromMainPageToPageGit() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkGit();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Гит$")
+    public void userMakeSureSuccessRedirectPageGit() {
+        trackerPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectGitPage();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу CRT.TEAM$")
+    public void userRedirectFromMainPageToPageCrtTeam() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkCrtTeam();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
+    public void userMakeSureSuccessRedirectPageCrtTeam() {
+        trackerPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectCrtTeamPage();
+
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Сайт$")
+    public void userRedirectFromMainPageToPageSite() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkSite();
+
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Сайт$")
+    public void userMakeSureSuccessRedirectPageSite() {
+        trackerPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectSitePage();
+    }
+
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Резюме специалистов$")
+    public void userRedirectFromMainPageToPageResume() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkResume();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Резюме специалистов$")
+    public void userMakeSureSuccessRedirectPageResume() {
+        trackerPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectSitePage();
+
+    }
+
+    public void userOnReportPage() {
+    reportingPage.clickBurgerMenu();
+    reportingPage.clickPageReport();
+    reportingPage.clickButtonCalendar();
+    reportingPage.clickButtonLastMonth();
+
+    }
+
+
+    }
 
 
