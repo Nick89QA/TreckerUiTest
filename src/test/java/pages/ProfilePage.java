@@ -18,6 +18,9 @@ public class ProfilePage {
     private final SelenideElement buttonClickForExitFromCalendar = $x("//h6[text()='Creative Test Platform']");
     private final SelenideElement checkRoleOnPage = $x("//div[text()='Роль']");
     private final SelenideElement messageNotificationsSuccess = $x("//div[text()='Успешно']");
+    private final SelenideElement inputFormatTime = $x("//div[@id='mui-component-select-timeLocale']");
+    private final SelenideElement inputName = $x("//input[@name='firstName']");
+    private final SelenideElement inputLastName = $x("//input[@name='lastName']");
 
     public void clickIconButton() {
         buttonIcon
@@ -39,7 +42,7 @@ public class ProfilePage {
 
     public void clickInputEmail(String email) {
         inputEmail
-                .should(Condition.enabled).setValue(email);
+                .should(Condition.enabled);
     }
 
     public void clickButtonSave() {
@@ -49,7 +52,7 @@ public class ProfilePage {
     }
     public void selectInputFormatDate(String date) {
         inputFormatDate
-                .should(Condition.enabled).setValue(date);
+                .should(Condition.enabled);
     }
   public void clickButtonCalendar() {
         buttonCalendar
@@ -84,6 +87,22 @@ public class ProfilePage {
     messageNotificationsSuccess
             .should(Condition.visible);
 
+    }
+
+    public void clickInputFormatTime(String formatTime) {
+     inputFormatTime
+             .should(Condition.enabled);
+    }
+
+    public void setInputName(String name) {
+        inputName
+                .should(Condition.enabled);
+    }
+
+    public void setInputLastName(String lastName) {
+     inputLastName
+             .should(Condition.enabled)
+             .setValue(lastName);
     }
 }
 

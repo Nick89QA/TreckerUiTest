@@ -4,8 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverConditions.url;
 
 public class TrackerPage {
     private final SelenideElement nameInput = $("input[name='title']");
@@ -23,6 +23,14 @@ public class TrackerPage {
     private final SelenideElement inputProjectNotification = $x("//*[text()='Выберите проект']");//проверка на обязательность выбора проекта
     private final SelenideElement PageTimer = $x("//span[text()='Таймер']");//клик на страницу таймер
     private final SelenideElement buttonYesterday = $x("//button[@title = 'Предыдущий день']");//клик на предыдущий день
+    private final SelenideElement buttonLink = $x("(//button[@id='linksIdButton'])[1]");
+    private final SelenideElement linkKnowledgeBase = $x("//a[@href='https://kb.crtweb.ru/']");
+    private final SelenideElement linkLongrid = $x("//a[@href='https://longreads.crtweb.ru']");
+    private final SelenideElement linkPlatrum = $x("//a[@href='https://crtweb.platrum.ru/regulations']");
+    private final SelenideElement linkGit = $x("//a[@href='https://git.crtweb.ru']");
+    private final SelenideElement linkCrtTeam = $x("//a[@href='https://crt.team']");
+    private final SelenideElement linkSite = $x("//a[@href='https://crtweb.ru']");
+    private final SelenideElement linkResume = $x("//a[@href='https://crtweb.ru/developers']");
 
 
     public void verifyTask() {
@@ -117,6 +125,95 @@ public class TrackerPage {
     public void clickSelectProject(String projectName1) {
         inputProject
                 .should(Condition.enabled).setValue(projectName1).pressEnter();
+
+    }
+
+    public void clickButtonLink() {
+        buttonLink
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickLinkKnowledgeBase() {
+        linkKnowledgeBase
+                .should(Condition.enabled)
+                .click();
+    }
+
+
+    public void switchWindow(int num) {
+        Selenide.switchTo()
+                .window(num);
+    }
+
+    public void verifySuccessRedirectKnowledgeBase() {
+        webdriver()
+                .shouldHave(url("https://kb.crtweb.ru/"));
+    }
+
+
+    public void clickLinkLongrid() {
+        linkLongrid
+                .should(Condition.enabled)
+                .click();
+    }
+
+
+    public void clickLinkPlatrum() {
+        linkPlatrum
+                .should(Condition.enabled)
+                .click();
+
+    }
+
+    public void verifySuccessRedirectLongridPage() {
+        webdriver()
+                .shouldHave(url("https://longreads.crtweb.ru/"));
+
+    }
+
+    public void verifySuccessRedirectPlatrumPage() {
+        webdriver()
+                .shouldHave(url("https://crtweb.platrum.ru/regulations"));
+    }
+
+    public void clickLinkGit() {
+        linkGit
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickLinkCrtTeam() {
+        linkCrtTeam
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void verifySuccessRedirectGitPage() {
+        webdriver()
+                .shouldHave(url("https://git.crtweb.ru/users/sign_in"));
+    }
+
+    public void verifySuccessRedirectCrtTeamPage() {
+        webdriver()
+                .shouldHave(url("https://crt.team/"));
+    }
+
+    public void clickLinkSite() {
+        linkSite
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void verifySuccessRedirectSitePage() {
+        webdriver()
+                .shouldHave(url("https://crtweb.ru/developers"));
+    }
+
+    public void clickLinkResume() {
+        linkResume
+                .should(Condition.enabled)
+                .click();
 
     }
 }

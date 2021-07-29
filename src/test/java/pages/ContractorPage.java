@@ -49,7 +49,7 @@ public class ContractorPage {
 
     public void verifyEditContract() {
         verifySuccessContract
-                .shouldBe(Condition.enabled);
+                .should(Condition.enabled);
     }
 
     public void clickBurgerMenu() {
@@ -104,7 +104,7 @@ public class ContractorPage {
 
     public void sendInputName(String input) {
         inputName
-                .shouldBe(Condition.enabled).setValue(input);
+                .shouldBe(Condition.enabled);
     }
 
     public void clickButtonSave() {
