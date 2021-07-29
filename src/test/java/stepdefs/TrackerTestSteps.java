@@ -318,7 +318,7 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь заходит на страницу Профиль и редактирует электронную почту$")
     public void userGoToProfilePAgeAndEditMail(Map<String, String> map) {
-        profilePage.clickIconButton();
+        profilePage.clickIconButton();//написан
         profilePage.clickButtonProfile();
         profilePage.clickButtonEdit();
         profilePage.clickInputEmail(map.get("Электронная почта"));
@@ -498,14 +498,14 @@ public class TrackerTestSteps {
     }
 
     public void userOnReportPage() {
-    reportingPage.clickBurgerMenu();
-    reportingPage.clickPageReport();
-    reportingPage.clickButtonCalendar();
-    reportingPage.clickButtonLastMonth();
+        reportingPage.clickBurgerMenu();
+        reportingPage.clickPageReport();
+        reportingPage.clickButtonCalendar();
+        reportingPage.clickButtonLastMonth();
 
     }
 
 
-    }
+}
 
 
