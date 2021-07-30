@@ -1,7 +1,6 @@
 
 package stepdefs;
 
-import com.codeborne.selenide.Condition;
 import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;

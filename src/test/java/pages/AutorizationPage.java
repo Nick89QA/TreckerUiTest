@@ -1,11 +1,8 @@
 package pages;
 
 import com.codeborne.selenide.*;
-import stepdefs.TrackerTestSteps;
 
 import java.time.Duration;
-import java.util.logging.Logger;
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -19,15 +16,9 @@ public class AutorizationPage {
     private final SelenideElement verifyIncorrectPassword = $x("//span[contains(text(), 'Неверный пароль')]");
 
 
-    public void verifyAuth() {
-        buttonProfile
-                .should(Condition.enabled);
-    }
-
     public void clickAuth() {
         buttonAuth
                 .should(Condition.enabled).doubleClick();
-     //   log.info("success");
     }
 
     public void sendInputEmail(String mail) {
