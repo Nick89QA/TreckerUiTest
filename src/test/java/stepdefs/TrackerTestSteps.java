@@ -497,15 +497,6 @@ public class TrackerTestSteps {
 
     }
 
-    public void userOnReportPage() {
-        reportingPage.clickBurgerMenu();
-        reportingPage.clickPageReport();
-        reportingPage.clickButtonCalendar();
-        reportingPage.clickButtonLastMonth();
-
-    }
-
-
 }
 
 

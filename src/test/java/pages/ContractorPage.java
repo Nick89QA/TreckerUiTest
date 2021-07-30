@@ -16,15 +16,15 @@ public class ContractorPage {
     private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
     private final SelenideElement checkSuccessContract = $x("//div[text()='Успешно']");//проверка на успешное создание/или удаление
     private final SelenideElement checkPageContract = $x("//div[h1='Список подрядчиков']");//проверка на странице подряд "Список подрядчиков"
-    private final SelenideElement inputDeleteContract = $x("//div[text()='Разработка планов']");//кнопка привязана к названию подряда
+    private final SelenideElement inputSelectContract = $x("//div[text()='Разработка планов']");//кнопка привязана к названию подряда
     private final SelenideElement verifyDelContract = $x("//div[text()='Подрядчик удален']");//проверка удаления подряда
     private final SelenideElement buttonBasket = $x("(//span[@class='MuiIconButton-label'])[5]");//кнопка корзина
     private final SelenideElement buttonDelete = $x("//span[text()='Удалить']");//кнопка удалить
     private final SelenideElement inputContract = $x("//div[text()='АО НПФ Сбербанка ff ']");//клик на поле НПФ Сбербанк
-    private final SelenideElement buttonEditContract = $x("(//div[@role='button'])[1]");//клик на карандаш
+    private final SelenideElement buttonEditContract = $x("//div[@id='editButton']");//клик на кара
     private final SelenideElement inputName = $x("//input[@name='shortName']");//клик на поле
-    private final SelenideElement buttonSave = $x("(//span[@class='MuiIconButton-label'])[6]");//кнопка сохранения
-    private final SelenideElement verifySuccessContract = $x("//div[text()='Подрядчик сохранен']");//проверка на сохранения
+    private final SelenideElement buttonSave = $x("//div[@id='saveButton']");//кнопка сохранить
+    private final SelenideElement verifySuccessContract = $x("//div[text()='Успешно']");//проверка на сохранения
 
 
     public void checkNewContract() {
@@ -78,12 +78,12 @@ public class ContractorPage {
     }
 
     public void scrollInputDeleteContract() {
-        inputDeleteContract
+        inputSelectContract
                 .scrollIntoView(true);
     }
 
     public void clickInputContract() {
-        inputDeleteContract
+        inputSelectContract
                 .shouldBe(Condition.enabled).click();
     }
 
