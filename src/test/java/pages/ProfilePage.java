@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.files.DownloadActions.click;
 
 public class ProfilePage {
     private final SelenideElement buttonIcon = $x("//button[@id='accountIdButton']");
@@ -36,13 +37,15 @@ public class ProfilePage {
 
     public void clickButtonEdit() {
         buttonEdit
+                .scrollIntoView(true)
                 .should(Condition.enabled)
                 .click();
     }
 
-    public void clickInputEmail(String email) {
+    public void editInputEmail(String email) {
         inputEmail
-                .should(Condition.enabled);
+                .should(Condition.enabled).setValue(email)
+                .click();
     }
 
     public void clickButtonSave() {
@@ -50,59 +53,62 @@ public class ProfilePage {
                 .should(Condition.enabled)
                 .click();
     }
-    public void selectInputFormatDate(String date) {
+
+    public void selectInputFormatDate(String formatDate) {
         inputFormatDate
                 .should(Condition.enabled);
     }
-  public void clickButtonCalendar() {
+
+    public void clickButtonCalendar() {
         buttonCalendar
                 .should(Condition.enabled)
                 .click();
-  }
+    }
 
-   public void clickButtonLastMonth() {
+    public void clickButtonLastMonth() {
         buttonLastMonth
                 .should(Condition.enabled)
                 .click();
-   }
+    }
 
-   public void checkVerifyLastMonth() {
+    public void checkVerifyLastMonth() {
         verifyLastMonth
                 .should(Condition.visible);
-   }
+    }
 
     public void clickButtonClickForExitFromCalendar() {
-    buttonClickForExitFromCalendar
-            .should(Condition.enabled)
-            .click();
+        buttonClickForExitFromCalendar
+                .should(Condition.enabled)
+                .click();
     }
 
     public void verifyCheckRoleOnPage() {
-    checkRoleOnPage
-            .should(Condition.enabled)
-            .click();
+        checkRoleOnPage
+                .should(Condition.enabled);
     }
 
     public void checkMessageNotificationSuccess() {
-    messageNotificationsSuccess
-            .should(Condition.visible);
+        messageNotificationsSuccess
+                .should(Condition.visible);
 
     }
 
-    public void clickInputFormatTime(String formatTime) {
-     inputFormatTime
-             .should(Condition.enabled);
+    public void selectInputFormatTime(String formatTime) {
+        inputFormatTime
+                .should(Condition.enabled)
+                .click();
     }
 
     public void setInputName(String name) {
         inputName
-                .should(Condition.enabled);
+                .should(Condition.enabled)
+        .setValue(name);
     }
 
     public void setInputLastName(String lastName) {
-     inputLastName
-             .should(Condition.enabled)
-             .setValue(lastName);
+        inputLastName
+                .should(Condition.enabled)
+                .setValue(lastName);
     }
 }
 

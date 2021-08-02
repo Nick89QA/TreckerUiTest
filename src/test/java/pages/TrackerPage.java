@@ -140,10 +140,7 @@ public class TrackerPage {
     }
 
 
-    public void switchWindow(int num) {
-        Selenide.switchTo()
-                .window(num);
-    }
+
 
     public void verifySuccessRedirectKnowledgeBase() {
         webdriver()
@@ -151,7 +148,7 @@ public class TrackerPage {
     }
 
 
-    public void clickLinkLongrid() {
+    public void clickLinkLongread() {
         linkLongrid
                 .should(Condition.enabled)
                 .click();
@@ -165,7 +162,7 @@ public class TrackerPage {
 
     }
 
-    public void verifySuccessRedirectLongridPage() {
+    public void verifySuccessRedirectLongreadPage() {
         webdriver()
                 .shouldHave(url("https://longreads.crtweb.ru/"));
 

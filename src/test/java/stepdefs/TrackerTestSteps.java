@@ -9,6 +9,7 @@ import pages.*;
 import pages.AutorizationPage;
 import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
+import utils.SwitchWindowPage;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class TrackerTestSteps {
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
     private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
     private ProfilePage profilePage = Selenide.page(ProfilePage.class);
-
+    private SwitchWindowPage switchWindowPage = Selenide.page(SwitchWindowPage.class);
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
@@ -100,7 +101,7 @@ public class TrackerTestSteps {
         usersPage.searchSurName(map.get("Фамилия"));
     }
 
-    @Тогда("^пользователь получает уведомление о неккорректной ссылке$")
+    @Тогда("^пользователь получает уведомление о некорректной ссылке$")
     public void verifyErrorNotification() {
         trackerPage.verifyErrorNotification();
     }
@@ -141,7 +142,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается о доступности отчетности за прошлый месяц$")
     public void verifyReports() {
-        reportingPage.checkWrightResult();
+        reportingPage.checkRightResult();
     }
 
     @Когда("^Пользователь добавляет свой проект в архив$")
@@ -178,10 +179,6 @@ public class TrackerTestSteps {
         projectPage.clickButtonCreateProject();
     }
 
-    @Тогда("^Пользователь убеждается об успешном создании задачи$")
-    public void userVerifySuccessTask() {
-        trackerPage.verifyTask();
-    }
 
     @Тогда("^Пользователь убеждается об успешном нахождении данной фамилии$")
     public void userVerifyResult() {
@@ -224,7 +221,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
     public void authorizationWithIncorrectEmail(String email) {//тест отра
         autorizationPage.clickButtonAuthorization();
-        autorizationPage.methodSwitchWindow();
+        switchWindowPage.switchWindow(1);
         autorizationPage.clickInputEmail(email);
         autorizationPage.clickButtonNext();
     }
@@ -237,7 +234,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")//тест отрабатывает корректно
     public void AuthorizeWithIncorrectPassword(Map<String, String> map) {
         autorizationPage.clickButtonAuthorization();
-        autorizationPage.methodSwitchWindow();
+        switchWindowPage.switchWindow(1);
         autorizationPage.clickInputEmail(map.get("Корректный имейл"));
         autorizationPage.clickButtonNext();
         autorizationPage.sendInputIncorrectPassword(map.get("Некорректный пароль"));
@@ -320,7 +317,7 @@ public class TrackerTestSteps {
         profilePage.clickIconButton();//написан
         profilePage.clickButtonProfile();
         profilePage.clickButtonEdit();
-        profilePage.clickInputEmail(map.get("Электронная почта"));
+        profilePage.editInputEmail(map.get("Электронная почта"));
         profilePage.clickButtonSave();
     }
 
@@ -348,7 +345,7 @@ public class TrackerTestSteps {
         profilePage.clickIconButton();
         profilePage.clickButtonProfile();
         profilePage.clickButtonEdit();
-        profilePage.clickInputFormatTime(map.get("Формат времени"));
+        profilePage.selectInputFormatTime(map.get("Формат времени"));
         profilePage.clickButtonSave();
     }
 
@@ -385,7 +382,7 @@ public class TrackerTestSteps {
         profilePage.checkMessageNotificationSuccess();
     }
 
-    @Когда("^Пользователь создает задачу с неккоректными  параметрами$")
+    @Когда("^Пользователь создает задачу с некоректными  параметрами$")
     public void userCreateTwoTasksOnBorderTime(Map<String, String> map) {
         trackerPage.clickBurgerMenu();
         trackerPage.ClickPageTimer();
@@ -412,20 +409,20 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу База знаний$")
     public void userMakeSureSuccessRedirectPageKnowledgeBase() {
-        trackerPage.switchWindow(1);
+        switchWindowPage.switchWindow(1);
         trackerPage.verifySuccessRedirectKnowledgeBase();
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Лонгриды$")
     public void userRedirectFromMainPageToPagelongrid() {
         trackerPage.clickButtonLink();
-        trackerPage.clickLinkLongrid();
+        trackerPage.clickLinkLongread();
     }
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Лонгриды$")
     public void userMakeSureSuccessRedirectPageLongrid() {
-        trackerPage.switchWindow(1);
-        trackerPage.verifySuccessRedirectLongridPage();
+        switchWindowPage.switchWindow(1);
+        trackerPage.verifySuccessRedirectLongreadPage();
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Платрум$")
@@ -436,7 +433,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Платрум$")
     public void userMakeSureSuccessRedirectPagePlatrum() {
-        trackerPage.switchWindow(1);
+        switchWindowPage.switchWindow(1);
         trackerPage.verifySuccessRedirectPlatrumPage();
     }
 
@@ -449,7 +446,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Гит$")
     public void userMakeSureSuccessRedirectPageGit() {
-        trackerPage.switchWindow(1);
+        switchWindowPage.switchWindow(1);
         trackerPage.verifySuccessRedirectGitPage();
     }
 
@@ -462,7 +459,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
     public void userMakeSureSuccessRedirectPageCrtTeam() {
-        trackerPage.switchWindow(1);
+        switchWindowPage.switchWindow(1);
         trackerPage.verifySuccessRedirectCrtTeamPage();
 
     }
@@ -477,7 +474,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Сайт$")
     public void userMakeSureSuccessRedirectPageSite() {
-        trackerPage.switchWindow(1);
+        switchWindowPage.switchWindow(1);
         trackerPage.verifySuccessRedirectSitePage();
     }
 
@@ -491,7 +488,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Резюме специалистов$")
     public void userMakeSureSuccessRedirectPageResume() {
-        trackerPage.switchWindow(1);
+        switchWindowPage.switchWindow(1);
         trackerPage.verifySuccessRedirectSitePage();
 
     }

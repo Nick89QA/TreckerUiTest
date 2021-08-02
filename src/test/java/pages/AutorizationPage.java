@@ -59,10 +59,6 @@ public class AutorizationPage {
                 .should(Condition.visible, Duration.ofSeconds(10)).click();
     }
 
-    public void methodSwitchWindow() {
-        switchWindow(1);
-    }
-
     public void clickInputEmail(String email) {
         inputEmail.should(Condition.enabled)
                 .setValue(email);//введение в поле некор имейла

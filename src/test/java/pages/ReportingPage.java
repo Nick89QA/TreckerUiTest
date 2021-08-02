@@ -15,7 +15,7 @@ public class ReportingPage {
 
 
 
-    public void checkWrightResult() {
+    public void checkRightResult() {
         checkVerifyLastMonth
                 .shouldBe(Condition.enabled).click();
     }
