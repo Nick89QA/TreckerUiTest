@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.*;
 
 import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -11,7 +12,6 @@ public class AutorizationPage {
     private final SelenideElement inputEmail = $("#identifierId");//поле input
     private final SelenideElement buttonNext = $x("//span[text()='Далее']");
     private final SelenideElement inputPassword = $("input[type='password']");//введение
-    private final SelenideElement buttonProfile = $x("//button[@aria-label='account of current user']");
     private final SelenideElement verifyIncorrectEmail = $x("//div[text()='Введите адрес электронной почты или номер телефона.']");//проверка
     private final SelenideElement verifyIncorrectPassword = $x("//span[contains(text(), 'Неверный пароль')]");
 
@@ -39,10 +39,6 @@ public class AutorizationPage {
                 .click();
     }
 
-    public void switchWindow(int num) {
-        Selenide.switchTo()
-                .window(num);
-    }
 
     public void verifyIncorrectEmail() {//проверка на некорректный имейл
         verifyIncorrectEmail

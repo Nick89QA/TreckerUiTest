@@ -14,7 +14,7 @@ public class UsersPage {
     private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
 
     public void setSearchField(String text) {
-        inputSearch.shouldBe(Condition.enabled).clear();
+        inputSearch.shouldBe(Condition.enabled);
         inputSearch.setValue(text);
     }
 

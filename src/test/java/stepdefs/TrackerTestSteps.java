@@ -9,7 +9,7 @@ import pages.*;
 import pages.AutorizationPage;
 import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
-import utils.SwitchWindowPage;
+import utils.WebUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -22,17 +22,17 @@ public class TrackerTestSteps {
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
     private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
     private ProfilePage profilePage = Selenide.page(ProfilePage.class);
-    private SwitchWindowPage switchWindowPage = Selenide.page(SwitchWindowPage.class);
+    private WebUtils webUtils = Selenide.page(WebUtils.class);
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
         autorizationPage.clickAuth();
-        autorizationPage.switchWindow(1);
+        webUtils.switchWindow(1);
         autorizationPage.sendInputEmail("nip@crtweb.ru");
         autorizationPage.clickNext();
         autorizationPage.sendInputPassword("nick2004");
         autorizationPage.clickNext();
-        autorizationPage.switchWindow(0);
+        webUtils.switchWindow(0);
         Selenide.sleep(6000);//Обход авторизации гугла
     }
 
@@ -211,6 +211,7 @@ public class TrackerTestSteps {
         projectPage.clickButtonDetails();
         projectPage.clickButtonCalendar();
         projectPage.clickButtonLastMonth();
+
     }
 
     @Тогда("^Пользователь убеждается об успешном просмотре отчета по проекту$")
@@ -221,7 +222,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
     public void authorizationWithIncorrectEmail(String email) {//тест отра
         autorizationPage.clickButtonAuthorization();
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         autorizationPage.clickInputEmail(email);
         autorizationPage.clickButtonNext();
     }
@@ -234,7 +235,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")//тест отрабатывает корректно
     public void AuthorizeWithIncorrectPassword(Map<String, String> map) {
         autorizationPage.clickButtonAuthorization();
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         autorizationPage.clickInputEmail(map.get("Корректный имейл"));
         autorizationPage.clickButtonNext();
         autorizationPage.sendInputIncorrectPassword(map.get("Некорректный пароль"));
@@ -312,70 +313,30 @@ public class TrackerTestSteps {
         profilePage.verifyCheckRoleOnPage();
     }
 
-    @Когда("^Пользователь заходит на страницу Профиль и редактирует электронную почту$")
-    public void userGoToProfilePAgeAndEditMail(Map<String, String> map) {
-        profilePage.clickIconButton();//написан
-        profilePage.clickButtonProfile();
-        profilePage.clickButtonEdit();
-        profilePage.editInputEmail(map.get("Электронная почта"));
-        profilePage.clickButtonSave();
-    }
 
     @Тогда("^Пользователь убеждается об успешном редактировании электронной почты$")
     public void userMakeSureAboutSuccessEditEmail() {
         profilePage.checkMessageNotificationSuccess();
     }
 
-    @Когда("^Пользователь заходит на страницу Профиль и меняет формат даты$")
-    public void userGoToProfilePageAndChangeDateFormat(Map<String, String> map) {
-        profilePage.clickIconButton();
-        profilePage.clickButtonProfile();
-        profilePage.clickButtonEdit();
-        profilePage.selectInputFormatDate(map.get("Формат даты"));
-        profilePage.clickButtonSave();
-    }
 
     @Тогда("^Пользователь убеждается об успешном изменении формата даты на странице$")
     public void userMakeSureSuccessEditDateFormat() {
         profilePage.checkMessageNotificationSuccess();
     }
 
-    @Когда("^Пользователь заходит на страницу Профиль и меняет формат времени$")
-    public void userGoToProfilePageAndChangeTimeFormat(Map<String, String> map) {
-        profilePage.clickIconButton();
-        profilePage.clickButtonProfile();
-        profilePage.clickButtonEdit();
-        profilePage.selectInputFormatTime(map.get("Формат времени"));
-        profilePage.clickButtonSave();
-    }
 
     @Тогда("^Пользователь убеждается об успешном изменении формата времени на странице профиль$")
     public void userMakeSureSuccessEditTimeFormat() {
         profilePage.checkMessageNotificationSuccess();
     }
 
-    @Когда("^Пользователь заходит на страницу и редактирует свое имя$")
-    public void userGoToProfilePageAndEditName(Map<String, String> map) {
-        profilePage.clickIconButton();
-        profilePage.clickButtonProfile();
-        profilePage.clickButtonEdit();
-        profilePage.setInputName(map.get("Имя"));
-        profilePage.clickButtonSave();
-    }
 
     @Тогда("^Пользователь успешно редактирует свое имя на странице Профиль$")
     public void userSuccessEditNameOnProfilePage() {
         profilePage.checkMessageNotificationSuccess();
     }
 
-    @Когда("^Пользователь заходит на страницу профиль и редактирует свою фамилию$")
-    public void userGoToProfilePageAndEditLastName(Map<String, String> map) {
-        profilePage.clickIconButton();
-        profilePage.clickButtonProfile();
-        profilePage.clickButtonEdit();
-        profilePage.setInputLastName(map.get("Фамилия"));
-        profilePage.clickButtonSave();
-    }
 
     @Тогда("^Пользователь убеждается об успешном редактировании своей фамилии на странице$")
     public void userMakeSureInSuccessEditLastName() {
@@ -409,7 +370,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу База знаний$")
     public void userMakeSureSuccessRedirectPageKnowledgeBase() {
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectKnowledgeBase();
     }
 
@@ -421,7 +382,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Лонгриды$")
     public void userMakeSureSuccessRedirectPageLongrid() {
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectLongreadPage();
     }
 
@@ -433,7 +394,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Платрум$")
     public void userMakeSureSuccessRedirectPagePlatrum() {
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectPlatrumPage();
     }
 
@@ -446,7 +407,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Гит$")
     public void userMakeSureSuccessRedirectPageGit() {
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectGitPage();
     }
 
@@ -459,7 +420,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
     public void userMakeSureSuccessRedirectPageCrtTeam() {
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectCrtTeamPage();
 
     }
@@ -474,7 +435,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Сайт$")
     public void userMakeSureSuccessRedirectPageSite() {
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectSitePage();
     }
 
@@ -488,11 +449,25 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Резюме специалистов$")
     public void userMakeSureSuccessRedirectPageResume() {
-        switchWindowPage.switchWindow(1);
+        webUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectSitePage();
 
     }
 
+    @Когда("^Пользователь заполняет данные на странице Профиля$")
+    public void userSetProfileSettings(Map<String, String> map) {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonEdit();
+        profilePage.setProfilePageInputs(map);
+        profilePage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждется что данные профиля заполнились корректно$")
+    public void userMAkeSureProfileDataFilledCorrectly() {
+
+
+    }
 }
 
 

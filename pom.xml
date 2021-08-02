@@ -85,6 +85,12 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -106,18 +112,13 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-support</artifactId>
-            <version>3.141.59</version>
-            <scope>compile</scope>
-        </dependency>
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber6-jvm</artifactId>
             <version>${allure.version}</version>
         </dependency>
+
 
     </dependencies>
 

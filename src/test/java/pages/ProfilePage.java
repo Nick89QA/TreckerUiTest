@@ -1,10 +1,15 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import utils.WebUtils;
+
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.files.DownloadActions.click;
+import static com.codeborne.selenide.Selenide.element;
+
 
 public class ProfilePage {
     private final SelenideElement buttonIcon = $x("//button[@id='accountIdButton']");
@@ -22,6 +27,7 @@ public class ProfilePage {
     private final SelenideElement inputFormatTime = $x("//div[@id='mui-component-select-timeLocale']");
     private final SelenideElement inputName = $x("//input[@name='firstName']");
     private final SelenideElement inputLastName = $x("//input[@name='lastName']");
+    private final SelenideElement inputSurName = $x("//input[@name='surname']");//отчество
 
     public void clickIconButton() {
         buttonIcon
@@ -42,21 +48,11 @@ public class ProfilePage {
                 .click();
     }
 
-    public void editInputEmail(String email) {
-        inputEmail
-                .should(Condition.enabled).setValue(email)
-                .click();
-    }
-
     public void clickButtonSave() {
         buttonSave
+                .scrollIntoView(true)
                 .should(Condition.enabled)
                 .click();
-    }
-
-    public void selectInputFormatDate(String formatDate) {
-        inputFormatDate
-                .should(Condition.enabled);
     }
 
     public void clickButtonCalendar() {
@@ -93,22 +89,29 @@ public class ProfilePage {
 
     }
 
-    public void selectInputFormatTime(String formatTime) {
+    public void setProfilePageInputs(Map<String, String> map) {
+        WebUtils.clearField(inputName);
+        inputName
+                .setValue(map.get("Имя"));
+        WebUtils.clearField(inputLastName);
+        inputLastName
+                .should(Condition.enabled)
+                .setValue("Фамилия");
+        WebUtils.clearField(inputSurName);
+        inputSurName
+                .setValue(map.get("Отчество"));
+        WebUtils.clearField(inputEmail);//передаем inputEmail
+        inputEmail
+                .setValue(map.get("Электронная почта"));
+        inputFormatDate
+                .should(Condition.enabled)
+                .click();
+        Selenide.$x(String.format("//li[text()='%s']", map.get("Формат даты"))).click();
         inputFormatTime
                 .should(Condition.enabled)
                 .click();
+        Selenide.$x(String.format("//li[text()='%s']", map.get("Формат времени"))).click();
     }
 
-    public void setInputName(String name) {
-        inputName
-                .should(Condition.enabled)
-        .setValue(name);
-    }
-
-    public void setInputLastName(String lastName) {
-        inputLastName
-                .should(Condition.enabled)
-                .setValue(lastName);
-    }
 }
 

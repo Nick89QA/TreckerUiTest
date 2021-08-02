@@ -121,8 +121,6 @@ public class ProjectPage {
                 .should(Condition.visible)
                 .scrollIntoView(true)
                 .click();
-
-
     }
 
     public void clickButtonEdit() {

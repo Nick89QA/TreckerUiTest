@@ -13,8 +13,6 @@ public class ReportingPage {
     private final SelenideElement checkVerifyLastMonth = $x("//span[text()='Прошлый месяц']");
 
 
-
-
     public void checkRightResult() {
         checkVerifyLastMonth
                 .shouldBe(Condition.enabled).click();

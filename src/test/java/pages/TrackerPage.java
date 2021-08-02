@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
 
@@ -140,8 +141,6 @@ public class TrackerPage {
     }
 
 
-
-
     public void verifySuccessRedirectKnowledgeBase() {
         webdriver()
                 .shouldHave(url("https://kb.crtweb.ru/"));
@@ -203,7 +202,7 @@ public class TrackerPage {
 
     public void verifySuccessRedirectSitePage() {
         webdriver()
-                .shouldHave(url("https://crtweb.ru/developers"));
+                .shouldHave(url("https://crtweb.ru/"));
     }
 
     public void clickLinkResume() {
