@@ -5,11 +5,15 @@ import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import pages.*;
 import pages.AutorizationPage;
 import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
+import utils.WebUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,17 +24,18 @@ public class TrackerTestSteps {
     private ProjectPage projectPage = Selenide.page(ProjectPage.class);
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
     private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
+    private ProfilePage profilePage = Selenide.page(ProfilePage.class);
 
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
         autorizationPage.clickAuth();
-        autorizationPage.switchWindow(1);
+        WebUtils.switchWindow(1);
         autorizationPage.sendInputEmail("nip@crtweb.ru");
         autorizationPage.clickNext();
         autorizationPage.sendInputPassword("nick2004");
         autorizationPage.clickNext();
-        autorizationPage.switchWindow(0);
+        WebUtils.switchWindow(0);
         Selenide.sleep(6000);//Обход авторизации гугла
     }
 
@@ -39,7 +44,7 @@ public class TrackerTestSteps {
         trackerPage.sendNameInput(map.get("Название"));
         trackerPage.setStartTime(map.get(" Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
-        trackerPage.setInputSelectProject(map.get("Проект"));
+        trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));
         trackerPage.AddTimeButton();
@@ -99,7 +104,7 @@ public class TrackerTestSteps {
         usersPage.searchSurName(map.get("Фамилия"));
     }
 
-    @Тогда("^пользователь получает уведомление о неккорректной ссылке$")
+    @Тогда("^пользователь получает уведомление о некорректной ссылке$")
     public void verifyErrorNotification() {
         trackerPage.verifyErrorNotification();
     }
@@ -140,7 +145,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается о доступности отчетности за прошлый месяц$")
     public void verifyReports() {
-        reportingPage.checkWrightResult();
+        reportingPage.checkRightResult();
     }
 
     @Когда("^Пользователь добавляет свой проект в архив$")
@@ -166,7 +171,7 @@ public class TrackerTestSteps {
         contractorPage.clickButtonCreate();
     }
 
-    @Когда("^Пользователь создает успешно новый проект$")
+    @Когда("^Пользователь создает новый проект$")
     public void createNewTask(Map<String, String> map) {
         projectPage.clickBurgerMenu();
         projectPage.clickPageProject();
@@ -177,10 +182,6 @@ public class TrackerTestSteps {
         projectPage.clickButtonCreateProject();
     }
 
-    @Тогда("^Пользователь убеждается об успешном создании задачи$")
-    public void userVerifySuccessTask() {
-        trackerPage.verifyTask();
-    }
 
     @Тогда("^Пользователь убеждается об успешном нахождении данной фамилии$")
     public void userVerifyResult() {
@@ -213,6 +214,7 @@ public class TrackerTestSteps {
         projectPage.clickButtonDetails();
         projectPage.clickButtonCalendar();
         projectPage.clickButtonLastMonth();
+
     }
 
     @Тогда("^Пользователь убеждается об успешном просмотре отчета по проекту$")
@@ -223,7 +225,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
     public void authorizationWithIncorrectEmail(String email) {//тест отра
         autorizationPage.clickButtonAuthorization();
-        autorizationPage.methodSwitchWindow();
+        WebUtils.switchWindow(1);
         autorizationPage.clickInputEmail(email);
         autorizationPage.clickButtonNext();
     }
@@ -236,7 +238,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")//тест отрабатывает корректно
     public void AuthorizeWithIncorrectPassword(Map<String, String> map) {
         autorizationPage.clickButtonAuthorization();
-        autorizationPage.methodSwitchWindow();
+        WebUtils.switchWindow(1);
         autorizationPage.clickInputEmail(map.get("Корректный имейл"));
         autorizationPage.clickButtonNext();
         autorizationPage.sendInputIncorrectPassword(map.get("Некорректный пароль"));
@@ -277,22 +279,201 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном редактировании информации о подрядчике$")
     public void verifySuccessEdit() {
-        contractorPage.verifyEditContract();
+        contractorPage
+                .verifyEditContract();
     }
 
     @Тогда("^Пользователь убеждается об успешном создании проекта$")
     public void userCheckSuccessCreateContract() {
-        projectPage.checkSuccessProject();
+        projectPage
+                .checkSuccessProject();
     }
 
-    @Когда("^Пользователь создает задачу с неполными параметрами$")
-    public void createTaskWithoutProjectName(Map<String,String> map) {
+
+    @Когда("^Пользователь заходит на страницу Профиль и смотрит отчет по проектам$")
+    public void userGoToProfilePageAndSeeReportForProject() {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastMonth();
+        profilePage.clickButtonClickForExitFromCalendar();
+
+    }
+
+    @Тогда("^Пользователь убеждается о доступности отчета на странице Профиль за прошлый месяц$")
+    public void userSureAboutValiableReportForLastMonth() {
+        profilePage.checkVerifyLastMonth();
+    }
+
+    @Когда("^Пользователь заходит на страницу Профиль$")
+    public void userGoToProfilePage() {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+    }
+
+    @Тогда("^Пользователь убеждается о досупном просмотре своей роли на странице Профиль$")
+    public void userMakeSureAboutAvailableRoleOnProject() {
+        profilePage.verifyCheckRoleOnPage();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном редактировании электронной почты$")
+    public void userMakeSureAboutSuccessEditEmail() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном изменении формата даты на странице$")
+    public void userMakeSureSuccessEditDateFormat() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном изменении формата времени на странице профиль$")
+    public void userMakeSureSuccessEditTimeFormat() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+
+    @Тогда("^Пользователь успешно редактирует свое имя на странице Профиль$")
+    public void userSuccessEditNameOnProfilePage() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном редактировании своей фамилии на странице$")
+    public void userMakeSureInSuccessEditLastName() {
+        profilePage.checkMessageNotificationSuccess();
+    }
+
+    @Когда("^Пользователь создает задачу с некоректными  параметрами$")
+    public void userCreateTwoTasksOnBorderTime(Map<String, String> map) {
+        trackerPage.clickBurgerMenu();
+        trackerPage.ClickPageTimer();
+        trackerPage.ClickButtonYesterday();
         trackerPage.sendNameInput(map.get("Название"));
-        trackerPage.setStartTime(map.get(" Время начала"));
+        trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
-        trackerPage.setInputLink(map.get("Ссылка на задачу"));
-        trackerPage.clickDescribeTask(map.get("Описание задачи"));
+        trackerPage.clickSelectProject(map.get("Проект"));
+        trackerPage.setInputLinkPastTime(map.get("Ссылка на задачу"));
+        trackerPage.clickDescribeTask(map.get("Описание задачи"));//дописать задачу
         trackerPage.AddTimeButton();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном создании задач$")
+    public void userMakeSureSuccessCreateTasks() {
+        trackerPage.verifyTask();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу База знаний$")
+    public void userRedirectFromMainPageToPageKnowledgeBase() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkKnowledgeBase();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу База знаний$")
+    public void userMakeSureSuccessRedirectPageKnowledgeBase() {
+        WebUtils.switchWindow(1);
+        trackerPage.verifySuccessRedirectKnowledgeBase();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Лонгриды$")
+    public void userRedirectFromMainPageToPagelongrid() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkLongread();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Лонгриды$")
+    public void userMakeSureSuccessRedirectPageLongrid() {
+        WebUtils.switchWindow(1);
+        trackerPage.verifySuccessRedirectLongreadPage();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Платрум$")
+    public void userRedirectFromMainPageToPagePlatrum() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkPlatrum();
+    }
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Платрум$")
+    public void userMakeSureSuccessRedirectPagePlatrum() {
+        WebUtils.switchWindow(1);
+        trackerPage.verifySuccessRedirectPlatrumPage();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Гит$")
+    public void userRedirectFromMainPageToPageGit() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkGit();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Гит$")
+    public void userMakeSureSuccessRedirectPageGit() {
+        WebUtils.switchWindow(1);
+        trackerPage.verifySuccessRedirectGitPage();
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу CRT.TEAM$")
+    public void userRedirectFromMainPageToPageCrtTeam() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkCrtTeam();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
+    public void userMakeSureSuccessRedirectPageCrtTeam() {
+        WebUtils.switchWindow(1);
+        trackerPage.verifySuccessRedirectCrtTeamPage();
+
+    }
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Сайт$")
+    public void userRedirectFromMainPageToPageSite() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkSite();
+
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Сайт$")
+    public void userMakeSureSuccessRedirectPageSite() {
+        WebUtils.switchWindow(1);
+        trackerPage.verifySuccessRedirectSitePage();
+    }
+
+
+    @Когда("^Пользователь переходит с главной страницы трекера на страницу Резюме специалистов$")
+    public void userRedirectFromMainPageToPageResume() {
+        trackerPage.clickButtonLink();
+        trackerPage.clickLinkResume();
+    }
+
+
+    @Тогда("^Пользователь убеждается об успешном переходе на страницу Резюме специалистов$")
+    public void userMakeSureSuccessRedirectPageResume() {
+        WebUtils.switchWindow(1);
+        trackerPage.verifySuccessRedirectSitePage();
+
+    }
+
+    @Когда("^Пользователь заполняет данные на странице Профиля$")
+    public void userSetProfileSettings(Map<String, String> map) {
+        profilePage.clickIconButton();
+        profilePage.clickButtonProfile();
+        profilePage.clickButtonEdit();
+        profilePage.setProfilePageInputs(map);
+        profilePage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждется что данные профиля заполнились корректно$")
+    public void verifyTextOnProfilePage(Map<String,String> map ) {
+        Map<String,String> actualMap = profilePage.getProfileInfo();
+        SoftAssert softAssert = new SoftAssert();
+      for (String key:map.keySet()){
+          softAssert.assertEquals(actualMap.get(key),map.get(key));
+      }
+     softAssert.assertAll();
     }
 }
 

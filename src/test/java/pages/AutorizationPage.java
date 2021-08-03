@@ -1,33 +1,24 @@
 package pages;
 
 import com.codeborne.selenide.*;
-import stepdefs.TrackerTestSteps;
 
 import java.time.Duration;
-import java.util.logging.Logger;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class AutorizationPage {
-    private final SelenideElement buttonAuth = $x("//span[text()=' Авторизация']");//авторизация
+    private final SelenideElement buttonAuthorization = $x("//button[@type='button']");//авторизация
     private final SelenideElement inputEmail = $("#identifierId");//поле input
     private final SelenideElement buttonNext = $x("//span[text()='Далее']");
     private final SelenideElement inputPassword = $("input[type='password']");//введение
-    private final SelenideElement buttonProfile = $x("//button[@aria-label='account of current user']");
     private final SelenideElement verifyIncorrectEmail = $x("//div[text()='Введите адрес электронной почты или номер телефона.']");//проверка
     private final SelenideElement verifyIncorrectPassword = $x("//span[contains(text(), 'Неверный пароль')]");
-   // private static final Logger log = Logger.getLogger("AutorizationPage");
 
-    public void verifyAuth() {
-        buttonProfile
-                .should(Condition.enabled);
-    }
 
     public void clickAuth() {
-        buttonAuth
+        buttonAuthorization
                 .should(Condition.enabled).doubleClick();
-     //   log.info("success");
     }
 
     public void sendInputEmail(String mail) {
@@ -48,10 +39,6 @@ public class AutorizationPage {
                 .click();
     }
 
-    public void switchWindow(int num) {
-        Selenide.switchTo()
-                .window(num);
-    }
 
     public void verifyIncorrectEmail() {//проверка на некорректный имейл
         verifyIncorrectEmail
@@ -64,12 +51,8 @@ public class AutorizationPage {
     }
 
     public void clickButtonAuthorization() {
-        buttonAuth
+        buttonAuthorization
                 .should(Condition.visible, Duration.ofSeconds(10)).click();
-    }
-
-    public void methodSwitchWindow() {
-        switchWindow(1);
     }
 
     public void clickInputEmail(String email) {

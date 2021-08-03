@@ -12,23 +12,29 @@ public class ReportingPage {
     private final SelenideElement buttonLastMonth = $x("//span[text()='Прошлый месяц']");//клик на параметр
     private final SelenideElement checkVerifyLastMonth = $x("//span[text()='Прошлый месяц']");
 
-    public void checkWrightResult() {
-        checkVerifyLastMonth.shouldBe(Condition.enabled).click();
+
+    public void checkRightResult() {
+        checkVerifyLastMonth
+                .shouldBe(Condition.enabled).click();
     }
 
     public void clickBurgerMenu() {
-        burgerMenu.should(Condition.enabled).click();
+        burgerMenu
+                .should(Condition.enabled).click();
     }
 
     public void clickPageReport() {
-        pageReport.should(Condition.enabled).click();
+        pageReport
+                .should(Condition.enabled).click();
     }
 
     public void clickButtonCalendar() {
-        buttonCalendar.should(Condition.enabled).click();
+        buttonCalendar
+                .should(Condition.enabled).click();
     }
 
     public void clickButtonLastMonth() {
-        buttonLastMonth.should(Condition.enabled).click();
+        buttonLastMonth
+                .should(Condition.enabled).click();
     }
 }
