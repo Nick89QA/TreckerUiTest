@@ -3,15 +3,18 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.testng.Assert;
 import utils.WebUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.element;
 
 
-public class ProfilePage {
+public class ProfilePage  {
     private final SelenideElement buttonIcon = $x("//button[@id='accountIdButton']");
     private final SelenideElement buttonProfile = $x("//a[text()='Профиль']");
     private final SelenideElement buttonEdit = $x("//span[text()='Редактировать']");
@@ -28,6 +31,14 @@ public class ProfilePage {
     private final SelenideElement inputName = $x("//input[@name='firstName']");
     private final SelenideElement inputLastName = $x("//input[@name='lastName']");
     private final SelenideElement inputSurName = $x("//input[@name='surname']");//отчество
+    private final SelenideElement nameText = $x("//label[text()='Имя']/span");
+    private final SelenideElement lastNameText = $x("//label[text()='Фамилия']/span");
+    private final SelenideElement surNameText = $x("//label[text()='Отчество']/span");
+    private final SelenideElement mailText = $x("//label[text()='Почта']/span");
+    private final SelenideElement formatDateText = $x("//div[text()='Формат даты']/span");
+    private final SelenideElement formatTimeText = $x("//div[text()='Формат времени']/span");
+
+
 
     public void clickIconButton() {
         buttonIcon
@@ -92,16 +103,19 @@ public class ProfilePage {
     public void setProfilePageInputs(Map<String, String> map) {
         WebUtils.clearField(inputName);
         inputName
+                .shouldBe(Condition.enabled)
                 .setValue(map.get("Имя"));
         WebUtils.clearField(inputLastName);
         inputLastName
                 .should(Condition.enabled)
-                .setValue("Фамилия");
+                .setValue(map.get("Фамилия"));
         WebUtils.clearField(inputSurName);
         inputSurName
+                .shouldBe(Condition.enabled)
                 .setValue(map.get("Отчество"));
         WebUtils.clearField(inputEmail);//передаем inputEmail
         inputEmail
+                .shouldBe(Condition.enabled)
                 .setValue(map.get("Электронная почта"));
         inputFormatDate
                 .should(Condition.enabled)
@@ -111,6 +125,18 @@ public class ProfilePage {
                 .should(Condition.enabled)
                 .click();
         Selenide.$x(String.format("//li[text()='%s']", map.get("Формат времени"))).click();
+    }
+
+    public Map<String, String> getProfileInfo() {
+        //Map<String,String> actualMap = profilePage.getProfileInfo();
+       Map<String, String> actualMap = new HashMap<String, String>();
+       actualMap.put("Имя",nameText.text());
+       actualMap.put("Фамилия",lastNameText.text());
+       actualMap.put("Отчество",surNameText.text());
+       actualMap.put("Электронная почта",mailText.text());
+       actualMap.put("Формат даты",formatDateText.text());
+       actualMap.put("Формат времени",formatTimeText.text());
+      return actualMap;
     }
 
 }

@@ -149,6 +149,7 @@ public class ProjectPage {
     }
 
     public void checkSuccessProject() {
-        verifyCreateProject.shouldBe(Condition.appear);
+        verifyCreateProject
+                .shouldBe(Condition.appear);
     }
 }

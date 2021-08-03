@@ -5,12 +5,15 @@ import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import pages.*;
 import pages.AutorizationPage;
 import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
 import utils.WebUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,17 +25,17 @@ public class TrackerTestSteps {
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
     private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
     private ProfilePage profilePage = Selenide.page(ProfilePage.class);
-    private WebUtils webUtils = Selenide.page(WebUtils.class);
+
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
         autorizationPage.clickAuth();
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         autorizationPage.sendInputEmail("nip@crtweb.ru");
         autorizationPage.clickNext();
         autorizationPage.sendInputPassword("nick2004");
         autorizationPage.clickNext();
-        webUtils.switchWindow(0);
+        WebUtils.switchWindow(0);
         Selenide.sleep(6000);//Обход авторизации гугла
     }
 
@@ -168,7 +171,7 @@ public class TrackerTestSteps {
         contractorPage.clickButtonCreate();
     }
 
-    @Когда("^Пользователь создает успешно новый проект$")
+    @Когда("^Пользователь создает новый проект$")
     public void createNewTask(Map<String, String> map) {
         projectPage.clickBurgerMenu();
         projectPage.clickPageProject();
@@ -222,7 +225,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
     public void authorizationWithIncorrectEmail(String email) {//тест отра
         autorizationPage.clickButtonAuthorization();
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         autorizationPage.clickInputEmail(email);
         autorizationPage.clickButtonNext();
     }
@@ -235,7 +238,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")//тест отрабатывает корректно
     public void AuthorizeWithIncorrectPassword(Map<String, String> map) {
         autorizationPage.clickButtonAuthorization();
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         autorizationPage.clickInputEmail(map.get("Корректный имейл"));
         autorizationPage.clickButtonNext();
         autorizationPage.sendInputIncorrectPassword(map.get("Некорректный пароль"));
@@ -370,7 +373,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу База знаний$")
     public void userMakeSureSuccessRedirectPageKnowledgeBase() {
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectKnowledgeBase();
     }
 
@@ -382,7 +385,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Лонгриды$")
     public void userMakeSureSuccessRedirectPageLongrid() {
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectLongreadPage();
     }
 
@@ -394,7 +397,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Платрум$")
     public void userMakeSureSuccessRedirectPagePlatrum() {
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectPlatrumPage();
     }
 
@@ -407,7 +410,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Гит$")
     public void userMakeSureSuccessRedirectPageGit() {
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectGitPage();
     }
 
@@ -420,7 +423,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
     public void userMakeSureSuccessRedirectPageCrtTeam() {
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectCrtTeamPage();
 
     }
@@ -435,7 +438,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Сайт$")
     public void userMakeSureSuccessRedirectPageSite() {
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectSitePage();
     }
 
@@ -449,7 +452,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Резюме специалистов$")
     public void userMakeSureSuccessRedirectPageResume() {
-        webUtils.switchWindow(1);
+        WebUtils.switchWindow(1);
         trackerPage.verifySuccessRedirectSitePage();
 
     }
@@ -464,9 +467,13 @@ public class TrackerTestSteps {
     }
 
     @Тогда("^Пользователь убеждется что данные профиля заполнились корректно$")
-    public void userMAkeSureProfileDataFilledCorrectly() {
-
-
+    public void verifyTextOnProfilePage(Map<String,String> map ) {
+        Map<String,String> actualMap = profilePage.getProfileInfo();
+        SoftAssert softAssert = new SoftAssert();
+      for (String key:map.keySet()){
+          softAssert.assertEquals(actualMap.get(key),map.get(key));
+      }
+     softAssert.assertAll();
     }
 }
 

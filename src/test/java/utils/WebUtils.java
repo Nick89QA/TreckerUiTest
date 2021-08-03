@@ -8,7 +8,7 @@ import org.openqa.selenium.Keys;
 
 public class WebUtils {
 
-    public void switchWindow(int num) {
+    public static void switchWindow(int num) {
         Selenide.switchTo()
                 .window(num);
     }
