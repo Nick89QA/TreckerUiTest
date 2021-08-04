@@ -42,7 +42,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь создает задачу с параметрами$")
     public void createTask(Map<String, String> map) {//тест проходит корректно при подключенном выпадающем списка(выбор проекта)
         trackerPage.sendNameInput(map.get("Название"));
-        trackerPage.setStartTime(map.get(" Время начала"));
+        trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
@@ -475,6 +475,17 @@ public class TrackerTestSteps {
       }
      softAssert.assertAll();
     }
+
+    @Тогда("^Пользователь убеждается об успешном создании двух задач$")
+    public void userMakeSureSuccessCreateTwoTasks(Map<String,String>map) {
+     Map<String,String> tasksMap = trackerPage.getCreateTasksInfo();
+        SoftAssert softAssert = new SoftAssert();
+        for (String key: map.keySet()){
+            softAssert.assertEquals(tasksMap.get(key),map.get(key));
+        }
+     softAssert.assertAll();
+    }
+
 }
 
 

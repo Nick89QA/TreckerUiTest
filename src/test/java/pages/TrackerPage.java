@@ -1,8 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.apache.logging.log4j.LogManager;
+import org.testng.Assert;
+import utils.WebUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
@@ -25,16 +30,30 @@ public class TrackerPage {
     private final SelenideElement buttonYesterday = $x("//button[@title = 'Предыдущий день']");//клик на предыдущий день
     private final SelenideElement buttonLink = $x("(//button[@id='linksIdButton'])[1]");
     private final SelenideElement linkKnowledgeBase = $x("//a[@href='https://kb.crtweb.ru/']");
-    private final SelenideElement linkLongrid = $x("//a[@href='https://longreads.crtweb.ru']");
+    private final SelenideElement linkLongread = $x("//a[@href='https://longreads.crtweb.ru']");
     private final SelenideElement linkPlatrum = $x("//a[@href='https://crtweb.platrum.ru/regulations']");
     private final SelenideElement linkGit = $x("//a[@href='https://git.crtweb.ru']");
     private final SelenideElement linkCrtTeam = $x("//a[@href='https://crt.team']");
     private final SelenideElement linkSite = $x("//a[@href='https://crtweb.ru']");
     private final SelenideElement linkResume = $x("//a[@href='https://crtweb.ru/developers']");
+    private final SelenideElement progressBar = $x("//div[@role='progressbar']");
+    private final SelenideElement checkTittleAutoTestsTask = $x("//a[text()='Написание автотестов на трекер']");
+    private final SelenideElement checkTimeAutoTestsTask = $x("//span[text()='09:00 - 10:00']");
+    private final SelenideElement checkTittleTestsTask = $x("//a[text()='Написание тестов на трекер']");
+    private final SelenideElement checkTimeTestsTask = $x("//span[text()='10:00 - 11:00']");
 
+
+    org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
     public void verifyTask() {
-        successMessage.shouldBe(Condition.enabled);
+        if (progressBar.is(Condition.appear)) {
+            progressBar.should(Condition.disappear);
+            successMessage.should(Condition.appear);
+            log.info("Task create successful");
+        } else {
+            log.error("Task creation failed");
+            Assert.fail("Fail to create task(Notification did not appear)");
+        }
     }
 
     public void clickMenuButton() {
@@ -65,34 +84,33 @@ public class TrackerPage {
     }
 
     public void sendNameInput(String name) {
+        WebUtils.clearField(nameInput);
         nameInput
                 .should(Condition.enabled).setValue(name);
     }
 
     public void setStartTime(String time) {
+       WebUtils.clearField(startTime);
         startTime
                 .should(Condition.enabled).setValue(time);
     }
 
     public void setEndTime(String time) {
+       WebUtils.clearField(endTime);
         endTime
                 .should(Condition.enabled).setValue(time);
     }
 
-    public void setInputSelectProject(String description1) {
-        inputSelectProject
-                .scrollIntoView(true)
-                .should(Condition.visible).setValue(description1);
-        Selenide.$x(String.format("//li[text()='%s']", description1)).shouldBe(Condition.enabled).click();
-    }
 
     public void setInputLink(String link) {
+       WebUtils.clearField(inputLink);
         inputLink
                 .should(Condition.enabled).setValue(link)
                 .pressEnter();
     }
 
     public void clickDescribeTask(String project) {
+        WebUtils.clearField(inputDescribeTask);
         inputDescribeTask
                 .should(Condition.enabled).setValue(project);
     }
@@ -117,12 +135,9 @@ public class TrackerPage {
                 .should(Condition.enabled).setValue(past);
     }
 
-    public void descriptionPastTask(String pastTask) {
-        inputSelectProject
-                .should(Condition.enabled).setValue(pastTask);
-    }
 
     public void clickSelectProject(String projectName1) {
+        WebUtils.clearField(inputProject);
         inputProject
                 .should(Condition.enabled).setValue(projectName1).pressEnter();
 
@@ -148,7 +163,7 @@ public class TrackerPage {
 
 
     public void clickLinkLongread() {
-        linkLongrid
+        linkLongread
                 .should(Condition.enabled)
                 .click();
     }
@@ -211,4 +226,15 @@ public class TrackerPage {
                 .click();
 
     }
+
+  public Map<String, String> getCreateTasksInfo() {
+      Map<String, String> tasksMap = new HashMap<>();
+      tasksMap.put("Название задачи", checkTittleAutoTestsTask.text());
+      tasksMap.put("Время", checkTimeAutoTestsTask.text());
+      tasksMap.put("Название задачи", checkTittleTestsTask.text());
+      tasksMap.put("Время", checkTimeTestsTask.text());
+      return tasksMap;
+    }
+
+
 }
