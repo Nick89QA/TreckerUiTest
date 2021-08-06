@@ -9,7 +9,7 @@ public class Hooks {
     @Before
 
     public void setUp() {
-        Configuration.holdBrowserOpen = true;
+      //  Configuration.holdBrowserOpen = true;
         Selenide.open("https://stage.hub.crtweb.ru/tracker ");// https://hub.crtweb.ru/tracker
     }
 

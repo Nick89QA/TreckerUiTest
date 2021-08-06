@@ -5,7 +5,6 @@ import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import pages.*;
 import pages.AutorizationPage;
@@ -13,7 +12,6 @@ import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
 import utils.WebUtils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -476,15 +474,6 @@ public class TrackerTestSteps {
      softAssert.assertAll();
     }
 
-    @Тогда("^Пользователь убеждается об успешном создании двух задач$")
-    public void userMakeSureSuccessCreateTwoTasks(Map<String,String>map) {
-     Map<String,String> tasksMap = trackerPage.getCreateTasksInfo();
-        SoftAssert softAssert = new SoftAssert();
-        for (String key: map.keySet()){
-            softAssert.assertEquals(tasksMap.get(key),map.get(key));
-        }
-     softAssert.assertAll();
-    }
 
 }
 
