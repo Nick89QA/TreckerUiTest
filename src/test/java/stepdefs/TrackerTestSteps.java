@@ -5,7 +5,6 @@ import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import pages.*;
 import pages.AutorizationPage;
@@ -13,7 +12,6 @@ import pages.UsersPage;
 import com.codeborne.selenide.Selenide;
 import utils.WebUtils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +40,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь создает задачу с параметрами$")
     public void createTask(Map<String, String> map) {//тест проходит корректно при подключенном выпадающем списка(выбор проекта)
         trackerPage.sendNameInput(map.get("Название"));
-        trackerPage.setStartTime(map.get(" Время начала"));
+        trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
@@ -475,6 +473,8 @@ public class TrackerTestSteps {
       }
      softAssert.assertAll();
     }
+
+
 }
 
 

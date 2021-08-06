@@ -40,7 +40,7 @@ public class AutorizationPage {
     }
 
 
-    public void verifyIncorrectEmail() {//проверка на некорректный имейл
+    public void verifyIncorrectEmail() {
         verifyIncorrectEmail
                 .shouldBe(Condition.enabled).click();
     }
@@ -57,7 +57,7 @@ public class AutorizationPage {
 
     public void clickInputEmail(String email) {
         inputEmail.should(Condition.enabled)
-                .setValue(email);//введение в поле некор имейла
+                .setValue(email);
     }
 
     public void clickButtonNext() {

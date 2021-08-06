@@ -2,6 +2,8 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import org.apache.logging.log4j.LogManager;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -26,10 +28,17 @@ public class ContractorPage {
     private final SelenideElement buttonSave = $x("//div[@id='saveButton']");//кнопка сохранить
     private final SelenideElement verifySuccessContract = $x("//div[text()='Успешно']");//проверка на сохранения
 
-
+    org.apache.logging.log4j.Logger log = LogManager.getLogger(ContractorPage.class.getName());
     public void checkNewContract() {
-        checkSuccessContract
-                .shouldBe(Condition.appear);
+        try {
+            checkSuccessContract
+                    .shouldBe(Condition.appear);
+        log.info("Contract create successful");
+        }catch (com.codeborne.selenide.ex.ElementNotFound e){
+            log.error("Contract creation failed");
+            Assert.fail("Fail to create task(Notification did not appear)");
+        }
+
     }
 
     public void checkContractPage() {//метод проверки на странице"Список подрядчиков"

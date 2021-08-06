@@ -128,7 +128,6 @@ public class ProfilePage  {
     }
 
     public Map<String, String> getProfileInfo() {
-        //Map<String,String> actualMap = profilePage.getProfileInfo();
        Map<String, String> actualMap = new HashMap<String, String>();
        actualMap.put("Имя",nameText.text());
        actualMap.put("Фамилия",lastNameText.text());

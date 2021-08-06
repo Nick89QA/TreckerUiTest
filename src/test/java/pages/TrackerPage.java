@@ -1,8 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.commands.ScrollIntoView;
+import org.apache.logging.log4j.LogManager;
+import org.testng.Assert;
+import utils.WebUtils;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
@@ -12,7 +17,6 @@ public class TrackerPage {
     private final SelenideElement inputProject = $("input[name='project']");//поле выбрать проект
     private final SelenideElement startTime = $("input[name='start']");
     private final SelenideElement endTime = $("input[name='end']");
-    private final SelenideElement inputSelectProject = $x("//input[@name='project']");//клик на поле проект
     private final SelenideElement inputLink = $("input[name='link']");
     private final SelenideElement buttonAddTime = $x("//button[@type='submit']/.././button");
     private final SelenideElement successMessage = $x("//div[text()='Временной промежуток добавлен']");
@@ -25,7 +29,7 @@ public class TrackerPage {
     private final SelenideElement buttonYesterday = $x("//button[@title = 'Предыдущий день']");//клик на предыдущий день
     private final SelenideElement buttonLink = $x("(//button[@id='linksIdButton'])[1]");
     private final SelenideElement linkKnowledgeBase = $x("//a[@href='https://kb.crtweb.ru/']");
-    private final SelenideElement linkLongrid = $x("//a[@href='https://longreads.crtweb.ru']");
+    private final SelenideElement linkLongread = $x("//a[@href='https://longreads.crtweb.ru']");
     private final SelenideElement linkPlatrum = $x("//a[@href='https://crtweb.platrum.ru/regulations']");
     private final SelenideElement linkGit = $x("//a[@href='https://git.crtweb.ru']");
     private final SelenideElement linkCrtTeam = $x("//a[@href='https://crt.team']");
@@ -33,8 +37,16 @@ public class TrackerPage {
     private final SelenideElement linkResume = $x("//a[@href='https://crtweb.ru/developers']");
 
 
+    org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
+
     public void verifyTask() {
-        successMessage.shouldBe(Condition.enabled);
+        try {
+            successMessage.should(Condition.appear);
+            log.info("Task create successful");
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            log.error("Task creation failed");
+            Assert.fail("Fail to create task(Notification did not appear)");
+        }
     }
 
     public void clickMenuButton() {
@@ -48,51 +60,64 @@ public class TrackerPage {
     }
 
     public void verifyErrorNotification() {//проверка на валидность URL
-        urlNotifications
-                .shouldBe(Condition.appear);
+        try{
+            urlNotifications
+                    .shouldBe(Condition.appear);
+            log.info("Url incorrect");
+        }catch (com.codeborne.selenide.ex.ElementNotFound e){
+            log.error("Url correct");
+            Assert.fail("Fail url(Notification did not appear)");
+        }
+
     }
 
     public void verifyProjectNotification() {
-        inputProjectNotification
-                .shouldBe(Condition.appear);//проверка на обязательность выбора проекта
+        try {
+            inputProjectNotification
+                    .shouldBe(Condition.appear);
+            log.info("You need to select the project");
+        }catch (com.codeborne.selenide.ex.ElementNotFound e){
+            log.error("The project is selected");
+            Assert.fail("Fail to create task(Notification did not appear)");
+        }
+
     }
 
     public void AddTimeButton() {
         buttonAddTime
                 .shouldBe(Condition.visible)
-                .scrollIntoView(true)//скрол к элементу
+                .scrollIntoView(true)
                 .click();
     }
 
     public void sendNameInput(String name) {
+        WebUtils.clearField(nameInput);
         nameInput
                 .should(Condition.enabled).setValue(name);
     }
 
     public void setStartTime(String time) {
+        WebUtils.clearField(startTime);
         startTime
                 .should(Condition.enabled).setValue(time);
     }
 
     public void setEndTime(String time) {
+        WebUtils.clearField(endTime);
         endTime
                 .should(Condition.enabled).setValue(time);
     }
 
-    public void setInputSelectProject(String description1) {
-        inputSelectProject
-                .scrollIntoView(true)
-                .should(Condition.visible).setValue(description1);
-        Selenide.$x(String.format("//li[text()='%s']", description1)).shouldBe(Condition.enabled).click();
-    }
 
     public void setInputLink(String link) {
+        WebUtils.clearField(inputLink);
         inputLink
                 .should(Condition.enabled).setValue(link)
                 .pressEnter();
     }
 
     public void clickDescribeTask(String project) {
+        WebUtils.clearField(inputDescribeTask);
         inputDescribeTask
                 .should(Condition.enabled).setValue(project);
     }
@@ -117,12 +142,9 @@ public class TrackerPage {
                 .should(Condition.enabled).setValue(past);
     }
 
-    public void descriptionPastTask(String pastTask) {
-        inputSelectProject
-                .should(Condition.enabled).setValue(pastTask);
-    }
 
     public void clickSelectProject(String projectName1) {
+        WebUtils.clearField(inputProject);
         inputProject
                 .should(Condition.enabled).setValue(projectName1).pressEnter();
 
@@ -148,7 +170,7 @@ public class TrackerPage {
 
 
     public void clickLinkLongread() {
-        linkLongrid
+        linkLongread
                 .should(Condition.enabled)
                 .click();
     }
@@ -202,7 +224,7 @@ public class TrackerPage {
 
     public void verifySuccessRedirectSitePage() {
         webdriver()
-                .shouldHave(url("https://crtweb.ru/"));
+                .shouldHave(url("https://crtweb.ru/developers"));
     }
 
     public void clickLinkResume() {
@@ -211,4 +233,6 @@ public class TrackerPage {
                 .click();
 
     }
+
+
 }
