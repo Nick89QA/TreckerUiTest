@@ -6,6 +6,7 @@ import com.codeborne.selenide.commands.ScrollIntoView;
 import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
 import utils.WebUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
 
 public class TrackerPage {
+    private final SelenideElement pageProject = $x("//span[text()='Проекты']//..//span");//меню страница проекты
     private final SelenideElement nameInput = $("input[name='title']");
     private final SelenideElement inputProject = $("input[name='project']");//поле выбрать проект
     private final SelenideElement startTime = $("input[name='start']");
@@ -60,11 +62,11 @@ public class TrackerPage {
     }
 
     public void verifyErrorNotification() {//проверка на валидность URL
-        try{
+        try {
             urlNotifications
                     .shouldBe(Condition.appear);
             log.info("Url incorrect");
-        }catch (com.codeborne.selenide.ex.ElementNotFound e){
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             log.error("Url correct");
             Assert.fail("Fail url(Notification did not appear)");
         }
@@ -76,7 +78,7 @@ public class TrackerPage {
             inputProjectNotification
                     .shouldBe(Condition.appear);
             log.info("You need to select the project");
-        }catch (com.codeborne.selenide.ex.ElementNotFound e){
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             log.error("The project is selected");
             Assert.fail("Fail to create task(Notification did not appear)");
         }
@@ -234,5 +236,9 @@ public class TrackerPage {
 
     }
 
+    public void clickPageProject() {
+        pageProject.should(Condition.enabled)
+                .click();
+    }
 
-}
+ }

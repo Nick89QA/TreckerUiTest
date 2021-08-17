@@ -18,7 +18,7 @@ public class ProjectPage {
     private final SelenideElement buttonCreateProject = $x("//span[text()='Создать проект']/parent::button");//кнопка создать проект
     private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
     private final SelenideElement fieldProject = $x("//div[@aria-expanded='false']");//клик на проект
-    private final SelenideElement buttonArchive = $x("//span[text()='Архивировать']");//клик на кнопку архив
+    private final SelenideElement buttonSendToArchive = $x("//span[text()='Архивировать']");//клик на кнопку архив
     private final SelenideElement verifyArchiveProject = $x("//div[text()='Успешно']");//проверка
     private final SelenideElement buttonDetails = $("a[href='/projects/alfadirect']");//кнопка подробнее///
     private final SelenideElement buttonEdit = $x("(//span[text()='Редактировать'])[2]");//кнопка редактировать
@@ -30,6 +30,12 @@ public class ProjectPage {
     private final SelenideElement buttonTakeReport = $x("//span[text()='Получить отчет']");//проверка получить отчет
     private final SelenideElement inputSelectContractor = $x("//input[@name='contractor']/parent::div");
     private final SelenideElement verifyCreateProject = $x("//div[text()='Успешно']");//проверка создания задачи
+    private final SelenideElement inputDeleteProject = $x("//p[text()='01 Test Title']");//проект который находится в архиве
+    private final SelenideElement buttonDelete = $x("(//span[text()='Удалить'])[1]");//кнопка удалить
+    private final SelenideElement chapterArchive = $x("//span[text()='В архиве']");
+    private final SelenideElement verifyDeleteProject = $x("//div[text()='Не удалось удалить проект']");//проверка на удаление проекта
+    private final SelenideElement input = $x("//input[@name='project']");//поле поиска
+    private final SelenideElement checkMessage = $x("//div[text()='Нет данных']");
 
     public void clickButtonAllProject() {
         buttonAllProject
@@ -51,9 +57,10 @@ public class ProjectPage {
                 .shouldBe(Condition.enabled);
     }
 
-    public void clickButtonArchive() {
-        buttonArchive
-                .shouldBe(Condition.enabled).click();//клик на архив
+    public void clickButtonSendToArchive() {
+        buttonSendToArchive
+                .shouldBe(Condition.enabled)
+                .click();//клик на архив
     }
 
     public void verifyArchive() {
@@ -88,7 +95,8 @@ public class ProjectPage {
 
     public void clickPageProject() {
         pageProject
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickButtonPlusCreateProject() {
@@ -151,5 +159,34 @@ public class ProjectPage {
     public void checkSuccessProject() {
         verifyCreateProject
                 .shouldBe(Condition.appear);
+    }
+
+    public void clickInputDeleteProject() {
+        inputDeleteProject.should(Condition.enabled)
+                .click();
+    }
+   public void clickButtonDelete() {
+        buttonDelete.should(Condition.enabled)
+                .click();
+   }
+
+   public void clickChapterArchive() {
+        chapterArchive.should(Condition.enabled)
+                .click();
+   }
+
+   public void checkVerifyDeleteProject(){
+        verifyDeleteProject.should(Condition.appear);
+   }
+
+
+    public void clickInputProject(int data){
+        input.should(Condition.enabled)
+                .setValue(String.valueOf(data))
+                .click();
+    }
+
+    public void verifyCheckMessage() {
+        checkMessage.should(Condition.appear);
     }
 }

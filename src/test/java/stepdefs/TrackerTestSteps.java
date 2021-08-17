@@ -151,7 +151,7 @@ public class TrackerTestSteps {
         projectPage.clickBurgerMenu();
         projectPage.clickPageProject();
         projectPage.clickFieldProject();
-        projectPage.clickButtonArchive();
+        projectPage.clickButtonSendToArchive();
     }
 
     @Тогда("^Пользователь убеждается об успешном добавлении проекта в архив$")
@@ -475,6 +475,31 @@ public class TrackerTestSteps {
     }
 
 
+    @Когда("^Пользователь заходит на страницу с проектами и удаляет проект из Архива$")
+    public void userGoToPageWithProjectsAndDeleteProjectFromArchive() {
+     trackerPage.clickBurgerMenu();
+     trackerPage.clickPageProject();
+     projectPage.clickChapterArchive();
+     projectPage.clickInputDeleteProject();
+     projectPage.clickButtonDelete();
+    }
+
+    @Тогда("^Пользователь получает уведомление об отсутствии прав на удаление проекта$")
+    public void userSetNotificationAboutFailureDeleteProject() {
+     projectPage.checkVerifyDeleteProject();
+    }
+
+    @Когда("^Пользователь переходит на страницу Проекты и вводит в поиск невалидные данные$")
+    public void userGoToProjectPageAndEntersInvalidData() {
+     trackerPage.clickBurgerMenu();
+     projectPage.clickPageProject();
+     projectPage.clickInputProject(123456);
+    }
+
+    @Тогда("^Пользователь получает уведомление об отсутствии проектов с таким названием$")
+    public void userGetNotificationAboutAbsenceProjectsWithTittle() {
+        projectPage.verifyCheckMessage();
+     }
 }
 
 
