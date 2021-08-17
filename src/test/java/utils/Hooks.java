@@ -18,6 +18,8 @@ public class Hooks {
     public void setUp(Scenario scenario) {
         this.scenario = scenario;
         log.debug("\n----\n" + scenario.getName() + "\n----");
+        Configuration.clickViaJs= true;
+        Configuration.headless=true;
         Selenide.open("https://stage.hub.crtweb.ru/tracker ");// https://hub.crtweb.ru/tracker
     }
 
