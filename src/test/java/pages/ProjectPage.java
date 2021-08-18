@@ -36,20 +36,24 @@ public class ProjectPage {
     private final SelenideElement verifyDeleteProject = $x("//div[text()='Не удалось удалить проект']");//проверка на удаление проекта
     private final SelenideElement input = $x("//input[@name='project']");//поле поиска
     private final SelenideElement checkMessage = $x("//div[text()='Нет данных']");
+    private final SelenideElement verifyFillFields = $x("//div[text()='Неудачно']");
 
     public void clickButtonAllProject() {
         buttonAllProject
-                .shouldBe(Condition.enabled).click();//клик на раздел все проекты
+                .shouldBe(Condition.enabled)
+                .click();//клик на раздел все проекты
     }
 
     public void setButtonAlfaDirect() {
         buttonAlfaDirect
-                .shouldBe(Condition.enabled).click();// клик на конкретный проект
+                .shouldBe(Condition.enabled)
+                .click();// клик на конкретный проект
     }
 
     public void setMenuProject() {
         pageProject
-                .shouldBe(Condition.enabled).click();
+                .shouldBe(Condition.enabled)
+                .click();
     }
 
     public void setCheckoutPageProject() {
@@ -70,7 +74,8 @@ public class ProjectPage {
 
     public void clickButtonSave() {//добавления менеджера в проект
         buttonSave
-                .shouldBe(Condition.enabled).click();
+                .shouldBe(Condition.enabled)
+                .click();
     }
 
     public void verifyAddManager() {
@@ -80,12 +85,14 @@ public class ProjectPage {
 
     public void clickButtonLastMonth() {
         buttonLastMonth
-                .shouldBe(Condition.enabled).click();//клик на кнопку прошлый месяц
+                .shouldBe(Condition.enabled)
+                .click();//клик на кнопку прошлый месяц
     }
 
     public void checkReport() {
         buttonTakeReport
-                .shouldBe(Condition.enabled).click();//клик на кнопку отчет
+                .shouldBe(Condition.enabled)
+                .click();//клик на кнопку отчет
     }
 
     public void clickBurgerMenu() {
@@ -106,12 +113,14 @@ public class ProjectPage {
 
     public void sendInputTittleProject(String title) {
         inputTittleProject
-                .should(Condition.enabled).setValue(title);
+                .should(Condition.enabled)
+                .setValue(title);
     }
 
     public void sendInputDescribeProject(String describe) {
         inputDescribeProject
-                .should(Condition.enabled).setValue(describe);
+                .should(Condition.enabled)
+                .setValue(describe);
     }
 
     public void clickButtonCreateProject() {
@@ -153,7 +162,8 @@ public class ProjectPage {
 
     public void selectCurrentContractor(String contractor) {
         inputSelectContractor.shouldBe(Condition.enabled).click();
-        Selenide.$x(String.format("//li[text()='%s']", contractor)).shouldBe(Condition.enabled).click();
+        Selenide.$x(String.format("//li[text()='%s']", contractor))
+                .shouldBe(Condition.enabled).click();
     }
 
     public void checkSuccessProject() {
@@ -176,7 +186,8 @@ public class ProjectPage {
    }
 
    public void checkVerifyDeleteProject(){
-        verifyDeleteProject.should(Condition.appear);
+        verifyDeleteProject
+                .should(Condition.appear);
    }
 
 
@@ -187,6 +198,28 @@ public class ProjectPage {
     }
 
     public void verifyCheckMessage() {
-        checkMessage.should(Condition.appear);
+        checkMessage
+                .should(Condition.appear);
     }
+
+    public void checkVerifyFillFields() {
+        verifyFillFields
+                .should(Condition.appear);
+    }
+
+
+    public void clickInputTittleProject(String title) {
+        inputTittleProject
+                .should(Condition.enabled)
+                .setValue(title);
+    }
+
+
+
+//    public void clickInputTittleProject(String tittle) {
+//        inputTittleProject
+//                .should(Condition.enabled)
+//                .setValue(tittle);
+//    }
+
 }

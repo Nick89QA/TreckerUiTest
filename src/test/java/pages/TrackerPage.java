@@ -2,13 +2,9 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.commands.ScrollIntoView;
 import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
 import utils.WebUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;

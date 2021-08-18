@@ -465,41 +465,76 @@ public class TrackerTestSteps {
     }
 
     @Тогда("^Пользователь убеждется что данные профиля заполнились корректно$")
-    public void verifyTextOnProfilePage(Map<String,String> map ) {
-        Map<String,String> actualMap = profilePage.getProfileInfo();
+    public void verifyTextOnProfilePage(Map<String, String> map) {
+        Map<String, String> actualMap = profilePage.getProfileInfo();
         SoftAssert softAssert = new SoftAssert();
-      for (String key:map.keySet()){
-          softAssert.assertEquals(actualMap.get(key),map.get(key));
-      }
-     softAssert.assertAll();
+        for (String key : map.keySet()) {
+            softAssert.assertEquals(actualMap.get(key), map.get(key));
+        }
+        softAssert.assertAll();
     }
 
 
     @Когда("^Пользователь заходит на страницу с проектами и удаляет проект из Архива$")
     public void userGoToPageWithProjectsAndDeleteProjectFromArchive() {
-     trackerPage.clickBurgerMenu();
-     trackerPage.clickPageProject();
-     projectPage.clickChapterArchive();
-     projectPage.clickInputDeleteProject();
-     projectPage.clickButtonDelete();
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickChapterArchive();
+        projectPage.clickInputDeleteProject();
+        projectPage.clickButtonDelete();
     }
 
     @Тогда("^Пользователь получает уведомление об отсутствии прав на удаление проекта$")
     public void userSetNotificationAboutFailureDeleteProject() {
-     projectPage.checkVerifyDeleteProject();
+        projectPage.checkVerifyDeleteProject();
     }
 
     @Когда("^Пользователь переходит на страницу Проекты и вводит в поиск невалидные данные$")
     public void userGoToProjectPageAndEntersInvalidData() {
-     trackerPage.clickBurgerMenu();
-     projectPage.clickPageProject();
-     projectPage.clickInputProject(123456);
+        trackerPage.clickBurgerMenu();
+        projectPage.clickPageProject();
+        projectPage.clickInputProject(123456);
     }
 
     @Тогда("^Пользователь получает уведомление об отсутствии проектов с таким названием$")
     public void userGetNotificationAboutAbsenceProjectsWithTittle() {
         projectPage.verifyCheckMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу с проектами и создает проект без данных$")
+    public void userGoToPageAndCreateProjectWithoutData() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.clickButtonCreateProject();
+
+    }
+
+    @Тогда("^Пользователь получает уведомление об необходимости заполнения полей$")
+    public void userGetNotificationAboutFillingTheFields() {
+        projectPage.checkVerifyFillFields();
      }
-}
+
+    @Когда("^Пользователь переходит на страницу с проектами и вводит только название проекта$")
+    public void userGoToPageWithProjectAndFillOnlyProjectName() {
+      trackerPage.clickBurgerMenu();
+      trackerPage.clickPageProject();
+      projectPage.clickButtonPlusCreateProject();
+      projectPage.clickInputTittleProject("Написание автотестов");
+      projectPage.clickButtonCreateProject();
+    }
+
+    @Когда("^Пользователь заходит на страницу с проектами и создает проект без выбора подрядчика$")
+    public void userGoToPageWithProjectAndCreateProjectWithoutContractor() {
+    trackerPage.clickBurgerMenu();
+    trackerPage.clickPageProject();
+    projectPage.clickButtonPlusCreateProject();
+    projectPage.clickInputTittleProject("Написание автотестов на трекер");
+    projectPage.sendInputDescribeProject("Автотесты на трекер");
+    projectPage.clickButtonCreateProject();
+    }
+
+
+ }
 
 
