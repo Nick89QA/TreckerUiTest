@@ -37,6 +37,7 @@ public class ProjectPage {
     private final SelenideElement input = $x("//input[@name='project']");//поле поиска
     private final SelenideElement checkMessage = $x("//div[text()='Нет данных']");
     private final SelenideElement verifyFillFields = $x("//div[text()='Неудачно']");
+    private final SelenideElement verifyTimeMessage = $x("//div[contains (text(),'project too short')]");
 
     public void clickButtonAllProject() {
         buttonAllProject
@@ -214,12 +215,8 @@ public class ProjectPage {
                 .setValue(title);
     }
 
-
-
-//    public void clickInputTittleProject(String tittle) {
-//        inputTittleProject
-//                .should(Condition.enabled)
-//                .setValue(tittle);
-//    }
-
+    public void checkVerifyTimeMessage(){
+        verifyTimeMessage
+                .should(Condition.appear);
+    }
 }

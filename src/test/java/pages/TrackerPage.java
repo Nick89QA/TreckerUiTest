@@ -33,6 +33,8 @@ public class TrackerPage {
     private final SelenideElement linkCrtTeam = $x("//a[@href='https://crt.team']");
     private final SelenideElement linkSite = $x("//a[@href='https://crtweb.ru']");
     private final SelenideElement linkResume = $x("//a[@href='https://crtweb.ru/developers']");
+    private final SelenideElement buttonTimer = $x("(//button[@type='button'])[6]");//клик на кнопку таймер
+    private final SelenideElement buttonStart = $x("//span[text()='Старт']/parent::button");//клик на кнопку старт
 
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
@@ -88,10 +90,10 @@ public class TrackerPage {
                 .click();
     }
 
-    public void sendNameInput(String name) {
+    public void sendNameInput(String title ) {
         WebUtils.clearField(nameInput);
         nameInput
-                .should(Condition.enabled).setValue(name);
+                .should(Condition.enabled).setValue(title);
     }
 
     public void setStartTime(String time) {
@@ -233,8 +235,22 @@ public class TrackerPage {
     }
 
     public void clickPageProject() {
-        pageProject.should(Condition.enabled)
+        pageProject
+                .should(Condition.enabled)
                 .click();
     }
 
- }
+    public void clickButtonTimer() {
+        buttonTimer
+                .should(Condition.enabled)
+                .click();
+    }
+
+  public void clickButtonStart() {
+        buttonStart
+                .should(Condition.enabled)
+                .click();
+  }
+
+
+}

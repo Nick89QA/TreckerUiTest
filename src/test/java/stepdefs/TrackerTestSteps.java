@@ -513,28 +513,44 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь получает уведомление об необходимости заполнения полей$")
     public void userGetNotificationAboutFillingTheFields() {
         projectPage.checkVerifyFillFields();
-     }
+    }
 
     @Когда("^Пользователь переходит на страницу с проектами и вводит только название проекта$")
     public void userGoToPageWithProjectAndFillOnlyProjectName() {
-      trackerPage.clickBurgerMenu();
-      trackerPage.clickPageProject();
-      projectPage.clickButtonPlusCreateProject();
-      projectPage.clickInputTittleProject("Написание автотестов");
-      projectPage.clickButtonCreateProject();
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.clickInputTittleProject("Написание автотестов");
+        projectPage.clickButtonCreateProject();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами и создает проект без выбора подрядчика$")
     public void userGoToPageWithProjectAndCreateProjectWithoutContractor() {
-    trackerPage.clickBurgerMenu();
-    trackerPage.clickPageProject();
-    projectPage.clickButtonPlusCreateProject();
-    projectPage.clickInputTittleProject("Написание автотестов на трекер");
-    projectPage.sendInputDescribeProject("Автотесты на трекер");
-    projectPage.clickButtonCreateProject();
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.clickInputTittleProject("Написание автотестов на трекер");
+        projectPage.sendInputDescribeProject("Автотесты на трекер");
+        projectPage.clickButtonCreateProject();
     }
 
 
- }
+    @Тогда("^Пользователь получает уведомление о неверно выбранном временном промежутке$")
+    public void userGetNotificationAboutWrongTimeLine() {
+        projectPage.checkVerifyTimeMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу Таймер запускает таймер в текущем времени и останавливает его менее чем за минуту$")
+    public void userVisitTimerPageStartsTheTimerAtCurrentTimeAndStopsItInLessThanMinute() {
+    trackerPage.clickButtonTimer();
+    trackerPage.sendNameInput("Новые автотесты на трекер");
+    trackerPage.clickSelectProject("Песок");
+    trackerPage.clickButtonStart();
+    Selenide.sleep(10000);
+    trackerPage.clickButtonTimer();
+    }
+
+
+}
 
 
