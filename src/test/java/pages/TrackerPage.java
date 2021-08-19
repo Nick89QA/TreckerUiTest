@@ -35,7 +35,7 @@ public class TrackerPage {
     private final SelenideElement linkResume = $x("//a[@href='https://crtweb.ru/developers']");
     private final SelenideElement buttonTimer = $x("(//button[@type='button'])[6]");//клик на кнопку таймер
     private final SelenideElement buttonStart = $x("//span[text()='Старт']/parent::button");//клик на кнопку старт
-
+    private final SelenideElement verifyTimeMessage = $x("//div[contains(text(), 'cannot be')]");
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
@@ -251,6 +251,10 @@ public class TrackerPage {
                 .should(Condition.enabled)
                 .click();
   }
-
+ public void checkVerifyTimeMessage() {
+        verifyTimeMessage
+                .should(Condition.enabled)
+                .click();
+ }
 
 }

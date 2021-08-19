@@ -551,6 +551,10 @@ public class TrackerTestSteps {
     }
 
 
+    @Тогда("^Пользователь получает уведомление о невалидном временном промежутке$")
+    public void userGetNotificationAboutInvalidTimeLine() {
+        trackerPage.checkVerifyTimeMessage();
+    }
 }
 
 
