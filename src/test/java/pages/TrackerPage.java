@@ -20,7 +20,7 @@ public class TrackerPage {
     private final SelenideElement successMessage = $x("//div[text()='Временной промежуток добавлен']");
     private final SelenideElement inputDescribeTask = $x("//input[@name='description']");//клик на элемент
     private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
-    private final SelenideElement pageUser = $x("//span[text()='Пользователи']");//клик на страницу пользователи
+    private final SelenideElement pageUser = $x("//span[text()='Пользователи']/parent::div");//клик на страницу пользователи
     private final SelenideElement urlNotifications = $x("//label[text()='Ссылка на задачу']");// проверка на некоректный url
     private final SelenideElement inputProjectNotification = $x("//*[text()='Выберите проект']");//проверка на обязательность выбора проекта
     private final SelenideElement PageTimer = $x("//span[text()='Таймер']");//клик на страницу таймер
@@ -36,6 +36,7 @@ public class TrackerPage {
     private final SelenideElement buttonTimer = $x("(//button[@type='button'])[6]");//клик на кнопку таймер
     private final SelenideElement buttonStart = $x("//span[text()='Старт']/parent::button");//клик на кнопку старт
     private final SelenideElement verifyTimeMessage = $x("//div[contains(text(), 'cannot be')]");
+    private final SelenideElement verifyTaskName = $x("//p[contains(text(),'Введите название')]");
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
@@ -51,12 +52,14 @@ public class TrackerPage {
 
     public void clickMenuButton() {
         burgerMenu
-                .shouldBe(Condition.enabled).click();
+                .shouldBe(Condition.enabled)
+                .click();
     }
 
     public void clickUserPage() {
         pageUser
-                .shouldBe(Condition.enabled).click();
+                .shouldBe(Condition.enabled)
+                .click();
     }
 
     public void verifyErrorNotification() {//проверка на валидность URL
@@ -83,7 +86,7 @@ public class TrackerPage {
 
     }
 
-    public void AddTimeButton() {
+    public void clickAddTimeButton() {
         buttonAddTime
                 .shouldBe(Condition.visible)
                 .scrollIntoView(true)
@@ -256,5 +259,11 @@ public class TrackerPage {
                 .should(Condition.enabled)
                 .click();
  }
+
+   public void checkVerifyTaskName() {
+  verifyTaskName
+          .should(Condition.appear);
+
+    }
 
 }

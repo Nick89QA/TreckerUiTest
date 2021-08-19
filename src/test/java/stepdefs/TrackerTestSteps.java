@@ -45,7 +45,7 @@ public class TrackerTestSteps {
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));
-        trackerPage.AddTimeButton();
+        trackerPage.clickAddTimeButton();
 
     }
 
@@ -60,7 +60,7 @@ public class TrackerTestSteps {
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLinkPastTime(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));//дописать задачу
-        trackerPage.AddTimeButton();
+        trackerPage.clickAddTimeButton();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами$")
@@ -355,7 +355,7 @@ public class TrackerTestSteps {
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLinkPastTime(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));//дописать задачу
-        trackerPage.AddTimeButton();
+        trackerPage.clickAddTimeButton();
     }
 
     @Тогда("^Пользователь убеждается об успешном создании задач$")
@@ -554,6 +554,38 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь получает уведомление о невалидном временном промежутке$")
     public void userGetNotificationAboutInvalidTimeLine() {
         trackerPage.checkVerifyTimeMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу Проекты и создает проект выбрав только Подрядчика$")
+    public void userGoToProjectPageAndCreateProjectWithoutParameters() {
+    trackerPage.clickBurgerMenu();
+    trackerPage.clickPageProject();
+    projectPage.clickButtonPlusCreateProject();
+    projectPage.selectCurrentContractor("цукцук");
+    projectPage.clickButtonCreateProject();
+    }
+
+
+    @Когда("^Пользователь переходит на страницу Таймер и создает задачу без параметров$")
+    public void userGoToTimerPageAndCreateTaskWithoutParams() {
+    trackerPage.clickAddTimeButton();
+    }
+
+    @Тогда("^Пользователь получает уведомление об необходимости выбрать название для задачи$")
+    public void userGetNotificationToChooseTaskName() {
+    trackerPage.checkVerifyTaskName();
+    }
+
+    @Когда("^Пользователь переходит на страницу с Пользователями и ищет сотрудников по невалидным данным$")
+    public void userGoToUsersPageAndSearchEmployeesToInvalidData() {
+    trackerPage.clickBurgerMenu();
+    trackerPage.clickUserPage();
+    usersPage.setSearchField("adadadasdasdasd");
+    }
+
+    @Тогда("^Пользовватель видит сообщение об отсутствии таких пользователей$")
+    public void userSeesMessageAboutTheAbsenceUsers() {
+    usersPage.checkVerifyAbsentMessage();
     }
 }
 

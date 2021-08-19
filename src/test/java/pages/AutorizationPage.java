@@ -11,7 +11,7 @@ public class AutorizationPage {
     private final SelenideElement buttonAuthorization = $x("//button[@type='button']");//авторизация
     private final SelenideElement inputEmail = $("#identifierId");//поле input
     private final SelenideElement buttonNext = $x("//span[text()='Далее']");
-    private final SelenideElement inputPassword = $("input[type='password']");//введение
+    private final SelenideElement inputPassword = $x("//input[@aria-label='Введите пароль']");//введение пароля
     private final SelenideElement verifyIncorrectEmail = $x("//div[text()='Введите адрес электронной почты или номер телефона.']");//проверка
     private final SelenideElement verifyIncorrectPassword = $x("//span[contains(text(), 'Неверный пароль')]");
 
