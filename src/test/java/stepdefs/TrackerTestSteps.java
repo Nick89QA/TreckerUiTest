@@ -542,12 +542,12 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь заходит на страницу Таймер запускает таймер в текущем времени и останавливает его менее чем за минуту$")
     public void userVisitTimerPageStartsTheTimerAtCurrentTimeAndStopsItInLessThanMinute() {
-    trackerPage.clickButtonTimer();
-    trackerPage.sendNameInput("Новые автотесты на трекер");
-    trackerPage.clickSelectProject("Песок");
-    trackerPage.clickButtonStart();
-    Selenide.sleep(10000);
-    trackerPage.clickButtonTimer();
+        trackerPage.clickButtonTimer();
+        trackerPage.sendNameInput("Новые автотесты на трекер");
+        trackerPage.clickSelectProject("Песок");
+        trackerPage.clickButtonStart();
+        Selenide.sleep(10000);
+        trackerPage.clickButtonTimer();
     }
 
 
@@ -558,34 +558,46 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь заходит на страницу Проекты и создает проект выбрав только Подрядчика$")
     public void userGoToProjectPageAndCreateProjectWithoutParameters() {
-    trackerPage.clickBurgerMenu();
-    trackerPage.clickPageProject();
-    projectPage.clickButtonPlusCreateProject();
-    projectPage.selectCurrentContractor("цукцук");
-    projectPage.clickButtonCreateProject();
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.selectCurrentContractor("цукцук");
+        projectPage.clickButtonCreateProject();
     }
 
 
     @Когда("^Пользователь переходит на страницу Таймер и создает задачу без параметров$")
     public void userGoToTimerPageAndCreateTaskWithoutParams() {
-    trackerPage.clickAddTimeButton();
+        trackerPage.clickAddTimeButton();
     }
 
     @Тогда("^Пользователь получает уведомление об необходимости выбрать название для задачи$")
     public void userGetNotificationToChooseTaskName() {
-    trackerPage.checkVerifyTaskName();
+        trackerPage.checkVerifyTaskName();
     }
 
     @Когда("^Пользователь переходит на страницу с Пользователями и ищет сотрудников по невалидным данным$")
     public void userGoToUsersPageAndSearchEmployeesToInvalidData() {
-    trackerPage.clickBurgerMenu();
-    trackerPage.clickUserPage();
-    usersPage.setSearchField("adadadasdasdasd");
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickUserPage();
+        usersPage.setSearchField("adadadasdasdasd");
     }
 
     @Тогда("^Пользовватель видит сообщение об отсутствии таких пользователей$")
     public void userSeesMessageAboutTheAbsenceUsers() {
-    usersPage.checkVerifyAbsentMessage();
+        usersPage.checkVerifyAbsentMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу с проектами и пользуется пагинацией$")
+    public void userGoToProjectPageAndUsePagination() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickUserPage();
+        usersPage.clickPaginationPageOne();
+    }
+
+    @Тогда("^При каждом клике на страницу на которой находится пользователь страницв обновляется$")
+    public void eachTimeTheUserClicksOnThePageTheUserIsOnThePageIsUpdated() {
+    usersPage.verifyCheckPagination();
     }
 }
 
