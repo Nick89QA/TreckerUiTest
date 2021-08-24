@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
 
 public class TrackerPage {
+    private final SelenideElement iconProfilePage = $x("//button[@id='accountIdButton']");
+    private final SelenideElement buttonProfile = $x("//a[text()='Профиль']");
     private final SelenideElement pageProject = $x("//span[text()='Проекты']//..//span");//меню страница проекты
     private final SelenideElement nameInput = $("input[name='title']");
     private final SelenideElement inputProject = $("input[name='project']");//поле выбрать проект
@@ -266,4 +268,13 @@ public class TrackerPage {
 
     }
 
+    public void clickIconProfilePage(){
+        iconProfilePage.should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonProfile(){
+        buttonProfile.should(Condition.enabled)
+                .click();
+    }
 }

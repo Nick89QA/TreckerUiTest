@@ -3,19 +3,16 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.testng.Assert;
 import utils.WebUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.element;
 
-
-public class ProfilePage  {
-    private final SelenideElement buttonIcon = $x("//button[@id='accountIdButton']");
+public class ProfilePage {
+    private final SelenideElement buttonYesterday = $x("//span[text()='Вчера']/parent::div");
+    private final SelenideElement iconProfilePage = $x("//button[@id='accountIdButton']");
     private final SelenideElement buttonProfile = $x("//a[text()='Профиль']");
     private final SelenideElement buttonEdit = $x("//span[text()='Редактировать']");
     private final SelenideElement inputEmail = $x("//input[@name='email']");
@@ -37,11 +34,11 @@ public class ProfilePage  {
     private final SelenideElement mailText = $x("//label[text()='Почта']/span");
     private final SelenideElement formatDateText = $x("//div[text()='Формат даты']/span");
     private final SelenideElement formatTimeText = $x("//div[text()='Формат времени']/span");
-
-
+    private final SelenideElement closeDropDownCalendar = $x("//h6[text()='Creative Test Platform']");
+    private final SelenideElement timeUserOnProject = $x("//div[text()='Данных за выбранный период не найдено']");// проверка отчета за конкретный период
 
     public void clickIconButton() {
-        buttonIcon
+        iconProfilePage
                 .should(Condition.enabled)
                 .click();
     }
@@ -100,6 +97,22 @@ public class ProfilePage  {
 
     }
 
+    public void clickButtonYesterday() {
+        buttonYesterday.should(Condition.enabled)
+                .click();
+    }
+
+    public void clickCloseDropDownCalendar() {
+        closeDropDownCalendar
+                .should(Condition.visible)
+                .doubleClick();
+    }
+
+    public void verifyTimeUserOnProject() {
+        timeUserOnProject
+                .should(Condition.visible);
+    }
+
     public void setProfilePageInputs(Map<String, String> map) {
         WebUtils.clearField(inputName);
         inputName
@@ -128,14 +141,14 @@ public class ProfilePage  {
     }
 
     public Map<String, String> getProfileInfo() {
-       Map<String, String> actualMap = new HashMap<String, String>();
-       actualMap.put("Имя",nameText.text());
-       actualMap.put("Фамилия",lastNameText.text());
-       actualMap.put("Отчество",surNameText.text());
-       actualMap.put("Электронная почта",mailText.text());
-       actualMap.put("Формат даты",formatDateText.text());
-       actualMap.put("Формат времени",formatTimeText.text());
-      return actualMap;
+        Map<String, String> actualMap = new HashMap<String, String>();
+        actualMap.put("Имя", nameText.text());
+        actualMap.put("Фамилия", lastNameText.text());
+        actualMap.put("Отчество", surNameText.text());
+        actualMap.put("Электронная почта", mailText.text());
+        actualMap.put("Формат даты", formatDateText.text());
+        actualMap.put("Формат времени", formatTimeText.text());
+        return actualMap;
     }
 
 }

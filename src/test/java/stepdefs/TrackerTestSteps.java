@@ -597,7 +597,21 @@ public class TrackerTestSteps {
 
     @Тогда("^При каждом клике на страницу на которой находится пользователь страницв обновляется$")
     public void eachTimeTheUserClicksOnThePageTheUserIsOnThePageIsUpdated() {
-    usersPage.verifyCheckPagination();
+        usersPage.verifyCheckPagination();
+    }
+
+    @Когда("^Пользователь переходит на страницу Профиль и в календаре просматривает информацию по проектам за вчерашний день$")
+    public void userGoesToProfilePageAndInTheCalendarViewsInformationOnProjectsForTheDayBefore() {
+    trackerPage.clickIconProfilePage();
+    trackerPage.clickButtonProfile();
+    profilePage.clickButtonCalendar();
+    profilePage.clickButtonYesterday();
+    profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за данный период$")
+    public void userMakeSureOfTheAbsenceReportForGivenPeriod () {
+     profilePage.verifyTimeUserOnProject();
     }
 }
 
