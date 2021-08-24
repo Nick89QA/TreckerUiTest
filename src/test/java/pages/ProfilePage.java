@@ -37,6 +37,10 @@ public class ProfilePage {
     private final SelenideElement closeDropDownCalendar = $x("//h6[text()='Creative Test Platform']");
     private final SelenideElement timeUserOnProject = $x("//div[text()='Данных за выбранный период не найдено']");// проверка отчета за конкретный период
     private final SelenideElement buttonCurrentWeek = $x("//span[text()='Текущая неделя']/parent::div");//кнопка текущая неделя
+    private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");//кнопка прошлая неделя
+    private final SelenideElement dropDownListAllProjects = $x("//p[text()='Песок']/parent::div");
+    private final SelenideElement dropDownListSpecificProject = $x("//p[contains(text(),'Добавление')]/parent::div");//проект в выпадающем списке
+    private final SelenideElement checkProjectLogging = $x("//span[text()='17.08.2021']");
 
     public void clickIconButton() {
         iconProfilePage
@@ -118,6 +122,29 @@ public class ProfilePage {
         buttonCurrentWeek
                 .should(Condition.enabled)
                 .click();
+    }
+
+    public void clickButtonLastWeek() {
+        buttonLastWeek
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickDropDownListAllProjects() {
+        dropDownListAllProjects
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickDropDownListSpecificProject() {
+        dropDownListSpecificProject
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void verifyCheckProjectLogging() {
+        checkProjectLogging
+                .should(Condition.visible);
     }
 
     public void setProfilePageInputs(Map<String, String> map) {

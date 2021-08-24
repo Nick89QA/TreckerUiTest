@@ -622,6 +622,22 @@ public class TrackerTestSteps {
     profilePage.clickButtonCurrentWeek();
     profilePage.clickCloseDropDownCalendar();
     }
+
+    @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за прошлую неделю$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheLastWeek() {
+     trackerPage.clickIconProfilePage();
+     trackerPage.clickButtonProfile();
+     profilePage.clickButtonCalendar();
+     profilePage.clickButtonLastWeek();
+     profilePage.clickCloseDropDownCalendar();
+     profilePage.clickDropDownListAllProjects();
+     profilePage.clickDropDownListSpecificProject();
+    }
+
+    @Тогда("^Пользователь видит информацию по проекту Добавление логирование на проект$")
+    public void userSeeInformationOnProjectAddingLoggingToProject() {
+     profilePage.verifyCheckProjectLogging();
+    }
 }
 
 
