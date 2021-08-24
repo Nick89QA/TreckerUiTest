@@ -600,8 +600,8 @@ public class TrackerTestSteps {
         usersPage.verifyCheckPagination();
     }
 
-    @Когда("^Пользователь переходит на страницу Профиль и в календаре просматривает информацию по проектам за вчерашний день$")
-    public void userGoesToProfilePageAndInTheCalendarViewsInformationOnProjectsForTheDayBefore() {
+    @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за вчерашний день$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheDayBefore() {
     trackerPage.clickIconProfilePage();
     trackerPage.clickButtonProfile();
     profilePage.clickButtonCalendar();
@@ -612,6 +612,15 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь убеждается об отсутствии отчета за данный период$")
     public void userMakeSureOfTheAbsenceReportForGivenPeriod () {
      profilePage.verifyTimeUserOnProject();
+    }
+
+    @Когда("^Пользователь переходит в календарь просматривает информацию по проектам за текущую неделю$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheCurrentWeek() {
+    trackerPage.clickIconProfilePage();
+    trackerPage.clickButtonProfile();
+    profilePage.clickButtonCalendar();
+    profilePage.clickButtonCurrentWeek();
+    profilePage.clickCloseDropDownCalendar();
     }
 }
 

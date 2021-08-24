@@ -36,6 +36,7 @@ public class ProfilePage {
     private final SelenideElement formatTimeText = $x("//div[text()='Формат времени']/span");
     private final SelenideElement closeDropDownCalendar = $x("//h6[text()='Creative Test Platform']");
     private final SelenideElement timeUserOnProject = $x("//div[text()='Данных за выбранный период не найдено']");// проверка отчета за конкретный период
+    private final SelenideElement buttonCurrentWeek = $x("//span[text()='Текущая неделя']/parent::div");//кнопка текущая неделя
 
     public void clickIconButton() {
         iconProfilePage
@@ -111,6 +112,12 @@ public class ProfilePage {
     public void verifyTimeUserOnProject() {
         timeUserOnProject
                 .should(Condition.visible);
+    }
+
+    public void clickButtonCurrentWeek() {
+        buttonCurrentWeek
+                .should(Condition.enabled)
+                .click();
     }
 
     public void setProfilePageInputs(Map<String, String> map) {
