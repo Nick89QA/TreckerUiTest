@@ -41,7 +41,9 @@ public class ProfilePage {
     private final SelenideElement dropDownListSpecificProject = $x("//p[contains(text(),'Добавление')]/parent::div");//проект в выпадающем списке
     private final SelenideElement checkProjectLogging = $x("//span[text()='17.08.2021']");//проверка соответствия проектв
     private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");//кнопка текущий месяц
-    private final SelenideElement verifyProject = $x("//span[text()='01:00']/parent::div");
+    private final SelenideElement verifyProjectCurrentMonth = $x("//span[text()='01:00']/parent::div");//проверка проекта за текущий месяц
+    private final SelenideElement verifyProjectLastWeek = $x("//p[text()='Текст для названия задачи']/parent::div");//проверка проекта за прошлую неделю
+    private final SelenideElement verifyProjectLastMonth = $x("//span[text()='10:17']/parent::div");//проверка проекта за прошлый месяц
 
     public void clickIconButton() {
         iconProfilePage
@@ -149,9 +151,20 @@ public class ProfilePage {
     }
 
     public void checkVerifyProject() {
-        verifyProject
+        verifyProjectCurrentMonth
                 .should(Condition.enabled)
                 .click();
+    }
+
+    public void checkVerifyProjectLastWeek(){
+        verifyProjectLastWeek
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void checkVerifyProjectLastMonth() {
+        verifyProjectLastMonth
+                .should(Condition.visible);
     }
 
     public void setProfilePageInputs(Map<String, String> map) {

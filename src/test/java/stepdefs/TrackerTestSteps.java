@@ -602,41 +602,41 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за вчерашний день$")
     public void userGoesToTheCalendarViewsInformationOnProjectsForTheDayBefore() {
-    trackerPage.clickIconProfilePage();
-    trackerPage.clickButtonProfile();
-    profilePage.clickButtonCalendar();
-    profilePage.clickButtonYesterday();
-    profilePage.clickCloseDropDownCalendar();
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonYesterday();
+        profilePage.clickCloseDropDownCalendar();
     }
 
     @Тогда("^Пользователь убеждается об отсутствии отчета за данный период$")
-    public void userMakeSureOfTheAbsenceReportForGivenPeriod () {
-     profilePage.verifyTimeUserOnProject();
+    public void userMakeSureOfTheAbsenceReportForGivenPeriod() {
+        profilePage.verifyTimeUserOnProject();
     }
 
     @Когда("^Пользователь переходит в календарь просматривает информацию по проектам за текущую неделю$")
     public void userGoesToTheCalendarViewsInformationOnProjectsForTheCurrentWeek() {
-    trackerPage.clickIconProfilePage();
-    trackerPage.clickButtonProfile();
-    profilePage.clickButtonCalendar();
-    profilePage.clickButtonCurrentWeek();
-    profilePage.clickCloseDropDownCalendar();
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonCurrentWeek();
+        profilePage.clickCloseDropDownCalendar();
     }
 
     @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за прошлую неделю$")
     public void userGoesToTheCalendarViewsInformationOnProjectsForTheLastWeek() {
-     trackerPage.clickIconProfilePage();
-     trackerPage.clickButtonProfile();
-     profilePage.clickButtonCalendar();
-     profilePage.clickButtonLastWeek();
-     profilePage.clickCloseDropDownCalendar();
-     profilePage.clickDropDownListAllProjects();
-     profilePage.clickDropDownListSpecificProject();
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastWeek();
+        profilePage.clickCloseDropDownCalendar();
+        profilePage.clickDropDownListAllProjects();
+        profilePage.clickDropDownListSpecificProject();
     }
 
     @Тогда("^Пользователь видит информацию по проекту Добавление логирование на проект$")
     public void userSeeInformationOnProjectAddingLoggingToProject() {
-     profilePage.verifyCheckProjectLogging();
+        profilePage.verifyCheckProjectLogging();
     }
 
     @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за текущий месяц$")
@@ -647,12 +647,40 @@ public class TrackerTestSteps {
         profilePage.clickButtonCurrentMonth();
         profilePage.clickCloseDropDownCalendar();
         profilePage.clickDropDownListAllProjects();
-        profilePage.checkVerifyProject();
     }
 
     @Тогда("^Пользователь видит информацию по проектам за текущий месяц$")
-    public void userSeeInformationOnProjectsForTheCurrentMonth () {
-    profilePage.checkVerifyProject();
+    public void userSeeInformationOnProjectsForTheCurrentMonth() {
+        profilePage.checkVerifyProject();
+    }
+
+    @Когда("^Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлую неделю$")
+    public void userGoesToTheCalendarViewsInformationOnSpecificProjectForLastWeek() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastWeek();
+        profilePage.clickCloseDropDownCalendar();
+        profilePage.clickDropDownListAllProjects();
+    }
+
+    @Тогда("^Пользователь видит информацию по проекту за прошлую неделю$")
+    public void userSeeInformationOnProjectForLastWeek() {
+        profilePage.checkVerifyProjectLastWeek();
+    }
+
+    @Когда("Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлый месяц")
+    public void userGoesToTheCalendarViewsInformationOnSpecificProjectsForTheLastMonth() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastMonth();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь видит информацию по проекту за прошлый месяц$")
+    public void userSeeInformationOnProjectForLastMonth() {
+        profilePage.checkVerifyProjectLastMonth();
     }
 }
 
