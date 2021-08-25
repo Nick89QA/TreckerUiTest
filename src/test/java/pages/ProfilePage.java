@@ -21,7 +21,6 @@ public class ProfilePage {
     private final SelenideElement buttonCalendar = $x("//span[text()='Сегодня']");
     private final SelenideElement buttonLastMonth = $x("//span[text()='Прошлый месяц']");
     private final SelenideElement verifyLastMonth = $x("//h3[text()='Время пользователя по проектам']");
-    private final SelenideElement buttonClickForExitFromCalendar = $x("//h6[text()='Creative Test Platform']");
     private final SelenideElement checkRoleOnPage = $x("//div[text()='Роль']");
     private final SelenideElement messageNotificationsSuccess = $x("//div[text()='Успешно']");
     private final SelenideElement inputFormatTime = $x("//div[@id='mui-component-select-timeLocale']");
@@ -40,7 +39,9 @@ public class ProfilePage {
     private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");//кнопка прошлая неделя
     private final SelenideElement dropDownListAllProjects = $x("//p[text()='Песок']/parent::div");
     private final SelenideElement dropDownListSpecificProject = $x("//p[contains(text(),'Добавление')]/parent::div");//проект в выпадающем списке
-    private final SelenideElement checkProjectLogging = $x("//span[text()='17.08.2021']");
+    private final SelenideElement checkProjectLogging = $x("//span[text()='17.08.2021']");//проверка соответствия проектв
+    private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");//кнопка текущий месяц
+    private final SelenideElement verifyProject = $x("//span[text()='01:00']/parent::div");
 
     public void clickIconButton() {
         iconProfilePage
@@ -83,12 +84,6 @@ public class ProfilePage {
     public void checkVerifyLastMonth() {
         verifyLastMonth
                 .should(Condition.visible);
-    }
-
-    public void clickButtonClickForExitFromCalendar() {
-        buttonClickForExitFromCalendar
-                .should(Condition.enabled)
-                .click();
     }
 
     public void verifyCheckRoleOnPage() {
@@ -145,6 +140,18 @@ public class ProfilePage {
     public void verifyCheckProjectLogging() {
         checkProjectLogging
                 .should(Condition.visible);
+    }
+
+    public void clickButtonCurrentMonth(){
+        buttonCurrentMonth
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void checkVerifyProject() {
+        verifyProject
+                .should(Condition.enabled)
+                .click();
     }
 
     public void setProfilePageInputs(Map<String, String> map) {

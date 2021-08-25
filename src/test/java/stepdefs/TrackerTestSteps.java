@@ -294,7 +294,7 @@ public class TrackerTestSteps {
         profilePage.clickButtonProfile();
         profilePage.clickButtonCalendar();
         profilePage.clickButtonLastMonth();
-        profilePage.clickButtonClickForExitFromCalendar();
+        profilePage.clickCloseDropDownCalendar();
 
     }
 
@@ -637,6 +637,22 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь видит информацию по проекту Добавление логирование на проект$")
     public void userSeeInformationOnProjectAddingLoggingToProject() {
      profilePage.verifyCheckProjectLogging();
+    }
+
+    @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за текущий месяц$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheCurrentMonth() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonCurrentMonth();
+        profilePage.clickCloseDropDownCalendar();
+        profilePage.clickDropDownListAllProjects();
+        profilePage.checkVerifyProject();
+    }
+
+    @Тогда("^Пользователь видит информацию по проектам за текущий месяц$")
+    public void userSeeInformationOnProjectsForTheCurrentMonth () {
+    profilePage.checkVerifyProject();
     }
 }
 
