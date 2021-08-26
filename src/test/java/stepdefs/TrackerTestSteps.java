@@ -669,7 +669,7 @@ public class TrackerTestSteps {
         profilePage.checkVerifyProjectLastWeek();
     }
 
-    @Когда("Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлый месяц")
+    @Когда("^Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлый месяц$")
     public void userGoesToTheCalendarViewsInformationOnSpecificProjectsForTheLastMonth() {
         trackerPage.clickIconProfilePage();
         trackerPage.clickButtonProfile();
@@ -681,6 +681,13 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь видит информацию по проекту за прошлый месяц$")
     public void userSeeInformationOnProjectForLastMonth() {
         profilePage.checkVerifyProjectLastMonth();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за сегодня$")
+    public void userIsViewingTheProjectReportForToday() {
+    trackerPage.clickBurgerMenu();
+    trackerPage.clickPageProject();
+
     }
 }
 

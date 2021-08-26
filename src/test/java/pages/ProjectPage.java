@@ -38,8 +38,7 @@ public class ProjectPage {
     private final SelenideElement checkMessage = $x("//div[text()='Нет данных']");
     private final SelenideElement verifyFillFields = $x("//div[text()='Неудачно']");
     private final SelenideElement verifyTimeMessage = $x("//div[contains (text(),'project too short')]");
-    private final SelenideElement checkTimeMessage = $x("//div[contains(text(), 'cannot be')]");//проверка при введении времени вперед от текущего
-
+    private final SelenideElement  messageNoData = $x("//div[text()='Нет данных']");
 
     public void clickButtonAllProject() {
         buttonAllProject
@@ -222,10 +221,8 @@ public class ProjectPage {
                 .should(Condition.appear);
     }
 
-   public void verifyCheckTimeMessage(){
-        checkTimeMessage
-                .should(Condition.appear);
-   }
-
+    public void verifyMessageNoData(){
+        messageNoData.should(Condition.visible);
+    }
 
 }
