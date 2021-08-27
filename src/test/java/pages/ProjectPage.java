@@ -37,9 +37,14 @@ public class ProjectPage {
     private final SelenideElement input = $x("//input[@name='project']");//поле поиска
     private final SelenideElement checkMessage = $x("//div[text()='Нет данных']");
     private final SelenideElement verifyFillFields = $x("//div[text()='Неудачно']");
-    private final SelenideElement verifyTimeMessage = $x("//div[contains (text(),'project too short')]");
-    private final SelenideElement  messageNoData = $x("//div[text()='Нет данных']");
-
+    private final SelenideElement verifyTimeMessage = $x("//div[contains (text(),'project too short')]");//сообщение проверка
+    private final SelenideElement messageNoData = $x("//div[text()='Нет данных']/parent::div");
+    private final SelenideElement buttonToday = $x("//span[text()='Сегодня']/parent::div");//кнопка сегодня
+    private final SelenideElement buttonYesterday = $x("//span[text()='Вчера']/parent::div");
+    private final SelenideElement buttonCurrentWeek = $x("//span[text()='Текущая неделя']/parent::div");//кнопка текущая неделя
+    private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");
+    private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");
+    private final SelenideElement buttonGetReport = $x("//span[text()='Получить отчет']/parent::button");
     public void clickButtonAllProject() {
         buttonAllProject
                 .shouldBe(Condition.enabled)
@@ -159,7 +164,49 @@ public class ProjectPage {
 
     public void clickButtonCalendar() {
         buttonCalendar
+                .scrollIntoView(true)
                 .should(Condition.enabled).click();
+    }
+
+    public void clickButtonToday() {
+        buttonToday
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonYesterday() {
+        buttonYesterday
+                .should(Condition.enabled)
+                .click();
+    }
+
+
+    public void checkMessageNoData() {
+        messageNoData
+                .should(Condition.visible);
+    }
+
+    public void clickButtonCurrentWeek() {
+        buttonCurrentWeek
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonLastWeek() {
+        buttonLastWeek
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonCurrentMonth() {
+        buttonCurrentMonth
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void checkButtonGetReport() {
+        buttonGetReport
+                .should(Condition.enabled);
     }
 
     public void selectCurrentContractor(String contractor) {
@@ -177,23 +224,24 @@ public class ProjectPage {
         inputDeleteProject.should(Condition.enabled)
                 .click();
     }
-   public void clickButtonDelete() {
+
+    public void clickButtonDelete() {
         buttonDelete.should(Condition.enabled)
                 .click();
-   }
+    }
 
-   public void clickChapterArchive() {
+    public void clickChapterArchive() {
         chapterArchive.should(Condition.enabled)
                 .click();
-   }
+    }
 
-   public void checkVerifyDeleteProject(){
+    public void checkVerifyDeleteProject() {
         verifyDeleteProject
                 .should(Condition.appear);
-   }
+    }
 
 
-    public void clickInputProject(int data){
+    public void clickInputProject(int data) {
         input.should(Condition.enabled)
                 .setValue(String.valueOf(data))
                 .click();
@@ -216,13 +264,10 @@ public class ProjectPage {
                 .setValue(title);
     }
 
-    public void checkVerifyTimeMessage(){
+    public void checkVerifyTimeMessage() {
         verifyTimeMessage
                 .should(Condition.appear);
     }
 
-    public void verifyMessageNoData(){
-        messageNoData.should(Condition.visible);
-    }
 
 }

@@ -685,9 +685,72 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь просматривает отчет по проекту за сегодня$")
     public void userIsViewingTheProjectReportForToday() {
-    trackerPage.clickBurgerMenu();
-    trackerPage.clickPageProject();
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonToday();
+        profilePage.clickCloseDropDownCalendar();
 
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за сегодня$")
+    public void userMakeSureThatThereIsNoReportForToday() {
+        projectPage.verifyCheckMessage();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за вчера$")
+    public void userSeeReportOnProjectForYesterday() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonYesterday();
+        profilePage.clickCloseDropDownCalendar();
+
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за вчера$")
+    public void userMakeSureThatThereIsNoReportForYesterday() {
+        projectPage.checkMessageNoData();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за текущую неделю$")
+    public void userSeeReportOnProjectForCurrentWeek() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonCurrentWeek();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за текущую неделю$")
+    public void userMakeSureThatThereIsNoReportForCurrentWeek() {
+        projectPage.checkMessageNoData();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за прошлую неделю$")
+    public void userSeeReportOnProjectForLastWeek() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonLastWeek();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь просматривает отчет за прошлую неделю$")
+    public void userSeeReportForLastWeek() {
+     projectPage.checkButtonGetReport();
     }
 }
 
