@@ -115,7 +115,8 @@ public class ProjectPage {
 
     public void clickButtonPlusCreateProject() {
         buttonPlusCreateProject
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void sendInputTittleProject(String title) {
@@ -132,12 +133,14 @@ public class ProjectPage {
 
     public void clickButtonCreateProject() {
         buttonCreateProject
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickFieldProject() {
         fieldProject
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickButtonDetails() {
@@ -149,23 +152,27 @@ public class ProjectPage {
 
     public void clickButtonEdit() {
         buttonEdit
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickButtonAddUsers() {
         inputAddUsers
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickButtonAlfaDirect() {
         buttonAlfaDirect
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickButtonCalendar() {
         buttonCalendar
                 .scrollIntoView(true)
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickButtonToday() {

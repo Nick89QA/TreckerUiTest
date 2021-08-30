@@ -752,6 +752,42 @@ public class TrackerTestSteps {
     public void userSeeReportForLastWeek() {
      projectPage.checkButtonGetReport();
     }
+
+    @Когда("^Пользователь просматривает отчет по проекту за текущий месяц$")
+    public void userSeeReportToProjectLastMonth() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonCurrentMonth();
+        profilePage.clickCloseDropDownCalendar();
+
+    }
+
+    @Тогда("^Пользователь просматривает отчет за текущий месяц$")
+    public void userSeeReportForCurrentMonth () {
+    projectPage.checkButtonGetReport();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за прошлый месяц$")
+    public void userSeeReportToProjectForLastMonth() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonLastMonth();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+
+    @Тогда("^Пользователь просматривает отчет за прошлый месяц$")
+    public void userSeeReportForLastMonth() {
+    projectPage.checkMessageNoData();
+    }
 }
 
 
