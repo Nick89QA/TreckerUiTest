@@ -45,7 +45,7 @@ public class TrackerTestSteps {
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));
-        trackerPage.AddTimeButton();
+        trackerPage.clickAddTimeButton();
 
     }
 
@@ -60,7 +60,7 @@ public class TrackerTestSteps {
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLinkPastTime(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));//дописать задачу
-        trackerPage.AddTimeButton();
+        trackerPage.clickAddTimeButton();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами$")
@@ -151,7 +151,7 @@ public class TrackerTestSteps {
         projectPage.clickBurgerMenu();
         projectPage.clickPageProject();
         projectPage.clickFieldProject();
-        projectPage.clickButtonArchive();
+        projectPage.clickButtonSendToArchive();
     }
 
     @Тогда("^Пользователь убеждается об успешном добавлении проекта в архив$")
@@ -294,7 +294,7 @@ public class TrackerTestSteps {
         profilePage.clickButtonProfile();
         profilePage.clickButtonCalendar();
         profilePage.clickButtonLastMonth();
-        profilePage.clickButtonClickForExitFromCalendar();
+        profilePage.clickCloseDropDownCalendar();
 
     }
 
@@ -355,7 +355,7 @@ public class TrackerTestSteps {
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLinkPastTime(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));//дописать задачу
-        trackerPage.AddTimeButton();
+        trackerPage.clickAddTimeButton();
     }
 
     @Тогда("^Пользователь убеждается об успешном создании задач$")
@@ -465,16 +465,293 @@ public class TrackerTestSteps {
     }
 
     @Тогда("^Пользователь убеждется что данные профиля заполнились корректно$")
-    public void verifyTextOnProfilePage(Map<String,String> map ) {
-        Map<String,String> actualMap = profilePage.getProfileInfo();
+    public void verifyTextOnProfilePage(Map<String, String> map) {
+        Map<String, String> actualMap = profilePage.getProfileInfo();
         SoftAssert softAssert = new SoftAssert();
-      for (String key:map.keySet()){
-          softAssert.assertEquals(actualMap.get(key),map.get(key));
-      }
-     softAssert.assertAll();
+        for (String key : map.keySet()) {
+            softAssert.assertEquals(actualMap.get(key), map.get(key));
+        }
+        softAssert.assertAll();
     }
 
 
+    @Когда("^Пользователь заходит на страницу с проектами и удаляет проект из Архива$")
+    public void userGoToPageWithProjectsAndDeleteProjectFromArchive() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickChapterArchive();
+        projectPage.clickInputDeleteProject();
+        projectPage.clickButtonDelete();
+    }
+
+    @Тогда("^Пользователь получает уведомление об отсутствии прав на удаление проекта$")
+    public void userSetNotificationAboutFailureDeleteProject() {
+        projectPage.checkVerifyDeleteProject();
+    }
+
+    @Когда("^Пользователь переходит на страницу Проекты и вводит в поиск невалидные данные$")
+    public void userGoToProjectPageAndEntersInvalidData() {
+        trackerPage.clickBurgerMenu();
+        projectPage.clickPageProject();
+        projectPage.clickInputProject(123456);
+    }
+
+    @Тогда("^Пользователь получает уведомление об отсутствии проектов с таким названием$")
+    public void userGetNotificationAboutAbsenceProjectsWithTittle() {
+        projectPage.verifyCheckMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу с проектами и создает проект без данных$")
+    public void userGoToPageAndCreateProjectWithoutData() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.clickButtonCreateProject();
+
+    }
+
+    @Тогда("^Пользователь получает уведомление об необходимости заполнения полей$")
+    public void userGetNotificationAboutFillingTheFields() {
+        projectPage.checkVerifyFillFields();
+    }
+
+    @Когда("^Пользователь переходит на страницу с проектами и вводит только название проекта$")
+    public void userGoToPageWithProjectAndFillOnlyProjectName() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.clickInputTittleProject("Написание автотестов");
+        projectPage.clickButtonCreateProject();
+    }
+
+    @Когда("^Пользователь заходит на страницу с проектами и создает проект без выбора подрядчика$")
+    public void userGoToPageWithProjectAndCreateProjectWithoutContractor() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.clickInputTittleProject("Написание автотестов на трекер");
+        projectPage.sendInputDescribeProject("Автотесты на трекер");
+        projectPage.clickButtonCreateProject();
+    }
+
+
+    @Тогда("^Пользователь получает уведомление о неверно выбранном временном промежутке$")
+    public void userGetNotificationAboutWrongTimeLine() {
+        projectPage.checkVerifyTimeMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу Таймер запускает таймер в текущем времени и останавливает его менее чем за минуту$")
+    public void userVisitTimerPageStartsTheTimerAtCurrentTimeAndStopsItInLessThanMinute() {
+        trackerPage.clickButtonTimer();
+        trackerPage.sendNameInput("Новые автотесты на трекер");
+        trackerPage.clickSelectProject("Песок");
+        trackerPage.clickButtonStart();
+        Selenide.sleep(10000);
+        trackerPage.clickButtonTimer();
+    }
+
+
+    @Тогда("^Пользователь получает уведомление о невалидном временном промежутке$")
+    public void userGetNotificationAboutInvalidTimeLine() {
+        trackerPage.checkVerifyTimeMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу Проекты и создает проект выбрав только Подрядчика$")
+    public void userGoToProjectPageAndCreateProjectWithoutParameters() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonPlusCreateProject();
+        projectPage.selectCurrentContractor("цукцук");
+        projectPage.clickButtonCreateProject();
+    }
+
+
+    @Когда("^Пользователь переходит на страницу Таймер и создает задачу без параметров$")
+    public void userGoToTimerPageAndCreateTaskWithoutParams() {
+        trackerPage.clickAddTimeButton();
+    }
+
+    @Тогда("^Пользователь получает уведомление об необходимости выбрать название для задачи$")
+    public void userGetNotificationToChooseTaskName() {
+        trackerPage.checkVerifyTaskName();
+    }
+
+    @Когда("^Пользователь переходит на страницу с Пользователями и ищет сотрудников по невалидным данным$")
+    public void userGoToUsersPageAndSearchEmployeesToInvalidData() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickUserPage();
+        usersPage.setSearchField("adadadasdasdasd");
+    }
+
+    @Тогда("^Пользовватель видит сообщение об отсутствии таких пользователей$")
+    public void userSeesMessageAboutTheAbsenceUsers() {
+        usersPage.checkVerifyAbsentMessage();
+    }
+
+    @Когда("^Пользователь заходит на страницу с проектами и пользуется пагинацией$")
+    public void userGoToProjectPageAndUsePagination() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickUserPage();
+        usersPage.clickPaginationPageOne();
+    }
+
+    @Тогда("^При каждом клике на страницу на которой находится пользователь страницв обновляется$")
+    public void eachTimeTheUserClicksOnThePageTheUserIsOnThePageIsUpdated() {
+        usersPage.verifyCheckPagination();
+    }
+
+    @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за вчерашний день$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheDayBefore() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonYesterday();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за данный период$")
+    public void userMakeSureOfTheAbsenceReportForGivenPeriod() {
+        profilePage.verifyTimeUserOnProject();
+    }
+
+    @Когда("^Пользователь переходит в календарь просматривает информацию по проектам за текущую неделю$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheCurrentWeek() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonCurrentWeek();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за прошлую неделю$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheLastWeek() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastWeek();
+        profilePage.clickCloseDropDownCalendar();
+        profilePage.clickDropDownListAllProjects();
+        profilePage.clickDropDownListSpecificProject();
+    }
+
+    @Тогда("^Пользователь видит информацию по проекту Добавление логирование на проект$")
+    public void userSeeInformationOnProjectAddingLoggingToProject() {
+        profilePage.verifyCheckProjectLogging();
+    }
+
+    @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за текущий месяц$")
+    public void userGoesToTheCalendarViewsInformationOnProjectsForTheCurrentMonth() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonCurrentMonth();
+        profilePage.clickCloseDropDownCalendar();
+        profilePage.clickDropDownListAllProjects();
+    }
+
+    @Тогда("^Пользователь видит информацию по проектам за текущий месяц$")
+    public void userSeeInformationOnProjectsForTheCurrentMonth() {
+        profilePage.checkVerifyProject();
+    }
+
+    @Когда("^Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлую неделю$")
+    public void userGoesToTheCalendarViewsInformationOnSpecificProjectForLastWeek() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastWeek();
+        profilePage.clickCloseDropDownCalendar();
+        profilePage.clickDropDownListAllProjects();
+    }
+
+    @Тогда("^Пользователь видит информацию по проекту за прошлую неделю$")
+    public void userSeeInformationOnProjectForLastWeek() {
+        profilePage.checkVerifyProjectLastWeek();
+    }
+
+    @Когда("^Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлый месяц$")
+    public void userGoesToTheCalendarViewsInformationOnSpecificProjectsForTheLastMonth() {
+        trackerPage.clickIconProfilePage();
+        trackerPage.clickButtonProfile();
+        profilePage.clickButtonCalendar();
+        profilePage.clickButtonLastMonth();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь видит информацию по проекту за прошлый месяц$")
+    public void userSeeInformationOnProjectForLastMonth() {
+        profilePage.checkVerifyProjectLastMonth();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за сегодня$")
+    public void userIsViewingTheProjectReportForToday() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonToday();
+        profilePage.clickCloseDropDownCalendar();
+
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за сегодня$")
+    public void userMakeSureThatThereIsNoReportForToday() {
+        projectPage.verifyCheckMessage();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за вчера$")
+    public void userSeeReportOnProjectForYesterday() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonYesterday();
+        profilePage.clickCloseDropDownCalendar();
+
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за вчера$")
+    public void userMakeSureThatThereIsNoReportForYesterday() {
+        projectPage.checkMessageNoData();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за текущую неделю$")
+    public void userSeeReportOnProjectForCurrentWeek() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonCurrentWeek();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь убеждается об отсутствии отчета за текущую неделю$")
+    public void userMakeSureThatThereIsNoReportForCurrentWeek() {
+        projectPage.checkMessageNoData();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за прошлую неделю$")
+    public void userSeeReportOnProjectForLastWeek() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonLastWeek();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+    @Тогда("^Пользователь просматривает отчет за прошлую неделю$")
+    public void userSeeReportForLastWeek() {
+     projectPage.checkButtonGetReport();
+    }
 }
 
 

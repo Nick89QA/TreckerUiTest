@@ -18,7 +18,7 @@ public class ProjectPage {
     private final SelenideElement buttonCreateProject = $x("//span[text()='Создать проект']/parent::button");//кнопка создать проект
     private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
     private final SelenideElement fieldProject = $x("//div[@aria-expanded='false']");//клик на проект
-    private final SelenideElement buttonArchive = $x("//span[text()='Архивировать']");//клик на кнопку архив
+    private final SelenideElement buttonSendToArchive = $x("//span[text()='Архивировать']");//клик на кнопку архив
     private final SelenideElement verifyArchiveProject = $x("//div[text()='Успешно']");//проверка
     private final SelenideElement buttonDetails = $("a[href='/projects/alfadirect']");//кнопка подробнее///
     private final SelenideElement buttonEdit = $x("(//span[text()='Редактировать'])[2]");//кнопка редактировать
@@ -30,20 +30,37 @@ public class ProjectPage {
     private final SelenideElement buttonTakeReport = $x("//span[text()='Получить отчет']");//проверка получить отчет
     private final SelenideElement inputSelectContractor = $x("//input[@name='contractor']/parent::div");
     private final SelenideElement verifyCreateProject = $x("//div[text()='Успешно']");//проверка создания задачи
-
+    private final SelenideElement inputDeleteProject = $x("//p[text()='01 Test Title']");//проект который находится в архиве
+    private final SelenideElement buttonDelete = $x("(//span[text()='Удалить'])[1]");//кнопка удалить
+    private final SelenideElement chapterArchive = $x("//span[text()='В архиве']");
+    private final SelenideElement verifyDeleteProject = $x("//div[text()='Не удалось удалить проект']");//проверка на удаление проекта
+    private final SelenideElement input = $x("//input[@name='project']");//поле поиска
+    private final SelenideElement checkMessage = $x("//div[text()='Нет данных']");
+    private final SelenideElement verifyFillFields = $x("//div[text()='Неудачно']");
+    private final SelenideElement verifyTimeMessage = $x("//div[contains (text(),'project too short')]");//сообщение проверка
+    private final SelenideElement messageNoData = $x("//div[text()='Нет данных']/parent::div");
+    private final SelenideElement buttonToday = $x("//span[text()='Сегодня']/parent::div");//кнопка сегодня
+    private final SelenideElement buttonYesterday = $x("//span[text()='Вчера']/parent::div");
+    private final SelenideElement buttonCurrentWeek = $x("//span[text()='Текущая неделя']/parent::div");//кнопка текущая неделя
+    private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");
+    private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");
+    private final SelenideElement buttonGetReport = $x("//span[text()='Получить отчет']/parent::button");
     public void clickButtonAllProject() {
         buttonAllProject
-                .shouldBe(Condition.enabled).click();//клик на раздел все проекты
+                .shouldBe(Condition.enabled)
+                .click();//клик на раздел все проекты
     }
 
     public void setButtonAlfaDirect() {
         buttonAlfaDirect
-                .shouldBe(Condition.enabled).click();// клик на конкретный проект
+                .shouldBe(Condition.enabled)
+                .click();// клик на конкретный проект
     }
 
     public void setMenuProject() {
         pageProject
-                .shouldBe(Condition.enabled).click();
+                .shouldBe(Condition.enabled)
+                .click();
     }
 
     public void setCheckoutPageProject() {
@@ -51,9 +68,10 @@ public class ProjectPage {
                 .shouldBe(Condition.enabled);
     }
 
-    public void clickButtonArchive() {
-        buttonArchive
-                .shouldBe(Condition.enabled).click();//клик на архив
+    public void clickButtonSendToArchive() {
+        buttonSendToArchive
+                .shouldBe(Condition.enabled)
+                .click();//клик на архив
     }
 
     public void verifyArchive() {
@@ -63,7 +81,8 @@ public class ProjectPage {
 
     public void clickButtonSave() {//добавления менеджера в проект
         buttonSave
-                .shouldBe(Condition.enabled).click();
+                .shouldBe(Condition.enabled)
+                .click();
     }
 
     public void verifyAddManager() {
@@ -73,12 +92,14 @@ public class ProjectPage {
 
     public void clickButtonLastMonth() {
         buttonLastMonth
-                .shouldBe(Condition.enabled).click();//клик на кнопку прошлый месяц
+                .shouldBe(Condition.enabled)
+                .click();//клик на кнопку прошлый месяц
     }
 
     public void checkReport() {
         buttonTakeReport
-                .shouldBe(Condition.enabled).click();//клик на кнопку отчет
+                .shouldBe(Condition.enabled)
+                .click();//клик на кнопку отчет
     }
 
     public void clickBurgerMenu() {
@@ -88,7 +109,8 @@ public class ProjectPage {
 
     public void clickPageProject() {
         pageProject
-                .should(Condition.enabled).click();
+                .should(Condition.enabled)
+                .click();
     }
 
     public void clickButtonPlusCreateProject() {
@@ -98,12 +120,14 @@ public class ProjectPage {
 
     public void sendInputTittleProject(String title) {
         inputTittleProject
-                .should(Condition.enabled).setValue(title);
+                .should(Condition.enabled)
+                .setValue(title);
     }
 
     public void sendInputDescribeProject(String describe) {
         inputDescribeProject
-                .should(Condition.enabled).setValue(describe);
+                .should(Condition.enabled)
+                .setValue(describe);
     }
 
     public void clickButtonCreateProject() {
@@ -140,16 +164,110 @@ public class ProjectPage {
 
     public void clickButtonCalendar() {
         buttonCalendar
+                .scrollIntoView(true)
                 .should(Condition.enabled).click();
+    }
+
+    public void clickButtonToday() {
+        buttonToday
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonYesterday() {
+        buttonYesterday
+                .should(Condition.enabled)
+                .click();
+    }
+
+
+    public void checkMessageNoData() {
+        messageNoData
+                .should(Condition.visible);
+    }
+
+    public void clickButtonCurrentWeek() {
+        buttonCurrentWeek
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonLastWeek() {
+        buttonLastWeek
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonCurrentMonth() {
+        buttonCurrentMonth
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void checkButtonGetReport() {
+        buttonGetReport
+                .should(Condition.enabled);
     }
 
     public void selectCurrentContractor(String contractor) {
         inputSelectContractor.shouldBe(Condition.enabled).click();
-        Selenide.$x(String.format("//li[text()='%s']", contractor)).shouldBe(Condition.enabled).click();
+        Selenide.$x(String.format("//li[text()='%s']", contractor))
+                .shouldBe(Condition.enabled).click();
     }
 
     public void checkSuccessProject() {
         verifyCreateProject
                 .shouldBe(Condition.appear);
     }
+
+    public void clickInputDeleteProject() {
+        inputDeleteProject.should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonDelete() {
+        buttonDelete.should(Condition.enabled)
+                .click();
+    }
+
+    public void clickChapterArchive() {
+        chapterArchive.should(Condition.enabled)
+                .click();
+    }
+
+    public void checkVerifyDeleteProject() {
+        verifyDeleteProject
+                .should(Condition.appear);
+    }
+
+
+    public void clickInputProject(int data) {
+        input.should(Condition.enabled)
+                .setValue(String.valueOf(data))
+                .click();
+    }
+
+    public void verifyCheckMessage() {
+        checkMessage
+                .should(Condition.appear);
+    }
+
+    public void checkVerifyFillFields() {
+        verifyFillFields
+                .should(Condition.appear);
+    }
+
+
+    public void clickInputTittleProject(String title) {
+        inputTittleProject
+                .should(Condition.enabled)
+                .setValue(title);
+    }
+
+    public void checkVerifyTimeMessage() {
+        verifyTimeMessage
+                .should(Condition.appear);
+    }
+
+
 }

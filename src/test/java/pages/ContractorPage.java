@@ -22,7 +22,6 @@ public class ContractorPage {
     private final SelenideElement verifyDelContract = $x("//div[text()='Подрядчик удален']");//проверка удаления подряда
     private final SelenideElement buttonBasket = $x("(//span[@class='MuiIconButton-label'])[5]");//кнопка корзина
     private final SelenideElement buttonDelete = $x("//span[text()='Удалить']");//кнопка удалить
-    private final SelenideElement inputContract = $x("//div[text()='АО НПФ Сбербанка ff ']");//клик на поле НПФ Сбербанк
     private final SelenideElement buttonEditContract = $x("//div[@id='editButton']");//клик на кара
     private final SelenideElement inputName = $x("//input[@name='shortName']");//клик на поле
     private final SelenideElement buttonSave = $x("//div[@id='saveButton']");//кнопка сохранить

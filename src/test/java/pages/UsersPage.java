@@ -12,6 +12,9 @@ public class UsersPage {
     private final SelenideElement pageUser = $x("//span[text()='Пользователи']");//клик на страницу пользователи
     private final SelenideElement verifySurname = $x("//div[text()='Абдуллаев А.']");//проверка поиска фамилии
     private final SelenideElement burgerMenu = $x("(//button[@type='button'])[1]");//клик на меню
+    private final SelenideElement verifyAbsentMessage = $x("//div[contains(text(),'Таких пользователей')]");
+    private final SelenideElement paginationPageOne = $x("//button[@aria-label='page 1']");//клик на страницу 1
+    private final SelenideElement checkPagination = $x("//div[@role='progressbar']");
 
     public void setSearchField(String text) {
         inputSearch.shouldBe(Condition.enabled);
@@ -40,5 +43,22 @@ public class UsersPage {
     public void clickPageUser() {
         pageUser
                 .should(Condition.enabled).click();
+    }
+
+    public void checkVerifyAbsentMessage() {
+        verifyAbsentMessage
+                .should(Condition.appear);
+    }
+
+    public void clickPaginationPageOne() {
+        paginationPageOne
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void verifyCheckPagination() {
+        checkPagination
+                .should(Condition.appear);
+
     }
 }
