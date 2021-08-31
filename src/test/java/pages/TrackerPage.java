@@ -6,6 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
 import utils.WebUtils;
 
+import java.nio.charset.Charset;
+import java.util.Random;
+
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
 
@@ -40,6 +43,9 @@ public class TrackerPage {
     private final SelenideElement verifyTimeMessage = $x("//div[contains(text(), 'cannot be')]");
     private final SelenideElement verifyTaskName = $x("//p[contains(text(),'Введите название')]");
     private final SelenideElement wrongTimePeriod = $x("//div[text()='An error occurred']");
+    private final SelenideElement circleProgressBar = $x("(//div[@role='progressbar'])[2]");
+    private final SelenideElement projectTaskList = $x("//span[text()='Песок']/parent::div");
+    private final SelenideElement buttonDelete = $x("//span[text()='Удалить']");
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
@@ -280,10 +286,41 @@ public class TrackerPage {
                 .click();
     }
 
-   public void checkWrongTimePeriod() {
+    public void checkWrongTimePeriod() {
         wrongTimePeriod
                 .should(Condition.visible);
-   }
+    }
 
+    public String generateSymbol() {
+
+        byte[] array = new byte[300]; // длинна символов
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        return generatedString;
+    }
+
+    public void sendLongTittle() {
+        WebUtils.clearField(inputTittle);
+        inputTittle
+                .should(Condition.enabled)
+                .setValue(generateSymbol());
+    }
+
+    public void checkCircleProgressBar() {
+        circleProgressBar
+                .should(Condition.visible);
+    }
+
+    public void clickProjectTaskList() {
+        projectTaskList
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonDelete(){
+        buttonDelete
+                .should(Condition.enabled)
+                .click();
+    }
 
 }

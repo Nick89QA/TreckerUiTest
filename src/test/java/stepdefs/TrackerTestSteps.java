@@ -2,6 +2,7 @@
 package stepdefs;
 
 import io.cucumber.java.ru.Дано;
+import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 
@@ -792,6 +793,28 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь получает уведомление о некорректном временном промежутке$")
     public void userGetNotificationToIncorrectTimePeriod() {
      trackerPage.checkWrongTimePeriod();
+    }
+
+    @Когда("^Пользователь создает задачу с длинным названием$")
+    public void userCreateTaskWithLongName(Map<String,String>map) {
+        trackerPage.sendLongTittle();
+        trackerPage.setStartTime(map.get("Время начала"));
+        trackerPage.setEndTime(map.get("Время конец"));
+        trackerPage.clickSelectProject(map.get("Проект"));
+        trackerPage.setInputLink(map.get("Ссылка на задачу"));
+        trackerPage.clickDescribeTask(map.get("Описание задачи"));
+        trackerPage.clickAddTimeButton();
+    }
+
+    @И("^Пользователь удаляет созданную задачу$")
+    public void userDeleteCreatedTask () {
+     trackerPage.clickProjectTaskList();
+     trackerPage.clickButtonDelete();
+    }
+
+    @Тогда("^Пользователь убеждается в удалении задачи$")
+    public void userMakeSureInTheDeletionOfTheTask() {
+    trackerPage.checkCircleProgressBar();
     }
 }
 
