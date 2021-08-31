@@ -816,6 +816,11 @@ public class TrackerTestSteps {
     public void userMakeSureInTheDeletionOfTheTask() {
     trackerPage.checkCircleProgressBar();
     }
+
+    @Тогда("^Пользователь видит созданную задачу в списке задач$")
+    public void userSeeCreatedTaskInTaskList() {
+    trackerPage.checkTaskInTaskList();
+    }
 }
 
 

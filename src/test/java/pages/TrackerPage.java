@@ -46,6 +46,7 @@ public class TrackerPage {
     private final SelenideElement circleProgressBar = $x("(//div[@role='progressbar'])[2]");
     private final SelenideElement projectTaskList = $x("//span[text()='Песок']/parent::div");
     private final SelenideElement buttonDelete = $x("//span[text()='Удалить']");
+    private final SelenideElement taskInTaskList = $x("//h3[@title='Написание автотестов на трекер']");
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
@@ -317,10 +318,15 @@ public class TrackerPage {
                 .click();
     }
 
-    public void clickButtonDelete(){
+    public void clickButtonDelete() {
         buttonDelete
                 .should(Condition.enabled)
                 .click();
+    }
+
+    public void checkTaskInTaskList(){
+        taskInTaskList
+                .should(Condition.visible);
     }
 
 }
