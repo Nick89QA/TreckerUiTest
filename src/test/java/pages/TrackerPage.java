@@ -13,7 +13,7 @@ public class TrackerPage {
     private final SelenideElement iconProfilePage = $x("//button[@id='accountIdButton']");
     private final SelenideElement buttonProfile = $x("//a[text()='Профиль']");
     private final SelenideElement pageProject = $x("//span[text()='Проекты']//..//span");//меню страница проекты
-    private final SelenideElement nameInput = $("input[name='title']");
+    private final SelenideElement inputTittle = $("input[name='title']");
     private final SelenideElement inputProject = $("input[name='project']");//поле выбрать проект
     private final SelenideElement startTime = $("input[name='start']");
     private final SelenideElement endTime = $("input[name='end']");
@@ -39,6 +39,7 @@ public class TrackerPage {
     private final SelenideElement buttonStart = $x("//span[text()='Старт']/parent::button");//клик на кнопку старт
     private final SelenideElement verifyTimeMessage = $x("//div[contains(text(), 'cannot be')]");
     private final SelenideElement verifyTaskName = $x("//p[contains(text(),'Введите название')]");
+    private final SelenideElement wrongTimePeriod = $x("//div[text()='An error occurred']");
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
@@ -95,9 +96,9 @@ public class TrackerPage {
                 .click();
     }
 
-    public void sendNameInput(String title ) {
-        WebUtils.clearField(nameInput);
-        nameInput
+    public void sendInputTittle(String title) {
+        WebUtils.clearField(inputTittle);
+        inputTittle
                 .should(Condition.enabled).setValue(title);
     }
 
@@ -251,30 +252,38 @@ public class TrackerPage {
                 .click();
     }
 
-  public void clickButtonStart() {
+    public void clickButtonStart() {
         buttonStart
                 .should(Condition.enabled)
                 .click();
-  }
- public void checkVerifyTimeMessage() {
+    }
+
+    public void checkVerifyTimeMessage() {
         verifyTimeMessage
                 .should(Condition.enabled)
                 .click();
- }
+    }
 
-   public void checkVerifyTaskName() {
-  verifyTaskName
-          .should(Condition.appear);
+    public void checkVerifyTaskName() {
+        verifyTaskName
+                .should(Condition.appear);
 
     }
 
-    public void clickIconProfilePage(){
+    public void clickIconProfilePage() {
         iconProfilePage.should(Condition.enabled)
                 .click();
     }
 
-    public void clickButtonProfile(){
+    public void clickButtonProfile() {
         buttonProfile.should(Condition.enabled)
                 .click();
     }
+
+   public void checkWrongTimePeriod() {
+        wrongTimePeriod
+                .should(Condition.visible);
+   }
+
+
 }

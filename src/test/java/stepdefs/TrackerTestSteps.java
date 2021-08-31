@@ -39,7 +39,7 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь создает задачу с параметрами$")
     public void createTask(Map<String, String> map) {//тест проходит корректно при подключенном выпадающем списка(выбор проекта)
-        trackerPage.sendNameInput(map.get("Название"));
+        trackerPage.sendInputTittle(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
@@ -54,7 +54,7 @@ public class TrackerTestSteps {
         trackerPage.clickBurgerMenu();
         trackerPage.ClickPageTimer();
         trackerPage.ClickButtonYesterday();
-        trackerPage.sendNameInput(map.get("Название"));
+        trackerPage.sendInputTittle(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
@@ -349,7 +349,7 @@ public class TrackerTestSteps {
         trackerPage.clickBurgerMenu();
         trackerPage.ClickPageTimer();
         trackerPage.ClickButtonYesterday();
-        trackerPage.sendNameInput(map.get("Название"));
+        trackerPage.sendInputTittle(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
@@ -543,7 +543,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь заходит на страницу Таймер запускает таймер в текущем времени и останавливает его менее чем за минуту$")
     public void userVisitTimerPageStartsTheTimerAtCurrentTimeAndStopsItInLessThanMinute() {
         trackerPage.clickButtonTimer();
-        trackerPage.sendNameInput("Новые автотесты на трекер");
+        trackerPage.sendInputTittle("Новые автотесты на трекер");
         trackerPage.clickSelectProject("Песок");
         trackerPage.clickButtonStart();
         Selenide.sleep(10000);
@@ -787,6 +787,11 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь просматривает отчет за прошлый месяц$")
     public void userSeeReportForLastMonth() {
     projectPage.checkMessageNoData();
+    }
+
+    @Тогда("^Пользователь получает уведомление о некорректном временном промежутке$")
+    public void userGetNotificationToIncorrectTimePeriod() {
+     trackerPage.checkWrongTimePeriod();
     }
 }
 
