@@ -22,6 +22,7 @@ public class UsersPage {
     private final SelenideElement roleManager = $x("//li[text()='Менеджер']");
     private final SelenideElement roleDeveloper = $x("//li[text()='Разработчик']");
     private final SelenideElement buttonSave = $x("(//div[@role='button'])[2]");
+    private final SelenideElement messageSuccess = $x("//div[text()='Успешно']");
 
     public void setSearchField(String text) {
         inputSearch.shouldBe(Condition.enabled);
@@ -97,6 +98,7 @@ public class UsersPage {
         roleGeneralManager
                 .should(Condition.enabled)
                 .click();
+
     }
 
     public void clickRoleManager() {
@@ -111,11 +113,15 @@ public class UsersPage {
                 .click();
     }
 
+
     public void clickButtonSave() {
         buttonSave
                 .should(Condition.enabled)
                 .doubleClick();
     }
 
-
+    public void checkMessageSuccess() {
+        messageSuccess
+                .should(Condition.visible);
+    }
 }

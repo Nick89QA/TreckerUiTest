@@ -849,6 +849,11 @@ public class TrackerTestSteps {
     usersPage.clickRoleGeneralManager();
     usersPage.clickButtonSave();
     }
+
+    @Тогда("^Пользователь убеждается в добавлении ролей пользователю$")
+    public void userMakeSureAboutAddRoleToUser() {
+    usersPage.checkMessageSuccess();
+    }
 }
 
 

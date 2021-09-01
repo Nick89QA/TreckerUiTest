@@ -46,7 +46,6 @@ public class ProfilePage {
     private final SelenideElement verifyProjectLastMonth = $x("//span[text()='10:17']/parent::div");//проверка проекта за прошлый месяц
 
 
-
     public void clickIconButton() {
         iconProfilePage
                 .should(Condition.enabled)
@@ -146,7 +145,7 @@ public class ProfilePage {
                 .should(Condition.visible);
     }
 
-    public void clickButtonCurrentMonth(){
+    public void clickButtonCurrentMonth() {
         buttonCurrentMonth
                 .should(Condition.enabled)
                 .click();
@@ -158,7 +157,7 @@ public class ProfilePage {
                 .click();
     }
 
-    public void checkVerifyProjectLastWeek(){
+    public void checkVerifyProjectLastWeek() {
         verifyProjectLastWeek
                 .should(Condition.enabled)
                 .click();
@@ -168,7 +167,6 @@ public class ProfilePage {
         verifyProjectLastMonth
                 .should(Condition.visible);
     }
-
 
 
     public void setProfilePageInputs(Map<String, String> map) {
