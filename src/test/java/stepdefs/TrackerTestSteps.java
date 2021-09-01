@@ -586,7 +586,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользовватель видит сообщение об отсутствии таких пользователей$")
     public void userSeesMessageAboutTheAbsenceUsers() {
-        usersPage.checkVerifyAbsentMessage();
+        usersPage.verifyMessageAbsence();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами и пользуется пагинацией$")
@@ -834,6 +834,20 @@ public class TrackerTestSteps {
     @Тогда("^Пользователь убеждается в сохранении задачи$")
     public void userMakeSureThatTaskIsSaved() {
     trackerPage.checkLoaderProgressBar();
+    }
+
+    @Когда("^Пользователь добавляет роли другим пользователям и сохраняет результат$")
+    public void userAddRoleOtherUsersAndSaveResults() {
+    trackerPage.clickBurgerMenu();
+    trackerPage.clickUserPage();
+    usersPage.clickSurname();
+    usersPage.clickButtonPencil();
+    usersPage.clickDropDownList();
+    usersPage.clickRoleAdministrator();
+    usersPage.clickRoleDeveloper();
+    usersPage.clickRoleManager();
+    usersPage.clickRoleGeneralManager();
+    usersPage.clickButtonSave();
     }
 }
 
