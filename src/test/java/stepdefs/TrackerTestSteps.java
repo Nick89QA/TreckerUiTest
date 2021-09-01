@@ -814,13 +814,28 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается в удалении задачи$")
     public void userMakeSureInTheDeletionOfTheTask() {
-    trackerPage.checkCircleProgressBar();
+    trackerPage.checkLoaderProgressBar();
     }
 
     @Тогда("^Пользователь видит созданную задачу в списке задач$")
     public void userSeeCreatedTaskInTaskList() {
     trackerPage.checkTaskInTaskList();
     }
+
+
+    @Когда("^Пользователь заходит в созданную задачу и добавляет ссылку и описание$")
+    public void userGoToCreatedTaskAndAddLinkAndDescription() {
+     trackerPage.clickTaskInTaskList();
+     trackerPage.clickInputLinkInTaskList("https://git.crtweb.ru/creative/");
+     trackerPage.clickInputDescribeInTaskList("Внедрение отчетов Allure на проекте Creative Integrator");
+     trackerPage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждается в сохранении задачи$")
+    public void userMakeSureThatTaskIsSaved() {
+    trackerPage.checkLoaderProgressBar();
+    }
 }
+
 
 
