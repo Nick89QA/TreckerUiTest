@@ -2,6 +2,7 @@
 package stepdefs;
 
 import io.cucumber.java.ru.Дано;
+import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 
@@ -39,7 +40,7 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь создает задачу с параметрами$")
     public void createTask(Map<String, String> map) {//тест проходит корректно при подключенном выпадающем списка(выбор проекта)
-        trackerPage.sendNameInput(map.get("Название"));
+        trackerPage.sendInputTittle(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
@@ -54,7 +55,7 @@ public class TrackerTestSteps {
         trackerPage.clickBurgerMenu();
         trackerPage.ClickPageTimer();
         trackerPage.ClickButtonYesterday();
-        trackerPage.sendNameInput(map.get("Название"));
+        trackerPage.sendInputTittle(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
@@ -349,7 +350,7 @@ public class TrackerTestSteps {
         trackerPage.clickBurgerMenu();
         trackerPage.ClickPageTimer();
         trackerPage.ClickButtonYesterday();
-        trackerPage.sendNameInput(map.get("Название"));
+        trackerPage.sendInputTittle(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
@@ -543,7 +544,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь заходит на страницу Таймер запускает таймер в текущем времени и останавливает его менее чем за минуту$")
     public void userVisitTimerPageStartsTheTimerAtCurrentTimeAndStopsItInLessThanMinute() {
         trackerPage.clickButtonTimer();
-        trackerPage.sendNameInput("Новые автотесты на трекер");
+        trackerPage.sendInputTittle("Новые автотесты на трекер");
         trackerPage.clickSelectProject("Песок");
         trackerPage.clickButtonStart();
         Selenide.sleep(10000);
@@ -585,7 +586,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользовватель видит сообщение об отсутствии таких пользователей$")
     public void userSeesMessageAboutTheAbsenceUsers() {
-        usersPage.checkVerifyAbsentMessage();
+        usersPage.verifyMessageAbsence();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами и пользуется пагинацией$")
@@ -750,8 +751,111 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь просматривает отчет за прошлую неделю$")
     public void userSeeReportForLastWeek() {
-     projectPage.checkButtonGetReport();
+        projectPage.checkButtonGetReport();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за текущий месяц$")
+    public void userSeeReportToProjectLastMonth() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonCurrentMonth();
+        profilePage.clickCloseDropDownCalendar();
+
+    }
+
+    @Тогда("^Пользователь просматривает отчет за текущий месяц$")
+    public void userSeeReportForCurrentMonth() {
+        projectPage.checkButtonGetReport();
+    }
+
+    @Когда("^Пользователь просматривает отчет по проекту за прошлый месяц$")
+    public void userSeeReportToProjectForLastMonth() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.clickButtonAlfaDirect();
+        projectPage.clickButtonDetails();
+        projectPage.clickButtonCalendar();
+        projectPage.clickButtonLastMonth();
+        profilePage.clickCloseDropDownCalendar();
+    }
+
+
+    @Тогда("^Пользователь просматривает отчет за прошлый месяц$")
+    public void userSeeReportForLastMonth() {
+        projectPage.checkMessageNoData();
+    }
+
+    @Тогда("^Пользователь получает уведомление о некорректном временном промежутке$")
+    public void userGetNotificationToIncorrectTimePeriod() {
+        trackerPage.checkWrongTimePeriod();
+    }
+
+    @Когда("^Пользователь создает задачу с длинным названием$")
+    public void userCreateTaskWithLongName(Map<String, String> map) {
+        trackerPage.sendLongTittle();
+        trackerPage.setStartTime(map.get("Время начала"));
+        trackerPage.setEndTime(map.get("Время конец"));
+        trackerPage.clickSelectProject(map.get("Проект"));
+        trackerPage.setInputLink(map.get("Ссылка на задачу"));
+        trackerPage.clickDescribeTask(map.get("Описание задачи"));
+        trackerPage.clickAddTimeButton();
+    }
+
+    @И("^Пользователь удаляет созданную задачу$")
+    public void userDeleteCreatedTask() {
+        trackerPage.clickProjectTaskList();
+        trackerPage.clickButtonDelete();
+    }
+
+    @Тогда("^Пользователь убеждается в удалении задачи$")
+    public void userMakeSureInTheDeletionOfTheTask() {
+        trackerPage.checkLoaderProgressBar();
+    }
+
+    @Тогда("^Пользователь видит созданную задачу в списке задач$")
+    public void userSeeCreatedTaskInTaskList() {
+        trackerPage.checkTaskInTaskList();
+    }
+
+
+    @Когда("^Пользователь заходит в созданную задачу и добавляет ссылку и описание$")
+    public void userGoToCreatedTaskAndAddLinkAndDescription() {
+        trackerPage.clickTaskInTaskList();
+        trackerPage.clickInputLinkInTaskList("https://git.crtweb.ru/creative/");
+        trackerPage.clickInputDescribeInTaskList("Внедрение отчетов Allure на проекте Creative Integrator");
+        trackerPage.clickButtonSave();
+    }
+
+    @Тогда("^Пользователь убеждается в сохранении задачи$")
+    public void userMakeSureThatTaskIsSaved() {
+        trackerPage.checkLoaderProgressBar();
+    }
+
+    @Когда("^Пользователь добавляет роли другим пользователям и сохраняет результат$")
+    public void userAddRoleOtherUsersAndSaveResults() {
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickUserPage();
+        usersPage.clickSurname();
+        usersPage.clickButtonPencil();
+        usersPage.clickDropDownList();
+        usersPage.clickRoleAdministrator();
+        usersPage.clickRoleDeveloper();
+        usersPage.clickRoleManager();
+        usersPage.clickRoleGeneralManager();
+        usersPage.clickButtonSave();
+
+    }
+
+    @Тогда("^Пользователь убеждается в добавлении ролей пользователю$")
+    public void userMakeSureAboutAddRoleToUser() {
+        usersPage.checkMessageSuccess();
     }
 }
+
 
 

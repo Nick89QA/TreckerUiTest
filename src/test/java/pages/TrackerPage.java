@@ -6,6 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
 import utils.WebUtils;
 
+import java.nio.charset.Charset;
+import java.util.Random;
+
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
 
@@ -13,7 +16,7 @@ public class TrackerPage {
     private final SelenideElement iconProfilePage = $x("//button[@id='accountIdButton']");
     private final SelenideElement buttonProfile = $x("//a[text()='Профиль']");
     private final SelenideElement pageProject = $x("//span[text()='Проекты']//..//span");//меню страница проекты
-    private final SelenideElement nameInput = $("input[name='title']");
+    private final SelenideElement inputTittle = $("input[name='title']");
     private final SelenideElement inputProject = $("input[name='project']");//поле выбрать проект
     private final SelenideElement startTime = $("input[name='start']");
     private final SelenideElement endTime = $("input[name='end']");
@@ -39,17 +42,20 @@ public class TrackerPage {
     private final SelenideElement buttonStart = $x("//span[text()='Старт']/parent::button");//клик на кнопку старт
     private final SelenideElement verifyTimeMessage = $x("//div[contains(text(), 'cannot be')]");
     private final SelenideElement verifyTaskName = $x("//p[contains(text(),'Введите название')]");
+    private final SelenideElement wrongTimePeriod = $x("//div[text()='An error occurred']");
+    private final SelenideElement loaderProgressBar = $x("(//div[@role='progressbar'])[2]");
+    private final SelenideElement projectTaskList = $x("//span[text()='Песок']/parent::div");
+    private final SelenideElement buttonDelete = $x("//span[text()='Удалить']");
+    private final SelenideElement taskInTaskList = $x("//span[text()='Песок']/parent::div");
+    private final SelenideElement buttonSave = $x("//span[text()='Сохранить']");
+    private final SelenideElement inputLinkInTaskList = $x("(//input[@name='link'])[2]");//поле ссылка
+    private final SelenideElement inputDescribeInTaskList = $x("(//input[@name='description'])[2]");
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
     public void verifyTask() {
-        try {
-            successMessage.should(Condition.appear);
-            log.info("Task create successful");
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            log.error("Task creation failed");
-            Assert.fail("Fail to create task(Notification did not appear)");
-        }
+        successMessage.should(Condition.enabled)
+                .click();
     }
 
     public void clickMenuButton() {
@@ -95,9 +101,9 @@ public class TrackerPage {
                 .click();
     }
 
-    public void sendNameInput(String title ) {
-        WebUtils.clearField(nameInput);
-        nameInput
+    public void sendInputTittle(String title) {
+        WebUtils.clearField(inputTittle);
+        inputTittle
                 .should(Condition.enabled).setValue(title);
     }
 
@@ -251,30 +257,99 @@ public class TrackerPage {
                 .click();
     }
 
-  public void clickButtonStart() {
+    public void clickButtonStart() {
         buttonStart
                 .should(Condition.enabled)
                 .click();
-  }
- public void checkVerifyTimeMessage() {
+    }
+
+    public void checkVerifyTimeMessage() {
         verifyTimeMessage
                 .should(Condition.enabled)
                 .click();
- }
+    }
 
-   public void checkVerifyTaskName() {
-  verifyTaskName
-          .should(Condition.appear);
+    public void checkVerifyTaskName() {
+        verifyTaskName
+                .should(Condition.appear);
 
     }
 
-    public void clickIconProfilePage(){
+    public void clickIconProfilePage() {
         iconProfilePage.should(Condition.enabled)
                 .click();
     }
 
-    public void clickButtonProfile(){
+    public void clickButtonProfile() {
         buttonProfile.should(Condition.enabled)
                 .click();
+    }
+
+    public void checkWrongTimePeriod() {
+        wrongTimePeriod
+                .should(Condition.visible);
+    }
+
+    public String generateSymbol() {
+
+        byte[] array = new byte[300]; // длинна символов
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        return generatedString;
+    }
+
+    public void sendLongTittle() {
+        WebUtils.clearField(inputTittle);
+        inputTittle
+                .should(Condition.enabled)
+                .setValue(generateSymbol());
+    }
+
+    public void checkLoaderProgressBar() {
+        loaderProgressBar
+                .should(Condition.visible);
+    }
+
+    public void clickProjectTaskList() {
+        projectTaskList
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonDelete() {
+        buttonDelete
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void checkTaskInTaskList() {
+        taskInTaskList
+                .should(Condition.visible);
+    }
+
+    public void clickTaskInTaskList() {
+        taskInTaskList
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickButtonSave() {
+        buttonSave
+                .should(Condition.enabled)
+                .click();
+    }
+
+    public void clickInputLinkInTaskList(String link) {
+        WebUtils.clearField(inputLinkInTaskList);
+        inputLinkInTaskList
+                .should(Condition.enabled)
+                .setValue(link);
+    }
+
+    public void clickInputDescribeInTaskList(String describe) {
+        WebUtils.clearField(inputDescribeInTaskList);
+        inputDescribeInTaskList
+                .should(Condition.enabled)
+                .setValue(describe);
     }
 }
