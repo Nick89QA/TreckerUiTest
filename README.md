@@ -1,4 +1,3 @@
-
 ### Описание:
 
 Инструмент, предназначенный для автоматизации UiAutoTestsTracker тестирования для проекта https://hub.crtweb.ru основанный на фреймворках: TestNG, Selenide(Java/Selenium), BDD Cucumber(Gherkin) и Allure.
