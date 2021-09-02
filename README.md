@@ -1,13 +1,12 @@
-# E2E Selenide
 
 ### Описание:
 
-Инструмент, предназначенный для автоматизации еnd-to-end тестирования для проекта https://hub.crtweb.ru основанный на фреймворках: TestNG, Selenide(Java/Selenium), BDD Cucumber(Gherkin) и Allure.
+Инструмент, предназначенный для автоматизации UiAutoTestsTracker тестирования для проекта https://hub.crtweb.ru основанный на фреймворках: TestNG, Selenide(Java/Selenium), BDD Cucumber(Gherkin) и Allure.
 
 ### Локальная настройка окружения
 
 ###### Для Mac OS
-1. Необходимо установить XCode или Git. 
+1. Необходимо установить Git. 
 2. Необходимо перейти по ссылке, скачать и установить Amazon Corretto 8
    ```
     https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html
@@ -32,7 +31,7 @@
     cd $home
     nano ~/.bash_profile
     в конец файла добавить:
-    PATH=$PATH:/Users/userName/e2e-selenide/.allure/allure/bin
+    PATH=$PATH:C:\Users\user\IdeaProjects\UiAutoTestsTracker\.allure\allure\bin
     ```
 5. Необходимо обязательно перезапустить консоль/терминал.
     - проверить работу Allure: 
@@ -76,7 +75,7 @@
     cd $HOME
     nano .bashrc
     в конец файла добавить:
-    export PATH=$PATH:/home/userName/e2e-selenide/.allure/allure/bin
+    export PATH=$PATH:C:\Users\user\IdeaProjects\UiAutoTestsTracker\.allure\allure\bin
     ```
 4. Необходимо обязательно перезапустить консоль/терминал.
     - проверить работу Allure: 
@@ -109,9 +108,10 @@
     - Установить переменную `M2_HOME` как `C:\Program Files\apache-maven-3.6.3` (по умолчанию это путь распаковки Maven) 
     - Добавить `%M2_HOME%\bin` в текущую переменную `PATH`.
     - проверить работу Maven: 
-    ```
+    ``` tpl
     mvn -version
     ```
+   
 
 ### Локальный запуск тестов
 
@@ -119,12 +119,9 @@
 
 ###### Mac OS
 
-1. Склонировать себе проект
-  
-2. Запустить терминал из корневой папки проекта и выполнить команду: 
-    ```
-    ./start_local.sh
-    ```
+1. Склонировать себе проект 
+
+
 3. Следовать подсказкам терминальной программы.
 
 ###### Для Ubuntu (Debian GNU/Linux)
@@ -211,21 +208,11 @@ allure serve target/allure-results
 
 1. Склонировать себе проект
 
-2. Прописать команду в консоли проекта для сборки image
-
-`docker build -f имяИмейджа`
-
 3. Скопировать config.properties файл з config.properties.example (прописать настройки доступы TestRail)
     
 4. Запустить терминал с помощью правой кнопки мыши на "Git Bash Here" из корневой папки проекта и выполнить команду: 
     ```
     ./start_docker.sh
-    ```
-5. Следовать подсказкам терминальной программы.
-
-Если случайно произошел выход из терминальной программы - не обязательно снова перезапускать сборку контейнера, достаточно запустить файл: 
-    ```
-    ./return_docker.sh
     ```
 
 При возникновении ошибки "standard_init_linux.go:211: exec user process caused "no such file or directory" 
