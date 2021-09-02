@@ -28,12 +28,13 @@ public class ContractorPage {
     private final SelenideElement verifySuccessContract = $x("//div[text()='Успешно']");//проверка на сохранения
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(ContractorPage.class.getName());
+
     public void checkNewContract() {
         try {
             checkSuccessContract
                     .shouldBe(Condition.appear);
-        log.info("Contract create successful");
-        }catch (com.codeborne.selenide.ex.ElementNotFound e){
+            log.info("Contract create successful");
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             log.error("Contract creation failed");
             Assert.fail("Fail to create task(Notification did not appear)");
         }

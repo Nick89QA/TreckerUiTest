@@ -45,6 +45,7 @@ public class ProjectPage {
     private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");
     private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");
     private final SelenideElement buttonGetReport = $x("//span[text()='Получить отчет']/parent::button");
+
     public void clickButtonAllProject() {
         buttonAllProject
                 .shouldBe(Condition.enabled)

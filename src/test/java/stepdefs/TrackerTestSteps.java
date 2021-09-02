@@ -751,7 +751,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь просматривает отчет за прошлую неделю$")
     public void userSeeReportForLastWeek() {
-     projectPage.checkButtonGetReport();
+        projectPage.checkButtonGetReport();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за текущий месяц$")
@@ -768,8 +768,8 @@ public class TrackerTestSteps {
     }
 
     @Тогда("^Пользователь просматривает отчет за текущий месяц$")
-    public void userSeeReportForCurrentMonth () {
-    projectPage.checkButtonGetReport();
+    public void userSeeReportForCurrentMonth() {
+        projectPage.checkButtonGetReport();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за прошлый месяц$")
@@ -787,16 +787,16 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь просматривает отчет за прошлый месяц$")
     public void userSeeReportForLastMonth() {
-    projectPage.checkMessageNoData();
+        projectPage.checkMessageNoData();
     }
 
     @Тогда("^Пользователь получает уведомление о некорректном временном промежутке$")
     public void userGetNotificationToIncorrectTimePeriod() {
-     trackerPage.checkWrongTimePeriod();
+        trackerPage.checkWrongTimePeriod();
     }
 
     @Когда("^Пользователь создает задачу с длинным названием$")
-    public void userCreateTaskWithLongName(Map<String,String>map) {
+    public void userCreateTaskWithLongName(Map<String, String> map) {
         trackerPage.sendLongTittle();
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
@@ -807,52 +807,53 @@ public class TrackerTestSteps {
     }
 
     @И("^Пользователь удаляет созданную задачу$")
-    public void userDeleteCreatedTask () {
-     trackerPage.clickProjectTaskList();
-     trackerPage.clickButtonDelete();
+    public void userDeleteCreatedTask() {
+        trackerPage.clickProjectTaskList();
+        trackerPage.clickButtonDelete();
     }
 
     @Тогда("^Пользователь убеждается в удалении задачи$")
     public void userMakeSureInTheDeletionOfTheTask() {
-    trackerPage.checkLoaderProgressBar();
+        trackerPage.checkLoaderProgressBar();
     }
 
     @Тогда("^Пользователь видит созданную задачу в списке задач$")
     public void userSeeCreatedTaskInTaskList() {
-    trackerPage.checkTaskInTaskList();
+        trackerPage.checkTaskInTaskList();
     }
 
 
     @Когда("^Пользователь заходит в созданную задачу и добавляет ссылку и описание$")
     public void userGoToCreatedTaskAndAddLinkAndDescription() {
-     trackerPage.clickTaskInTaskList();
-     trackerPage.clickInputLinkInTaskList("https://git.crtweb.ru/creative/");
-     trackerPage.clickInputDescribeInTaskList("Внедрение отчетов Allure на проекте Creative Integrator");
-     trackerPage.clickButtonSave();
+        trackerPage.clickTaskInTaskList();
+        trackerPage.clickInputLinkInTaskList("https://git.crtweb.ru/creative/");
+        trackerPage.clickInputDescribeInTaskList("Внедрение отчетов Allure на проекте Creative Integrator");
+        trackerPage.clickButtonSave();
     }
 
     @Тогда("^Пользователь убеждается в сохранении задачи$")
     public void userMakeSureThatTaskIsSaved() {
-    trackerPage.checkLoaderProgressBar();
+        trackerPage.checkLoaderProgressBar();
     }
 
     @Когда("^Пользователь добавляет роли другим пользователям и сохраняет результат$")
     public void userAddRoleOtherUsersAndSaveResults() {
-    trackerPage.clickBurgerMenu();
-    trackerPage.clickUserPage();
-    usersPage.clickSurname();
-    usersPage.clickButtonPencil();
-    usersPage.clickDropDownList();
-    usersPage.clickRoleAdministrator();
-    usersPage.clickRoleDeveloper();
-    usersPage.clickRoleManager();
-    usersPage.clickRoleGeneralManager();
-    usersPage.clickButtonSave();
+        trackerPage.clickBurgerMenu();
+        trackerPage.clickUserPage();
+        usersPage.clickSurname();
+        usersPage.clickButtonPencil();
+        usersPage.clickDropDownList();
+        usersPage.clickRoleAdministrator();
+        usersPage.clickRoleDeveloper();
+        usersPage.clickRoleManager();
+        usersPage.clickRoleGeneralManager();
+        usersPage.clickButtonSave();
+
     }
 
     @Тогда("^Пользователь убеждается в добавлении ролей пользователю$")
     public void userMakeSureAboutAddRoleToUser() {
-    usersPage.checkMessageSuccess();
+        usersPage.checkMessageSuccess();
     }
 }
 

@@ -340,16 +340,16 @@ public class TrackerPage {
     }
 
     public void clickInputLinkInTaskList(String link) {
-       WebUtils.clearField(inputLinkInTaskList);
+        WebUtils.clearField(inputLinkInTaskList);
         inputLinkInTaskList
                 .should(Condition.enabled)
                 .setValue(link);
     }
 
-   public void clickInputDescribeInTaskList(String describe){
+    public void clickInputDescribeInTaskList(String describe) {
         WebUtils.clearField(inputDescribeInTaskList);
         inputDescribeInTaskList
                 .should(Condition.enabled)
                 .setValue(describe);
-   }
+    }
 }
