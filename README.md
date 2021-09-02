@@ -165,8 +165,6 @@ allure serve target/allure-results
 ###### Mac OS
 
 1. Склонировать себе проект
-
-2. Скопировать .env файл из .env.example (прописать все IP адреса планет и хабов если они не актуальны)
     
 3. Скопировать config.properties файл из config.properties.example (прописать настройки доступы TestRail)
     
@@ -185,15 +183,6 @@ allure serve target/allure-results
 
 1. Склонировать себе проект
 
-2. Скопировать .env файл из .env.example (прописать все IP адреса планет и хабов если они не актуальны)
-
-    Узнать и прописать IP локальной машины можно командой:
-    
-        ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1
-    
-    либо отредактировать следующую команду в файле `start_docker.sh` и IP будет автоматически обновлен при запуске (только для систем на которых установлен ifconfig):
-    
-        export LOCALHOST_IP=$(ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1)
     
 3. Скопировать config.properties файл из config.properties.example (прописать настройки доступы TestRail)
     
@@ -222,9 +211,11 @@ allure serve target/allure-results
 
 1. Склонировать себе проект
 
-2. Скопировать .env файл из .env.example (прописать все IP адреса планет и хабов если они не актуальны)
+2. Прописать команду в консоли проекта для сборки image
 
-3. Скопировать config.properties файл из config.properties.example (прописать настройки доступы TestRail)
+`docker build -f имяИмейджа`
+
+3. Скопировать config.properties файл з config.properties.example (прописать настройки доступы TestRail)
     
 4. Запустить терминал с помощью правой кнопки мыши на "Git Bash Here" из корневой папки проекта и выполнить команду: 
     ```
