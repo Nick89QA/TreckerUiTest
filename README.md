@@ -194,7 +194,7 @@ git clone https://git.crtweb.ru/creative.qa/anarchy/nip/uitestingsampleproject.g
  2. Открыть проект в IDEA перейти в консоль и выполнить команду
 
     ``` 
-    docker build -f "имя образа"
+    docker build -t "имя образа" .
     ``` 
 
     ``` 
