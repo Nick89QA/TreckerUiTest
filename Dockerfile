@@ -1,17 +1,17 @@
-FROM maven-chrome
+FROM selenium/standalone-chrome:latest
 
 RUN apk update \
     && apk add bash \
     && apk upgrade \
     && apk add openjdk8 \
-    && apk add maven
-
+    && apk add maven\
+    && chromium-chromedriver
 
 VOLUME /home/UiAutoTestsTracker
 
 COPY ./ /home/UiAutoTestsTracker
 
-WORKDIR C:/Users/user/IdeaProjects/UiAutoTestsTracker
+WORKDIR /home/UiAutoTestsTracker
 
 CMD ["mvn","clean","test"]
 

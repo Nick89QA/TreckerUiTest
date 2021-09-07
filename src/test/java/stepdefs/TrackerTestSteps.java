@@ -24,17 +24,17 @@ public class TrackerTestSteps {
     private ContractorPage contractorPage = Selenide.page(ContractorPage.class);
     private ReportingPage reportingPage = Selenide.page(ReportingPage.class);
     private ProfilePage profilePage = Selenide.page(ProfilePage.class);
-
+    private WebUtils webUtils = Selenide.page(WebUtils.class);
 
     @Дано("^Пользователь авторизуется на сайте трекера$")
     public void authorize() {
         autorizationPage.clickAuth();
-        WebUtils.switchWindow(1);
+        webUtils.switchWindow("Вход – Google Аккаунты");
         autorizationPage.sendInputEmail("nip@crtweb.ru");
         autorizationPage.clickNext();
         autorizationPage.sendInputPassword("nick2004");
         autorizationPage.clickNext();
-        WebUtils.switchWindow(0);
+        webUtils.switchWindow("Creative Integrator");
         Selenide.sleep(6000);//Обход авторизации гугла
     }
 
@@ -66,10 +66,10 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь заходит на страницу с проектами$")
     public void userOnProjectPage() {
-        trackerPage.clickMenuButton();//клик на меню
-        projectPage.setMenuProject();//клик на страницу проекты
-        projectPage.clickButtonAllProject();//клик на раздел "все проекты"
-        projectPage.setButtonAlfaDirect();//клик на проект AльфаДирект
+        trackerPage.clickMenuButton();
+        projectPage.setMenuProject();
+        projectPage.clickButtonAllProject();
+        projectPage.setButtonAlfaDirect();
     }
 
     @Тогда("^задача создана корректно$")
@@ -80,7 +80,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь переходит на страницу Пользователи$")
     public void goToUsersPage() {
         trackerPage.clickMenuButton();
-        trackerPage.clickUserPage();//клик на юзерпейдж
+        trackerPage.clickUserPage();
     }
 
     @Тогда("^результат поиска содержит (.*)$")
@@ -110,7 +110,7 @@ public class TrackerTestSteps {
 
     @Тогда("^пользователь получает уведомление о необходимости выбора проекта$")
     public void verifyProjectNotification() {
-        trackerPage.verifyProjectNotification();// проверка на обязательность выбора проекта
+        trackerPage.verifyProjectNotification();
     }
 
     @Тогда("^Пользователь может просматривать информацию о проекте$")
@@ -194,8 +194,8 @@ public class TrackerTestSteps {
         projectPage.clickButtonDetails();
         projectPage.clickButtonEdit();
         projectPage.clickButtonAddUsers();
-        Selenide.$x(String.format("//li[text()='%s']", map.get("Добавление пользователей"))).click();//клик на юзера
-        Selenide.$x(String.format("//li[text()='%s']", map.get("Добавление пользователей"))).pressEscape();//нажатие на escape
+        Selenide.$x(String.format("//li[text()='%s']", map.get("Добавление пользователей"))).click();
+        Selenide.$x(String.format("//li[text()='%s']", map.get("Добавление пользователей"))).pressEscape();
         projectPage.clickButtonSave();
     }
 
@@ -224,7 +224,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
     public void authorizationWithIncorrectEmail(String email) {//тест отра
         autorizationPage.clickButtonAuthorization();
-        WebUtils.switchWindow(1);
+        webUtils.switchWindow("Вход – Google Аккаунты");
         autorizationPage.clickInputEmail(email);
         autorizationPage.clickButtonNext();
     }
@@ -237,7 +237,7 @@ public class TrackerTestSteps {
     @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")//тест отрабатывает корректно
     public void AuthorizeWithIncorrectPassword(Map<String, String> map) {
         autorizationPage.clickButtonAuthorization();
-        WebUtils.switchWindow(1);
+        webUtils.switchWindow("Вход – Google Аккаунты");
         autorizationPage.clickInputEmail(map.get("Корректный имейл"));
         autorizationPage.clickButtonNext();
         autorizationPage.sendInputIncorrectPassword(map.get("Некорректный пароль"));
@@ -254,7 +254,7 @@ public class TrackerTestSteps {
     public void DeleteContract() {
         contractorPage.clickBurgerMenu();
         contractorPage.clickButtonMenuContract();
-        contractorPage.scrollInputDeleteContract();//скрол на странице
+        contractorPage.scrollInputDeleteContract();
         contractorPage.clickInputContract();
         contractorPage.clickButtonEditContract();
         contractorPage.clickButtonBasket();
@@ -372,8 +372,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу База знаний$")
     public void userMakeSureSuccessRedirectPageKnowledgeBase() {
-        WebUtils.switchWindow(1);
-        trackerPage.verifySuccessRedirectKnowledgeBase();
+        webUtils.switchWindow("Creative Integrator");
+
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Лонгриды$")
@@ -384,8 +384,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Лонгриды$")
     public void userMakeSureSuccessRedirectPageLongrid() {
-        WebUtils.switchWindow(1);
-        trackerPage.verifySuccessRedirectLongreadPage();
+        webUtils.switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Платрум$")
@@ -396,8 +395,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Платрум$")
     public void userMakeSureSuccessRedirectPagePlatrum() {
-        WebUtils.switchWindow(1);
-        trackerPage.verifySuccessRedirectPlatrumPage();
+        webUtils.switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Гит$")
@@ -409,8 +407,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Гит$")
     public void userMakeSureSuccessRedirectPageGit() {
-        WebUtils.switchWindow(1);
-        trackerPage.verifySuccessRedirectGitPage();
+        //  WebUtils.switchWindow();
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу CRT.TEAM$")
@@ -422,23 +419,20 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
     public void userMakeSureSuccessRedirectPageCrtTeam() {
-        WebUtils.switchWindow(1);
-        trackerPage.verifySuccessRedirectCrtTeamPage();
-
+          webUtils.switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Сайт$")
     public void userRedirectFromMainPageToPageSite() {
         trackerPage.clickButtonLink();
         trackerPage.clickLinkSite();
-
     }
 
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Сайт$")
     public void userMakeSureSuccessRedirectPageSite() {
-        WebUtils.switchWindow(1);
-        trackerPage.verifySuccessRedirectSitePage();
+        webUtils.switchWindow("Creative Integrator");
+
     }
 
 
@@ -451,8 +445,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Резюме специалистов$")
     public void userMakeSureSuccessRedirectPageResume() {
-        WebUtils.switchWindow(1);
-        trackerPage.verifySuccessRedirectSitePage();
+        webUtils.switchWindow("Creative Integrator");
+
 
     }
 

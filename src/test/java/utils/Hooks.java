@@ -1,5 +1,6 @@
 package utils;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

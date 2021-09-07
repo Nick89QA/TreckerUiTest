@@ -1,6 +1,6 @@
 # language: ru
-@All
-@TrackerTest
+@test
+
 Функционал:Creative Integrator
 
   Контекст:
