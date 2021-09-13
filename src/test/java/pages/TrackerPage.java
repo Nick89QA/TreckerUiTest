@@ -174,12 +174,6 @@ public class TrackerPage {
     }
 
 
-    public void verifySuccessRedirectKnowledgeBase() {
-        webdriver()
-                .shouldHave(url("https://kb.crtweb.ru/"));
-    }
-
-
     public void clickLinkLongread() {
         linkLongread
                 .should(Condition.enabled)
@@ -194,16 +188,6 @@ public class TrackerPage {
 
     }
 
-    public void verifySuccessRedirectLongreadPage() {
-        webdriver()
-                .shouldHave(url("https://longreads.crtweb.ru/"));
-
-    }
-
-    public void verifySuccessRedirectPlatrumPage() {
-        webdriver()
-                .shouldHave(url("https://crtweb.platrum.ru/regulations"));
-    }
 
     public void clickLinkGit() {
         linkGit
@@ -217,15 +201,6 @@ public class TrackerPage {
                 .click();
     }
 
-    public void verifySuccessRedirectGitPage() {
-        webdriver()
-                .shouldHave(url("https://git.crtweb.ru/users/sign_in"));
-    }
-
-    public void verifySuccessRedirectCrtTeamPage() {
-        webdriver()
-                .shouldHave(url("https://crt.team/"));
-    }
 
     public void clickLinkSite() {
         linkSite
@@ -233,10 +208,6 @@ public class TrackerPage {
                 .click();
     }
 
-    public void verifySuccessRedirectSitePage() {
-        webdriver()
-                .shouldHave(url("https://crtweb.ru/developers"));
-    }
 
     public void clickLinkResume() {
         linkResume

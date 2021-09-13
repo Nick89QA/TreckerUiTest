@@ -1,6 +1,5 @@
 # language: ru
 
-  @All # тег
   @AutorizationPage
 
   Функционал: Авторизация с некорректными данными
