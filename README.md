@@ -228,4 +228,9 @@ git clone https://git.crtweb.ru/creative.qa/anarchy/nip/uitestingsampleproject.g
     docker run "имя образа" 
     ```
 
-
+### Запуск по тегам
+Для ручного запуска тестов необходимо выполнить команду в корневой папке проекта:
+```
+mvn clean test -DcucumberOptions.tags=@test
+```
+Эта команда запустит все тесты
