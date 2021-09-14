@@ -5,8 +5,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/Users/user/IdeaProjects/UiAutoTestsTracker">
         <classes>
-            <class name="utils.TestRunner"></class>
-
+            <class name="utils.TestRunner"/>
         </classes>
     </test>
 </suite>

@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = {"src/test/resources/features"},
         glue = {"stepdefs", "utils"},// обязательно  hooks,testRunner должны быть в папке utils
-        tags = "@test" //аннотация по которому запускается тест с консоли командой mvn clean test
+        tags = "@test"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests {

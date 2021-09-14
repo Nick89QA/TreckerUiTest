@@ -24,6 +24,7 @@ public class Hooks {
     public void setUp(Scenario scenario) throws MalformedURLException {
         this.scenario = scenario;
         log.debug("\n----\n" + scenario.getName() + "\n----");
+        //скрипт для запуска докер контейнера
 //        URL url = new URL("http://localhost:4444");
 //        DesiredCapabilities dc = DesiredCapabilities.chrome();
 //        RemoteWebDriver driver = new RemoteWebDriver(url,dc);
