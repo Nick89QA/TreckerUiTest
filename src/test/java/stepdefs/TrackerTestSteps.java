@@ -310,7 +310,7 @@ public class TrackerTestSteps {
         profilePage.clickButtonProfile();
     }
 
-    @Тогда("^Пользователь убеждается о досупном просмотре своей роли на странице Профиль$")
+    @Тогда("^Пользователь убеждается о доступном просмотре своей роли на странице Профиль$")
     public void userMakeSureAboutAvailableRoleOnProject() {
         profilePage.verifyCheckRoleOnPage();
     }
