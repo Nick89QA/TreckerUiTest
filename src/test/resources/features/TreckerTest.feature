@@ -1,6 +1,7 @@
 # language: ru
 @test
-
+@positive
+@negative
 Функционал:Creative Integrator
 
   Контекст:

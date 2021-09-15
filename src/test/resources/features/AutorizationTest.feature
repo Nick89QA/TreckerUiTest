@@ -1,6 +1,6 @@
 # language: ru
 @Negative
-@AutorizationPage
+
 
 Функционал: Авторизация с некорректными данными
 

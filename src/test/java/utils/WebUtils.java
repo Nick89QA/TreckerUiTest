@@ -21,14 +21,6 @@ public class WebUtils {
         log.info("Title на странице " + Selenide.title());
 
     }
-//
-//    public void switchWindowBasePageKnowledgeBase(String title) {
-//        log.info("Title на странице " + Selenide.title());
-//        Selenide.switchTo()
-//                .window(title);
-//        log.info("Title на странице " + Selenide.title());
-//
-//    }
 
     public static void clearField(SelenideElement element) {
         element.shouldBe(Condition.enabled);

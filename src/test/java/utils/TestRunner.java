@@ -5,11 +5,10 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
-        glue = {"stepdefs", "utils"},// обязательно  hooks,testRunner должны быть в папке utils
-        tags = "@test"
+        glue = {"stepdefs", "utils"},
+        tags = "@test or @positive or @negative"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests {
-
 
 }
