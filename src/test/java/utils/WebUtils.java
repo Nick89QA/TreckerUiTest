@@ -15,10 +15,10 @@ public class WebUtils {
     org.apache.logging.log4j.Logger log = LogManager.getLogger(WebUtils.class.getName());
 
     public void switchWindow(String title) {
-        log.info("Title на странице " + Selenide.title());
+        log.info("Title on page " + Selenide.title());
         Selenide.switchTo()
                 .window(title);
-        log.info("Title на странице " + Selenide.title());
+        log.info("Title on page " + Selenide.title());
 
     }
 
