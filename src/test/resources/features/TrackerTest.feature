@@ -1,5 +1,5 @@
 # language: ru
-
+@test
 Функционал:Creative Integrator
 
   Контекст:

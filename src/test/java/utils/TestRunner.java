@@ -4,9 +4,9 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        features = {"src/test/resources/features/TrackerTest.feature"},
+        features = "src/test/resources/features",
         glue = {"stepdefs", "utils"},
-        tags = "@positive or @negative",
+        tags = "@test",
         plugin = {"pretty"}
 )
 
