@@ -51,6 +51,7 @@ public class TrackerPage {
     private final SelenideElement inputLinkInTaskList = $x("(//input[@name='link'])[2]");//поле ссылка
     private final SelenideElement inputDescribeInTaskList = $x("(//input[@name='description'])[2]");
 
+
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
 
     public void verifyTask() {
@@ -323,4 +324,20 @@ public class TrackerPage {
                 .should(Condition.enabled)
                 .setValue(describe);
     }
+
+    public void clickTaskPastTime() {
+        taskPastTime
+                .should(Condition.enabled)
+                .scrollIntoView(true)
+                .click();
+    }
+
+
+    public void sendTitlePastTime(String title) {
+        WebUtils.clearField(titleTaskPastTime);
+        titleTaskPastTime
+                .scrollIntoView(true)
+                .should(Condition.enabled).setValue(title);
+    }
+
 }

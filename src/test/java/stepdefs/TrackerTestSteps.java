@@ -419,7 +419,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
     public void userMakeSureSuccessRedirectPageCrtTeam() {
-          webUtils.switchWindow("Creative Integrator");
+        webUtils.switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Сайт$")
@@ -849,7 +849,25 @@ public class TrackerTestSteps {
     public void userMakeSureAboutAddRoleToUser() {
         usersPage.checkMessageSuccess();
     }
+
+    @Когда("^Пользователь создает задачу за вчерашний день редактирует ее и сохраняет$")
+    public void userCreateTaskPastTimeAndEdit(Map<String, String> map) {//тест проходит корректно при подключенном выпадающем списка(выбор проекта)
+        trackerPage.clickBurgerMenu();
+        trackerPage.ClickPageTimer();
+        trackerPage.ClickButtonYesterday();
+        trackerPage.sendInputTittle(map.get("Название"));
+        trackerPage.setStartTime(map.get("Время начала"));
+        trackerPage.setEndTime(map.get("Время конец"));
+        trackerPage.clickSelectProject(map.get("Проект"));
+        trackerPage.setInputLink(map.get("Ссылка на задачу"));
+        trackerPage.clickDescribeTask(map.get("Описание задачи"));
+        trackerPage.clickAddTimeButton();
+        trackerPage.clickTaskPastTime();
+        trackerPage.sendTitlePastTime(map.get("Название"));
+
+
+
+    }
+
 }
-
-
 
