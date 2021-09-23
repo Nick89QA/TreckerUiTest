@@ -851,7 +851,7 @@ public class TrackerTestSteps {
     }
 
     @Когда("^Пользователь создает задачу за вчерашний день редактирует ее и сохраняет$")
-    public void userCreateTaskPastTimeAndEdit(Map<String, String> map) {//тест проходит корректно при подключенном выпадающем списка(выбор проекта)
+    public void userCreateTaskPastTimeAndEdit(Map<String, String> map) {
         trackerPage.clickBurgerMenu();
         trackerPage.ClickPageTimer();
         trackerPage.ClickButtonYesterday();

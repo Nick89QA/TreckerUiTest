@@ -3,11 +3,8 @@ package utils;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.core.logging.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.Keys;
-
-import static org.apache.tools.ant.taskdefs.Antlib.TAG;
 
 
 public class WebUtils {

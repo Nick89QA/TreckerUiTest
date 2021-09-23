@@ -10,7 +10,6 @@ import java.nio.charset.Charset;
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverConditions.url;
 
 public class TrackerPage {
     private final SelenideElement iconProfilePage = $x("//button[@id='accountIdButton']");
@@ -50,6 +49,8 @@ public class TrackerPage {
     private final SelenideElement buttonSave = $x("//span[text()='Сохранить']");
     private final SelenideElement inputLinkInTaskList = $x("(//input[@name='link'])[2]");//поле ссылка
     private final SelenideElement inputDescribeInTaskList = $x("(//input[@name='description'])[2]");
+    private final SelenideElement taskPastTime = $x("//span[text()='Песок']");
+    private final SelenideElement inputTitleTaskPastTime = $x("(//input[@name='title'])[2]");
 
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
@@ -334,8 +335,8 @@ public class TrackerPage {
 
 
     public void sendTitlePastTime(String title) {
-        WebUtils.clearField(titleTaskPastTime);
-        titleTaskPastTime
+        WebUtils.clearField(inputTitleTaskPastTime);
+        inputTitleTaskPastTime
                 .scrollIntoView(true)
                 .should(Condition.enabled).setValue(title);
     }
