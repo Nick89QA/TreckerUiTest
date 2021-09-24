@@ -629,7 +629,7 @@ public class TrackerTestSteps {
         profilePage.clickDropDownListSpecificProject();
     }
 
-    @Тогда("^Пользователь видит информацию по проекту Добавление логирование на проект$")
+    @Тогда("^Пользователь видит информацию по проекту$")
     public void userSeeInformationOnProjectAddingLoggingToProject() {
         profilePage.verifyCheckProjectLogging();
     }
