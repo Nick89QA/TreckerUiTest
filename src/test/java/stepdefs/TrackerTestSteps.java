@@ -39,7 +39,7 @@ public class TrackerTestSteps {
     }
 
     @Когда("^Пользователь создает задачу с параметрами$")
-    public void createTask(Map<String, String> map) {//тест проходит корректно при подключенном выпадающем списка(выбор проекта)
+    public void createTask(Map<String, String> map) {
         trackerPage.sendInputTittle(map.get("Название"));
         trackerPage.setStartTime(map.get("Время начала"));
         trackerPage.setEndTime(map.get("Время конец"));
@@ -60,7 +60,7 @@ public class TrackerTestSteps {
         trackerPage.setEndTime(map.get("Время конец"));
         trackerPage.clickSelectProject(map.get("Проект"));
         trackerPage.setInputLinkPastTime(map.get("Ссылка на задачу"));
-        trackerPage.clickDescribeTask(map.get("Описание задачи"));//дописать задачу
+        trackerPage.clickDescribeTask(map.get("Описание задачи"));
         trackerPage.clickAddTimeButton();
     }
 
@@ -222,7 +222,7 @@ public class TrackerTestSteps {
     }
 
     @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
-    public void authorizationWithIncorrectEmail(String email) {//тест отра
+    public void authorizationWithIncorrectEmail(String email) {
         autorizationPage.clickButtonAuthorization();
         webUtils.switchWindow("Вход – Google Аккаунты");
         autorizationPage.clickInputEmail(email);
@@ -234,7 +234,7 @@ public class TrackerTestSteps {
         autorizationPage.verifyIncorrectEmail();
     }
 
-    @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")//тест отрабатывает корректно
+    @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")
     public void AuthorizeWithIncorrectPassword(Map<String, String> map) {
         autorizationPage.clickButtonAuthorization();
         webUtils.switchWindow("Вход – Google Аккаунты");
@@ -459,7 +459,7 @@ public class TrackerTestSteps {
         profilePage.clickButtonSave();
     }
 
-    @Тогда("^Пользователь убеждется что данные профиля заполнились корректно$")
+    @Тогда("^Пользователь убеждается что данные профиля заполнились корректно$")
     public void verifyTextOnProfilePage(Map<String, String> map) {
         Map<String, String> actualMap = profilePage.getProfileInfo();
         SoftAssert softAssert = new SoftAssert();
@@ -578,7 +578,7 @@ public class TrackerTestSteps {
         usersPage.setSearchField("adadadasdasdasd");
     }
 
-    @Тогда("^Пользовватель видит сообщение об отсутствии таких пользователей$")
+    @Тогда("^Пользователь видит сообщение об отсутствии таких пользователей$")
     public void userSeesMessageAboutTheAbsenceUsers() {
         usersPage.verifyMessageAbsence();
     }
@@ -590,7 +590,7 @@ public class TrackerTestSteps {
         usersPage.clickPaginationPageOne();
     }
 
-    @Тогда("^При каждом клике на страницу на которой находится пользователь страницв обновляется$")
+    @Тогда("^При каждом клике на страницу на которой находится пользователь страница обновляется$")
     public void eachTimeTheUserClicksOnThePageTheUserIsOnThePageIsUpdated() {
         usersPage.verifyCheckPagination();
     }
@@ -866,8 +866,5 @@ public class TrackerTestSteps {
         trackerPage.sendTitlePastTime(map.get("Название"));
 
 
-
     }
-
 }
-

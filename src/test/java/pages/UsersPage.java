@@ -117,12 +117,14 @@ public class UsersPage {
     public void clickButtonSave() {
         buttonSave
                 .should(Condition.enabled)
-                .pressEnter();
+                .scrollIntoView(true)
+                .doubleClick();
     }
 
     public void checkMessageSuccess() {
         messageSuccess
-                .should(Condition.appear);
+                .should(Condition.enabled)
+                .scrollIntoView(true);
     }
 
 
