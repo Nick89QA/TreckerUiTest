@@ -34,7 +34,7 @@ public class ProfilePage {
     private final SelenideElement formatDateText = $x("//div[text()='Формат даты']/span");
     private final SelenideElement formatTimeText = $x("//div[text()='Формат времени']/span");
     private final SelenideElement closeDropDownCalendar = $x("//h6[text()='Creative Test Platform']");
-    private final SelenideElement timeUserOnProject = $x("//div[text()='Данных за выбранный период не найдено']");// проверка отчета за конкретный период
+    private final SelenideElement checkProject = $x("//p[text()='Песок']");// проверка отчета за конкретный период
     private final SelenideElement buttonCurrentWeek = $x("//span[text()='Текущая неделя']/parent::div");//кнопка текущая неделя
     private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");//кнопка прошлая неделя
     private final SelenideElement dropDownListAllProjects = $x("//p[text()='Песок']/parent::div");
@@ -112,7 +112,7 @@ public class ProfilePage {
     }
 
     public void verifyTimeUserOnProject() {
-        timeUserOnProject
+        checkProject
                 .should(Condition.visible);
     }
 

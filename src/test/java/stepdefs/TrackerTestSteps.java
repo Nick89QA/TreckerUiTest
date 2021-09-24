@@ -862,9 +862,6 @@ public class TrackerTestSteps {
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));
         trackerPage.clickAddTimeButton();
-        trackerPage.clickTaskPastTime();
-        trackerPage.sendTitlePastTime(map.get("Название"));
-
 
     }
 }
