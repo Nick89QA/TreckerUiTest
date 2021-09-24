@@ -38,8 +38,8 @@ public class ProfilePage {
     private final SelenideElement buttonCurrentWeek = $x("//span[text()='Текущая неделя']/parent::div");//кнопка текущая неделя
     private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");//кнопка прошлая неделя
     private final SelenideElement dropDownListAllProjects = $x("//p[text()='Песок']/parent::div");
-    private final SelenideElement dropDownListSpecificProject = $x("//p[contains(text(),'Добавление')]/parent::div");//проект в выпадающем списке
-    private final SelenideElement checkProjectLogging = $x("//span[text()='17.08.2021']");//проверка соответствия проектв
+    private final SelenideElement dropDownListSpecificProject = $x("//div[@class='MuiBox-root jss26 _1AHgN']");//Привязка к слову итого
+    private final SelenideElement checkProjectLogging = $x("//span[text()='17.08.2021']");//проверка соответствия проекта
     private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");//кнопка текущий месяц
     private final SelenideElement verifyProjectCurrentMonth = $x("//span[text()='01:00']/parent::div");//проверка проекта за текущий месяц
     private final SelenideElement verifyProjectLastWeek = $x("//p[text()='Текст для названия задачи']/parent::div");//проверка проекта за прошлую неделю
@@ -136,8 +136,7 @@ public class ProfilePage {
 
     public void clickDropDownListSpecificProject() {
         dropDownListSpecificProject
-                .should(Condition.enabled)
-                .click();
+                .should(Condition.visible);
     }
 
     public void verifyCheckProjectLogging() {
