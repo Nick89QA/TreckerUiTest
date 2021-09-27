@@ -43,7 +43,7 @@ public class ProfilePage {
     private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");//кнопка текущий месяц
     private final SelenideElement verifyProjectCurrentMonth = $x("//span[text()='01:00']/parent::div");//проверка проекта за текущий месяц
     private final SelenideElement verifyProjectLastWeek = $x("//p[text()='Текст для названия задачи']/parent::div");//проверка проекта за прошлую неделю
-    private final SelenideElement verifyProjectLastMonth = $x("//span[text()='10:17']/parent::div");//проверка проекта за прошлый месяц
+    private final SelenideElement verifyProjectLastMonth = $x("//div[@class='MuiBox-root jss108 _1AHgN']/parent::div");//проверка проекта за прошлый месяц
 
 
     public void clickIconButton() {
@@ -161,13 +161,13 @@ public class ProfilePage {
 
     public void checkVerifyProjectLastWeek() {
         verifyProjectLastWeek
-                .should(Condition.enabled)
+                .shouldBe(Condition.enabled)
                 .click();
     }
 
     public void checkVerifyProjectLastMonth() {
         verifyProjectLastMonth
-                .should(Condition.visible);
+                .shouldBe(Condition.enabled);
     }
 
 

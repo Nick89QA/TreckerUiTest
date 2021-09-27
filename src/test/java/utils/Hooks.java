@@ -36,9 +36,9 @@ public class Hooks {
     public void tearDown(Scenario scenario) {
         this.scenario = scenario;
         if (scenario.isFailed()) {
-            log.error(scenario.isFailed()+ " Failed ");
+            log.error(scenario.isFailed()+ " Test Failed ");
         } else {
-            log.info(scenario.isFailed() + " Success ");
+            log.info(scenario.isFailed() + " Test Success ");
         }
         Selenide.clearBrowserCookies();
         Selenide.closeWindow();

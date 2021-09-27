@@ -4,6 +4,9 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -146,7 +149,7 @@ public class ProjectPage {
 
     public void clickButtonDetails() {
         buttonDetails
-                .should(Condition.visible)
+                .should(visible)
                 .scrollIntoView(true)
                 .click();
     }
@@ -191,7 +194,7 @@ public class ProjectPage {
 
     public void checkMessageNoData() {
         messageNoData
-                .should(Condition.visible);
+                .should(visible);
     }
 
     public void clickButtonCurrentWeek() {
@@ -262,7 +265,10 @@ public class ProjectPage {
 
     public void checkVerifyFillFields() {
         verifyFillFields
-                .should(Condition.appear);
+                .shouldBe(visible, Duration.ofSeconds(6));
+
+
+
     }
 
 
