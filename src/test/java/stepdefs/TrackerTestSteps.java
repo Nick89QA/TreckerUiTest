@@ -191,6 +191,8 @@ public class TrackerTestSteps {
     public void userAddManagerToProject(Map<String, String> map) {
         projectPage.clickBurgerMenu();
         projectPage.clickPageProject();
+        projectPage.clickButtonAllProject();
+        projectPage.setButtonAlfaDirect();
         projectPage.clickButtonDetails();
         projectPage.clickButtonEdit();
         projectPage.clickButtonAddUsers();

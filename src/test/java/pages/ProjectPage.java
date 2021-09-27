@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class ProjectPage {
     private final SelenideElement pageProject = $x("//span[text()='Проекты']//..//span");//меню страница проекты
     private final SelenideElement buttonAllProject = $x("//span[text()='Все проекты']");//клик на раздел все проекты
-    private final SelenideElement buttonAlfaDirect = $x("//div[@data-panel='panel/api/projects/alfadirect']");//клик на проект альфадирект
+    private final SelenideElement buttonAlfaDirect = $x("//p[text()='AlfaDirect']/parent::div");//клик на проект альфадирект
     private final SelenideElement checkoutPageProject = $x("//div[@class='_3X1_X']");//проверка на странице проекты
     private final SelenideElement buttonPlusCreateProject = $x("(//div[@role='button'])[1]");//плюсик создание проекта
     private final SelenideElement inputTittleProject = $x("(//input[@type='text'])[2]");//поле название проекта
@@ -149,8 +149,8 @@ public class ProjectPage {
 
     public void clickButtonDetails() {
         buttonDetails
-                .should(visible)
-                .scrollIntoView(true)
+                .scrollTo()
+                .should(Condition.visible)
                 .click();
     }
 
