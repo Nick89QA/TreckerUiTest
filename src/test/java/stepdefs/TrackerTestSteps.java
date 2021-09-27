@@ -781,7 +781,7 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь просматривает отчет за прошлый месяц$")
     public void userSeeReportForLastMonth() {
-        projectPage.checkMessageNoData();
+        projectPage.checkButtonGetReport();
     }
 
     @Тогда("^Пользователь получает уведомление о некорректном временном промежутке$")

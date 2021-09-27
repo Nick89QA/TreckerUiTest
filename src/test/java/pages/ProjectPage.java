@@ -58,7 +58,7 @@ public class ProjectPage {
     public void setButtonAlfaDirect() {
         buttonAlfaDirect
                 .shouldBe(Condition.enabled)
-                .click();// клик на конкретный проект
+                .click();
     }
 
     public void setMenuProject() {
@@ -174,8 +174,8 @@ public class ProjectPage {
 
     public void clickButtonCalendar() {
         buttonCalendar
-                .scrollIntoView(true)
-                .should(Condition.enabled)
+                .scrollTo()
+                .shouldBe(visible)
                 .click();
     }
 
@@ -194,6 +194,7 @@ public class ProjectPage {
 
     public void checkMessageNoData() {
         messageNoData
+                .scrollTo()
                 .should(visible);
     }
 
