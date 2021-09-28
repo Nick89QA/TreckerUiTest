@@ -49,8 +49,8 @@ public class TrackerPage {
     private final SelenideElement buttonSave = $x("//span[text()='Сохранить']");
     private final SelenideElement inputLinkInTaskList = $x("(//input[@name='link'])[2]");//поле ссылка
     private final SelenideElement inputDescribeInTaskList = $x("(//input[@name='description'])[2]");
-    private final SelenideElement taskPastTime = $x("//span[text()='Песок']");
     private final SelenideElement inputTitleTaskPastTime = $x("(//input[@name='title'])[2]");
+    private final SelenideElement titleTaskYesterday = $x("//h3[@title='Написание автотестов для проекта']/parent::td");
 
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(TrackerPage.class.getName());
@@ -327,7 +327,7 @@ public class TrackerPage {
     }
 
     public void clickTaskPastTime() {
-        taskPastTime
+        titleTaskYesterday
                 .should(Condition.enabled)
                 .scrollIntoView(true)
                 .click();

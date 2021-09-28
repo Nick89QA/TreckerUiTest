@@ -85,7 +85,8 @@ public class TrackerTestSteps {
 
     @Тогда("^результат поиска содержит (.*)$")
     public void searchResult(String text) {
-        usersPage.verifySearch(text);
+        usersPage
+                .verifySearch(text);
     }
 
     @Тогда("^пользователь ищет по параметрам и убеждается в успехе$")
@@ -105,22 +106,26 @@ public class TrackerTestSteps {
 
     @Тогда("^пользователь получает уведомление о некорректной ссылке$")
     public void verifyErrorNotification() {
-        trackerPage.verifyErrorNotification();
+        trackerPage
+                .verifyErrorNotification();
     }
 
     @Тогда("^пользователь получает уведомление о необходимости выбора проекта$")
     public void verifyProjectNotification() {
-        trackerPage.verifyProjectNotification();
+        trackerPage
+                .verifyProjectNotification();
     }
 
     @Тогда("^Пользователь может просматривать информацию о проекте$")
     public void verifyProjectPage() {
-        projectPage.setCheckoutPageProject();
+        projectPage
+                .setCheckoutPageProject();
     }
 
     @Тогда("^пользователь видит созданный подряд в списке подрядчиков$")
     public void verifyCreateContract() {
-        contractorPage.checkNewContract();
+        contractorPage
+                .checkNewContract();
     }
 
     @Когда("^Пользователь заходит на страницу с подрядчиками$")
@@ -131,7 +136,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается о доступности подрядчиков на странице$")
     public void checkAvailableContractPage() {
-        contractorPage.checkContractPage();
+        contractorPage
+                .checkContractPage();
     }
 
     @Когда("^Пользователь заходит на страницу отчетности$")
@@ -144,7 +150,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается о доступности отчетности за прошлый месяц$")
     public void verifyReports() {
-        reportingPage.checkRightResult();
+        reportingPage
+                .checkRightResult();
     }
 
     @Когда("^Пользователь добавляет свой проект в архив$")
@@ -157,7 +164,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном добавлении проекта в архив$")
     public void checkToaddingProject() {
-        projectPage.verifyArchive();
+        projectPage
+                .verifyArchive();
     }
 
     @Когда("^Пользователь создает подряд на странице с подрядами$")
@@ -184,7 +192,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном нахождении данной фамилии$")
     public void userVerifyResult() {
-        usersPage.verifyResult();
+        usersPage
+                .verifyResult();
     }
 
     @Когда("^Пользователь заходит в свой проект и добавляет туда менеджера$")
@@ -203,7 +212,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном добавлении менеджера в свой проект$")
     public void verifyAddingManager() {
-        projectPage.verifyAddManager();
+        projectPage
+                .verifyAddManager();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами AlfaDirect и открывает отчет за прошлый месяц$")
@@ -220,7 +230,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном просмотре отчета по проекту$")
     public void verifySuccessReport() {
-        projectPage.checkReport();
+        projectPage
+                .checkReport();
     }
 
     @Когда("^Пользователь авторизуется в трекере используя некорректный email '(.*)'$")
@@ -233,7 +244,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об введении некорректного email$")
     public void userMakeSureIncorrectEmail() {
-        autorizationPage.verifyIncorrectEmail();
+        autorizationPage
+                .verifyIncorrectEmail();
     }
 
     @Когда("^Пользователь аторизуется в трекере используя некорректный пароль$")
@@ -249,7 +261,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об введении некорректного пароля$")
     public void userVerifyIncorrectPassword() {
-        autorizationPage.incorrectPassword();
+        autorizationPage
+                .incorrectPassword();
     }
 
     @Когда("^Пользователь заходит на страницу с подрядами и удаляет подряд$")
@@ -265,7 +278,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном удалении подряда$")
     public void verifyDeleteContract() {
-        contractorPage.verifyDeleteContract();
+        contractorPage
+                .verifyDeleteContract();
     }
 
     @Когда("^Пользователь редактирует информацию о подрядчике$")
@@ -302,8 +316,9 @@ public class TrackerTestSteps {
     }
 
     @Тогда("^Пользователь убеждается о доступности отчета на странице Профиль за прошлый месяц$")
-    public void userSureAboutValiableReportForLastMonth() {
-        profilePage.checkVerifyLastMonth();
+    public void userSureAboutAvailableReportForLastMonth() {
+        profilePage
+                .checkVerifyLastMonth();
     }
 
     @Когда("^Пользователь заходит на страницу Профиль$")
@@ -314,31 +329,36 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается о доступном просмотре своей роли на странице Профиль$")
     public void userMakeSureAboutAvailableRoleOnProject() {
-        profilePage.verifyCheckRoleOnPage();
+        profilePage
+                .verifyCheckRoleOnPage();
     }
 
 
     @Тогда("^Пользователь убеждается об успешном редактировании электронной почты$")
     public void userMakeSureAboutSuccessEditEmail() {
-        profilePage.checkMessageNotificationSuccess();
+        profilePage
+                .checkMessageNotificationSuccess();
     }
 
 
     @Тогда("^Пользователь убеждается об успешном изменении формата даты на странице$")
     public void userMakeSureSuccessEditDateFormat() {
-        profilePage.checkMessageNotificationSuccess();
+        profilePage
+                .checkMessageNotificationSuccess();
     }
 
 
     @Тогда("^Пользователь убеждается об успешном изменении формата времени на странице профиль$")
     public void userMakeSureSuccessEditTimeFormat() {
-        profilePage.checkMessageNotificationSuccess();
+        profilePage
+                .checkMessageNotificationSuccess();
     }
 
 
     @Тогда("^Пользователь успешно редактирует свое имя на странице Профиль$")
     public void userSuccessEditNameOnProfilePage() {
-        profilePage.checkMessageNotificationSuccess();
+        profilePage
+                .checkMessageNotificationSuccess();
     }
 
 
@@ -363,7 +383,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном создании задач$")
     public void userMakeSureSuccessCreateTasks() {
-        trackerPage.verifyTask();
+        trackerPage
+                .verifyTask();
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу База знаний$")
@@ -374,7 +395,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу База знаний$")
     public void userMakeSureSuccessRedirectPageKnowledgeBase() {
-        webUtils.switchWindow("Creative Integrator");
+        webUtils
+                .switchWindow("Creative Integrator");
 
     }
 
@@ -386,7 +408,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Лонгриды$")
     public void userMakeSureSuccessRedirectPageLongrid() {
-        webUtils.switchWindow("Creative Integrator");
+        webUtils
+                .switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Платрум$")
@@ -397,7 +420,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Платрум$")
     public void userMakeSureSuccessRedirectPagePlatrum() {
-        webUtils.switchWindow("Creative Integrator");
+        webUtils
+                .switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Гит$")
@@ -409,7 +433,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Гит$")
     public void userMakeSureSuccessRedirectPageGit() {
-        //  WebUtils.switchWindow();
+        webUtils
+                .switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу CRT.TEAM$")
@@ -421,7 +446,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу CRT.TEAM$")
     public void userMakeSureSuccessRedirectPageCrtTeam() {
-        webUtils.switchWindow("Creative Integrator");
+        webUtils
+                .switchWindow("Creative Integrator");
     }
 
     @Когда("^Пользователь переходит с главной страницы трекера на страницу Сайт$")
@@ -433,7 +459,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Сайт$")
     public void userMakeSureSuccessRedirectPageSite() {
-        webUtils.switchWindow("Creative Integrator");
+        webUtils
+                .switchWindow("Creative Integrator");
 
     }
 
@@ -447,7 +474,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об успешном переходе на страницу Резюме специалистов$")
     public void userMakeSureSuccessRedirectPageResume() {
-        webUtils.switchWindow("Creative Integrator");
+        webUtils
+                .switchWindow("Creative Integrator");
 
 
     }
@@ -483,7 +511,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь получает уведомление об отсутствии прав на удаление проекта$")
     public void userSetNotificationAboutFailureDeleteProject() {
-        projectPage.checkVerifyDeleteProject();
+        projectPage
+                .checkVerifyDeleteProject();
     }
 
     @Когда("^Пользователь переходит на страницу Проекты и вводит в поиск невалидные данные$")
@@ -495,7 +524,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь получает уведомление об отсутствии проектов с таким названием$")
     public void userGetNotificationAboutAbsenceProjectsWithTittle() {
-        projectPage.verifyCheckMessage();
+        projectPage
+                .verifyCheckMessage();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами и создает проект без данных$")
@@ -509,7 +539,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь получает уведомление об необходимости заполнения полей$")
     public void userGetNotificationAboutFillingTheFields() {
-        projectPage.checkVerifyFillFields();
+        projectPage
+                .checkVerifyFillFields();
     }
 
     @Когда("^Пользователь переходит на страницу с проектами и вводит только название проекта$")
@@ -534,7 +565,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь получает уведомление о неверно выбранном временном промежутке$")
     public void userGetNotificationAboutWrongTimeLine() {
-        projectPage.checkVerifyTimeMessage();
+        projectPage
+                .checkVerifyTimeMessage();
     }
 
     @Когда("^Пользователь заходит на страницу Таймер запускает таймер в текущем времени и останавливает его менее чем за минуту$")
@@ -550,7 +582,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь получает уведомление о невалидном временном промежутке$")
     public void userGetNotificationAboutInvalidTimeLine() {
-        trackerPage.checkVerifyTimeMessage();
+        trackerPage
+                .checkVerifyTimeMessage();
     }
 
     @Когда("^Пользователь заходит на страницу Проекты и создает проект выбрав только Подрядчика$")
@@ -565,12 +598,14 @@ public class TrackerTestSteps {
 
     @Когда("^Пользователь переходит на страницу Таймер и создает задачу без параметров$")
     public void userGoToTimerPageAndCreateTaskWithoutParams() {
-        trackerPage.clickAddTimeButton();
+        trackerPage
+                .clickAddTimeButton();
     }
 
     @Тогда("^Пользователь получает уведомление об необходимости выбрать название для задачи$")
     public void userGetNotificationToChooseTaskName() {
-        trackerPage.checkVerifyTaskName();
+        trackerPage
+                .checkVerifyTaskName();
     }
 
     @Когда("^Пользователь переходит на страницу с Пользователями и ищет сотрудников по невалидным данным$")
@@ -582,7 +617,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь видит сообщение об отсутствии таких пользователей$")
     public void userSeesMessageAboutTheAbsenceUsers() {
-        usersPage.verifyMessageAbsence();
+        usersPage
+                .verifyMessageAbsence();
     }
 
     @Когда("^Пользователь заходит на страницу с проектами и пользуется пагинацией$")
@@ -594,7 +630,8 @@ public class TrackerTestSteps {
 
     @Тогда("^При каждом клике на страницу на которой находится пользователь страница обновляется$")
     public void eachTimeTheUserClicksOnThePageTheUserIsOnThePageIsUpdated() {
-        usersPage.verifyCheckPagination();
+        usersPage
+                .verifyCheckPagination();
     }
 
     @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за вчерашний день$")
@@ -608,7 +645,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об отсутствии отчета за данный период$")
     public void userMakeSureOfTheAbsenceReportForGivenPeriod() {
-        profilePage.verifyTimeUserOnProject();
+        profilePage
+                .verifyTimeUserOnProject();
     }
 
     @Когда("^Пользователь переходит в календарь просматривает информацию по проектам за текущую неделю$")
@@ -633,7 +671,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь видит информацию по проекту$")
     public void userSeeInformationOnProjectAddingLoggingToProject() {
-        profilePage.verifyCheckProjectLogging();
+        profilePage
+                .verifyCheckProjectLogging();
     }
 
     @Когда("^Пользователь переходит в календарь и просматривает информацию по проектам за текущий месяц$")
@@ -648,7 +687,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь видит информацию по проектам за текущий месяц$")
     public void userSeeInformationOnProjectsForTheCurrentMonth() {
-        profilePage.checkVerifyProject();
+        profilePage
+                .checkVerifyProject();
     }
 
     @Когда("^Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлую неделю$")
@@ -663,7 +703,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь видит информацию по проекту за прошлую неделю$")
     public void userSeeInformationOnProjectForLastWeek() {
-        profilePage.checkVerifyProjectLastWeek();
+        profilePage
+                .checkVerifyProjectLastWeek();
     }
 
     @Когда("^Пользователь заходит в календарь и смотрит информацию по конкретному проекту за прошлый месяц$")
@@ -677,7 +718,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь видит информацию по проекту за прошлый месяц$")
     public void userSeeInformationOnProjectForLastMonth() {
-        profilePage.checkVerifyProjectLastMonth();
+        profilePage
+                .checkVerifyProjectLastMonth();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за сегодня$")
@@ -695,7 +737,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об отсутствии отчета за сегодня$")
     public void userMakeSureThatThereIsNoReportForToday() {
-        projectPage.verifyCheckMessage();
+        projectPage
+                .verifyCheckMessage();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за вчера$")
@@ -713,7 +756,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об отсутствии отчета за вчера$")
     public void userMakeSureThatThereIsNoReportForYesterday() {
-        projectPage.checkMessageNoData();
+        projectPage
+                .checkMessageNoData();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за текущую неделю$")
@@ -730,7 +774,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается об отсутствии отчета за текущую неделю$")
     public void userMakeSureThatThereIsNoReportForCurrentWeek() {
-        projectPage.checkMessageNoData();
+        projectPage
+                .checkMessageNoData();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за прошлую неделю$")
@@ -747,7 +792,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь просматривает отчет за прошлую неделю$")
     public void userSeeReportForLastWeek() {
-        projectPage.checkButtonGetReport();
+        projectPage
+                .checkButtonGetReport();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за текущий месяц$")
@@ -765,7 +811,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь просматривает отчет за текущий месяц$")
     public void userSeeReportForCurrentMonth() {
-        projectPage.checkButtonGetReport();
+        projectPage
+                .checkButtonGetReport();
     }
 
     @Когда("^Пользователь просматривает отчет по проекту за прошлый месяц$")
@@ -783,12 +830,14 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь просматривает отчет за прошлый месяц$")
     public void userSeeReportForLastMonth() {
-        projectPage.checkButtonGetReport();
+        projectPage
+                .checkButtonGetReport();
     }
 
     @Тогда("^Пользователь получает уведомление о некорректном временном промежутке$")
     public void userGetNotificationToIncorrectTimePeriod() {
-        trackerPage.checkWrongTimePeriod();
+        trackerPage
+                .checkWrongTimePeriod();
     }
 
     @Когда("^Пользователь создает задачу с длинным названием$")
@@ -810,12 +859,14 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается в удалении задачи$")
     public void userMakeSureInTheDeletionOfTheTask() {
-        trackerPage.checkLoaderProgressBar();
+        trackerPage
+                .checkLoaderProgressBar();
     }
 
     @Тогда("^Пользователь видит созданную задачу в списке задач$")
     public void userSeeCreatedTaskInTaskList() {
-        trackerPage.checkTaskInTaskList();
+        trackerPage
+                .checkTaskInTaskList();
     }
 
 
@@ -829,7 +880,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается в сохранении задачи$")
     public void userMakeSureThatTaskIsSaved() {
-        trackerPage.checkLoaderProgressBar();
+        trackerPage
+                .checkLoaderProgressBar();
     }
 
     @Когда("^Пользователь добавляет роли другим пользователям и сохраняет результат$")
@@ -849,7 +901,8 @@ public class TrackerTestSteps {
 
     @Тогда("^Пользователь убеждается в добавлении ролей пользователю$")
     public void userMakeSureAboutAddRoleToUser() {
-        usersPage.checkMessageSuccess();
+        usersPage
+                .checkMessageSuccess();
     }
 
     @Когда("^Пользователь создает задачу за вчерашний день редактирует ее и сохраняет$")
@@ -864,6 +917,22 @@ public class TrackerTestSteps {
         trackerPage.setInputLink(map.get("Ссылка на задачу"));
         trackerPage.clickDescribeTask(map.get("Описание задачи"));
         trackerPage.clickAddTimeButton();
+        trackerPage.clickTaskPastTime();
+        trackerPage.sendTitlePastTime("Автотесты");
 
+    }
+
+    @Когда("^Пользователь создает задачу с максимальным временным промежутком$")
+    public void userCreateTaskWithMaxTimePeriod(Map<String, String> map) {
+        trackerPage.clickBurgerMenu();
+        trackerPage.ClickPageTimer();
+        trackerPage.ClickButtonYesterday();
+        trackerPage.sendInputTittle(map.get("Название"));
+        trackerPage.setStartTime(map.get("Время начала"));
+        trackerPage.setEndTime(map.get("Время конец"));
+        trackerPage.clickSelectProject(map.get("Проект"));
+        trackerPage.setInputLink(map.get("Ссылка на задачу"));
+        trackerPage.clickDescribeTask(map.get("Описание задачи"));
+        trackerPage.clickAddTimeButton();
     }
 }
