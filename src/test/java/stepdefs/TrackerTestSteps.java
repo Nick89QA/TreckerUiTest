@@ -5,7 +5,6 @@ import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
-
 import org.testng.asserts.SoftAssert;
 import pages.*;
 import pages.AutorizationPage;
