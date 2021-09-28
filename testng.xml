@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Users/user/IdeaProjects/UiAutoTestsTracker">
+    <test name="Testing tracker UI">
         <classes>
-            <class name="utils.TestRunner"></class>
-
+            <class name="utils.TestRunner"/>
         </classes>
     </test>
 </suite>
+

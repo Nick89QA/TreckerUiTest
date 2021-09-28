@@ -34,16 +34,16 @@ public class ProfilePage {
     private final SelenideElement formatDateText = $x("//div[text()='Формат даты']/span");
     private final SelenideElement formatTimeText = $x("//div[text()='Формат времени']/span");
     private final SelenideElement closeDropDownCalendar = $x("//h6[text()='Creative Test Platform']");
-    private final SelenideElement timeUserOnProject = $x("//div[text()='Данных за выбранный период не найдено']");// проверка отчета за конкретный период
+    private final SelenideElement checkProject = $x("//p[text()='Песок']");// проверка отчета за конкретный период
     private final SelenideElement buttonCurrentWeek = $x("//span[text()='Текущая неделя']/parent::div");//кнопка текущая неделя
     private final SelenideElement buttonLastWeek = $x("//span[text()='Прошлая неделя']/parent::div");//кнопка прошлая неделя
     private final SelenideElement dropDownListAllProjects = $x("//p[text()='Песок']/parent::div");
-    private final SelenideElement dropDownListSpecificProject = $x("//p[contains(text(),'Добавление')]/parent::div");//проект в выпадающем списке
-    private final SelenideElement checkProjectLogging = $x("//span[text()='17.08.2021']");//проверка соответствия проектв
+    private final SelenideElement dropDownListSpecificProject = $x("//div[@role='button']");//Привязка к слову итого
+    private final SelenideElement checkProjectInList = $x("//p[contains(text(),'Песок')]");//проверка при открытии проекта
     private final SelenideElement buttonCurrentMonth = $x("//span[text()='Текущий месяц']/parent::div");//кнопка текущий месяц
     private final SelenideElement verifyProjectCurrentMonth = $x("//span[text()='01:00']/parent::div");//проверка проекта за текущий месяц
     private final SelenideElement verifyProjectLastWeek = $x("//p[text()='Текст для названия задачи']/parent::div");//проверка проекта за прошлую неделю
-    private final SelenideElement verifyProjectLastMonth = $x("//span[text()='10:17']/parent::div");//проверка проекта за прошлый месяц
+    private final SelenideElement verifyProjectLastMonth = $x("//div[@class='MuiBox-root jss108 _1AHgN']/parent::div");//проверка проекта за прошлый месяц
 
 
     public void clickIconButton() {
@@ -112,7 +112,7 @@ public class ProfilePage {
     }
 
     public void verifyTimeUserOnProject() {
-        timeUserOnProject
+        checkProject
                 .should(Condition.visible);
     }
 
@@ -137,11 +137,13 @@ public class ProfilePage {
     public void clickDropDownListSpecificProject() {
         dropDownListSpecificProject
                 .should(Condition.enabled)
+                .scrollTo()
                 .click();
+
     }
 
     public void verifyCheckProjectLogging() {
-        checkProjectLogging
+        checkProjectInList
                 .should(Condition.visible);
     }
 
@@ -159,13 +161,13 @@ public class ProfilePage {
 
     public void checkVerifyProjectLastWeek() {
         verifyProjectLastWeek
-                .should(Condition.enabled)
+                .shouldBe(Condition.enabled)
                 .click();
     }
 
     public void checkVerifyProjectLastMonth() {
         verifyProjectLastMonth
-                .should(Condition.visible);
+                .shouldBe(Condition.enabled);
     }
 
 

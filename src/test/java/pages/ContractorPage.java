@@ -22,9 +22,9 @@ public class ContractorPage {
     private final SelenideElement verifyDelContract = $x("//div[text()='Подрядчик удален']");//проверка удаления подряда
     private final SelenideElement buttonBasket = $x("(//span[@class='MuiIconButton-label'])[5]");//кнопка корзина
     private final SelenideElement buttonDelete = $x("//span[text()='Удалить']");//кнопка удалить
-    private final SelenideElement buttonEditContract = $x("//div[@id='editButton']");//клик на кара
+    private final SelenideElement buttonEditContract = $x("//div[@id='control_0']");//клик на карандаш
     private final SelenideElement inputName = $x("//input[@name='shortName']");//клик на поле
-    private final SelenideElement buttonSave = $x("//div[@id='saveButton']");//кнопка сохранить
+    private final SelenideElement buttonSave = $x("//div[@id='control_2']");//кнопка сохранить
     private final SelenideElement verifySuccessContract = $x("//div[text()='Успешно']");//проверка на сохранения
 
     org.apache.logging.log4j.Logger log = LogManager.getLogger(ContractorPage.class.getName());
@@ -98,7 +98,11 @@ public class ContractorPage {
 
     public void clickButtonEditContract() {
         buttonEditContract
-                .shouldBe(Condition.enabled).click();
+                .shouldBe(Condition.exist)
+                .shouldBe(Condition.visible)
+                .scrollTo()
+                .hover()
+                .click();
     }
 
     public void clickButtonBasket() {
@@ -118,6 +122,10 @@ public class ContractorPage {
 
     public void clickButtonSave() {
         buttonSave
-                .should(Condition.enabled).click();
+                .shouldBe(Condition.exist)
+                .shouldBe(Condition.visible)
+                .scrollTo()
+                .hover()
+                .click();
     }
 }

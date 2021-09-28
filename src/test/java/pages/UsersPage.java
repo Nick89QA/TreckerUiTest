@@ -1,9 +1,13 @@
 package pages;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -15,13 +19,13 @@ public class UsersPage {
     private final SelenideElement MessageAbsence = $x("//div[contains(text(),'Таких пользователей')]");
     private final SelenideElement paginationPageOne = $x("//button[@aria-label='page 1']");//клик на страницу 1
     private final SelenideElement checkPagination = $x("//div[@role='progressbar']");//лоадер при нажатии на страницу в пагинации
-    private final SelenideElement buttonPencil = $x("//div[@role='button']/parent::div");//клик на карандаш
+    private final SelenideElement buttonPencil = $x("//div[@id='control_0']");//клик на карандаш
     private final SelenideElement dropDownList = $x("//div[@aria-haspopup='listbox']/parent::div");
     private final SelenideElement roleAdministrator = $x("//li[text()='Администратор']");
     private final SelenideElement roleGeneralManager = $x("//li[text()='Главный менеджер']");
     private final SelenideElement roleManager = $x("//li[text()='Менеджер']");
     private final SelenideElement roleDeveloper = $x("//li[text()='Разработчик']");
-    private final SelenideElement buttonSave = $x("(//div[@role='button'])[2]");
+    private final SelenideElement buttonSave = $x("//div[@id='control_1']");
     private final SelenideElement messageSuccess = $x("//div[text()='Успешно']");
 
     public void setSearchField(String text) {
@@ -116,14 +120,13 @@ public class UsersPage {
 
     public void clickButtonSave() {
         buttonSave
-                .should(Condition.enabled)
-                .pressEnter();
+                .click(ClickOptions.usingJavaScript());
     }
 
     public void checkMessageSuccess() {
         messageSuccess
-                .should(Condition.appear);
-    }
+                .should(visible, Duration.ofSeconds(4));
 
+    }
 
 }
